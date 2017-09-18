@@ -50,10 +50,10 @@ namespace Fuse.Reactive.FuseJS
 			Date = (Scripting.Function)context.Evaluate("fuse-builtins", "Date");
 			DateCtor = (Scripting.Function)context.Evaluate("fuse-builtins", "(function(ticks) { return new Date(ticks); })");
 			
-			res = null;
+			/*res = null;
 			// TODO: This should eventually be an optional module. It's here until we accept to break stuff.
 			if (Uno.UX.Resource.TryFindGlobal("Polyfills/Window", IsModule, out res))
-				((Module)res).Evaluate(context, "Polyfills/Window");
+				((Module)res).Evaluate(context, "Polyfills/Window");*/
 		}
 		
 		static bool IsModule(object module)
