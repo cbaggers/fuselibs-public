@@ -17,6 +17,7 @@
   ],
   "Includes": [
     "Context.uno:Source",
-    "package.json:File"
+    "package.json:File",
+    "Android.uxl"
   ]
 }

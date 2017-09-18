@@ -40,6 +40,7 @@ namespace Fuse.Scripting.ReactNative
 				.setBundleAssetName("index.android.bundle")
 				.setJSMainModuleName("index.android")
 				.addPackage(new com.facebook.react.shell.MainReactPackage())
+				@(ReactNative.Package:Join('\n', '.addPackage(new ', '())'))
 				.setUseDeveloperSupport(true) //BuildConfig.DEBUG
 				.setInitialLifecycleState(LifecycleState.RESUMED);
 

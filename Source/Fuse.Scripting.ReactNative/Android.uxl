@@ -1,0 +1,3 @@
+<Extensions Backend="CPlusPlus" Condition="ANDROID">
+	<Declare Element="ReactNative.Package" />
+</Extensions>
