@@ -33,6 +33,10 @@
 - IThreadWorker no longer implement IDispatcher
 - `Fuse.Scripting.JavaScript`'s `ThreadWorker` no longer blocks on construction
 
+## JavaScript: JavaScriptCore on Android
+- Added support for JavaScriptCore on Android. Build with `-DUSE_JAVASCRIPTCORE` to enable it on Android. JavaScriptCore is by default enabled on iOS.
+
+
 # 1.4
 
 ## 1.4.0
