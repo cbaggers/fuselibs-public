@@ -19,7 +19,7 @@ namespace Fuse.Reactive
 
 		internal static Context CreateContext(IThreadWorker worker)
 		{
-			if defined(USE_JAVASCRIPTCORE) return new Fuse.Scripting.JavaScriptCore.Context(worker);
+			if defined(USE_JAVASCRIPTCORE && !USE_REACTNATIVE) return new Fuse.Scripting.JavaScriptCore.Context(worker);
 			else if defined(USE_V8) return new Fuse.Scripting.V8.Context(worker);
 			else if defined(USE_DUKTAPE) return new Fuse.Scripting.Duktape.Context(worker);
 			else throw new Exception("No JavaScript VM available for this platform");
@@ -39,8 +39,16 @@ namespace Fuse.Reactive
 		readonly ConcurrentQueue<Action> _queue = new ConcurrentQueue<Action>();
 		readonly ConcurrentQueue<Exception> _exceptionQueue = new ConcurrentQueue<Exception>();
 
+		extern(USE_REACTNATIVE) readonly Fuse.Scripting.ReactNative.ReactNativeSetup _rnManager;
+
 		public ThreadWorker()
 		{
+			if defined(USE_REACTNATIVE)
+			{
+				debug_log("Use reactnative");
+				_rnManager = new Fuse.Scripting.ReactNative.ReactNativeSetup();
+			}
+
 			_thread = new Thread(Run);
 			if defined(DotNet)
 			{
@@ -90,23 +98,33 @@ namespace Fuse.Reactive
 
 		void RunInner()
 		{
-			try
+			_ready.Set();
+
+			if (_context == null)
 			{
-				if (_context == null)
+				if defined(USE_REACTNATIVE)
+				{
+					_context = new Fuse.Scripting.JavaScriptCore.Context(this, _rnManager.JavascriptContextPtr);
+				}
+				else
 				{
 					_context = CreateContext(this);
-					if (_context == null)
-					{
-						throw new Exception("Could not create script context");
-					}
-					UpdateManager.AddAction(CheckAndThrow);
-
-					_fuseJS = new FuseJS.Builtins(_context);
 				}
-			}
-			finally
-			{
-				_ready.Set();
+
+				if (_context == null)
+				{
+					throw new Exception("Could not create script context");
+				}
+				UpdateManager.AddAction(CheckAndThrow);
+
+				if defined(USE_REACTNATIVE)
+				{
+					_rnManager.InvokeOnJSThread(CreateBuiltins);
+				}
+				else
+				{
+					CreateBuiltins();
+				}
 			}
 
 			double t = Uno.Diagnostics.Clock.GetSeconds();
@@ -135,7 +153,14 @@ namespace Fuse.Reactive
 					try
 					{
 						didAnything = true;
-						action();
+						if defined(USE_REACTNATIVE)
+						{
+							_rnManager.InvokeOnJSThread(action);
+						}
+						else
+						{
+							action();
+						}
 					}
 					catch (Exception e)
 					{
@@ -147,7 +172,14 @@ namespace Fuse.Reactive
 
 				try
 				{
-					_fuseJS.UpdateModules(_context);
+					if defined(USE_REACTNATIVE)
+					{
+						_rnManager.InvokeOnJSThread(UpdateModules);
+					}
+					else
+					{
+						UpdateModules();
+					}
 				}
 				catch (Exception e)
 				{
@@ -162,6 +194,16 @@ namespace Fuse.Reactive
 					t = t2;
 				}
 			}
+		}
+
+		static void CreateBuiltins()
+		{
+			_fuseJS = new FuseJS.Builtins(_context);
+		}
+
+		static void UpdateModules()
+		{
+			_fuseJS.UpdateModules(_context);
 		}
 
 		/**

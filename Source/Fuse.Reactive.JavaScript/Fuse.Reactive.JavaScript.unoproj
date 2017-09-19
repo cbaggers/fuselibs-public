@@ -26,7 +26,8 @@
     "../Fuse.Triggers/Fuse.Triggers.unoproj",
     "../Fuse.Nodes/Fuse.Nodes.unoproj",
     "../Fuse.Common/Fuse.Common.unoproj",
-    "../Fuse.Marshal/Fuse.Marshal.unoproj"
+    "../Fuse.Marshal/Fuse.Marshal.unoproj",
+    "../Fuse.Scripting.ReactNative/Fuse.Scripting.ReactNative.unoproj",
   ],
   "InternalsVisibleTo": [
     "Fuse.Reactive.JavaScript.Test",

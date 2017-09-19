@@ -1,0 +1,22 @@
+{
+  "Copyright": "Copyright (c) Fusetools AS 2017",
+  "Description": "This package is part of Fuse",
+  "Publisher": "Fusetools AS",
+  "Version": "1.2.2-rc1",
+  "Package": {
+    "ProjectUrl": "https://fusetools.com"
+  },
+  "Packages": [
+    "Uno.Collections",
+    "Uno.Data.Json",
+    "Uno.Threading"
+  ],
+  "Projects": [
+    "../Fuse.Scripting/Fuse.Scripting.unoproj",
+    "../Fuse.Common/Fuse.Common.unoproj"
+  ],
+  "Includes": [
+    "Context.uno:Source",
+    "package.json:File"
+  ]
+}
