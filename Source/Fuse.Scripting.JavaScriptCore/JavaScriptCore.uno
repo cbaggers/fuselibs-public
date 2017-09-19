@@ -4,7 +4,6 @@ using Uno.Compiler.ExportTargetInterop;
 namespace Fuse.Scripting.JavaScriptCore
 {
 	[Require("Source.Include", "JavaScriptCore/JSValueRef.h")]
-	[Require("Xcode.Framework", "JavaScriptCore")]
 	[Set("TypeName", "::JSValueRef")]
 	[Set("DefaultValue", "NULL")]
 	extern(USE_JAVASCRIPTCORE) struct JSValueRef
@@ -134,7 +133,6 @@ namespace Fuse.Scripting.JavaScriptCore
 		FlipTheTable,
 	}
 
-	[Require("Xcode.Framework", "JavaScriptCore")]
 	[Set("Include", "JavaScriptCore/JSStringRef.h")]
 	[Set("TypeName", "::JSStringRef")]
 	[Set("DefaultValue", "NULL")]
@@ -161,7 +159,6 @@ namespace Fuse.Scripting.JavaScriptCore
 		@}
 	}
 
-	[Require("Xcode.Framework", "JavaScriptCore")]
 	[Set("Include", "JavaScriptCore/JSObjectRef.h")]
 	[Set("TypeName", "::JSObjectRef")]
 	[Set("DefaultValue", "NULL")]
@@ -316,7 +313,6 @@ namespace Fuse.Scripting.JavaScriptCore
 		@}
 	}
 
-	[Require("Xcode.Framework", "JavaScriptCore")]
 	[Set("Include", "JavaScriptCore/JSObjectRef.h")]
 	[Set("TypeName", "::JSPropertyNameArrayRef")]
 	[Set("DefaultValue", "NULL")]
@@ -344,13 +340,17 @@ namespace Fuse.Scripting.JavaScriptCore
 	}
 
 	[Require("Source.Include", "JavaScriptCore/JSBase.h")]
-	[Require("Xcode.Framework", "JavaScriptCore")]
 	[Set("Include", "JavaScriptCore/JSContextRef.h")]
 	[Set("TypeName", "::JSContextRef")]
 	[Set("DefaultValue", "NULL")]
 	extern(USE_JAVASCRIPTCORE) struct JSContextRef : IDisposable
 	{
 		IntPtr _dummy;
+
+		public static JSContextRef Create(long context)
+		@{
+			return (@{JSContextRef})context;
+		@}
 
 		public static JSContextRef Create()
 		@{
@@ -407,7 +407,6 @@ namespace Fuse.Scripting.JavaScriptCore
 		}
 	}
 
-	[Require("Xcode.Framework", "JavaScriptCore")]
 	[Set("Include", "JavaScriptCore/JSObjectRef.h")]
 	[Set("TypeName", "::JSClassRef")]
 	[Set("DefaultValue", "NULL")]
@@ -492,7 +491,6 @@ namespace Fuse.Scripting.JavaScriptCore
 	}
 
 	[Require("Source.Include", "JSTypedArrayInclude.h")]
-	[Require("Xcode.Framework", "JavaScriptCore")]
 	extern(USE_JAVASCRIPTCORE) static class JSTypedArray
 	{
 		public static JSObjectRef TryMakeArrayBufferWithBytes(JSContextRef ctx, byte[] bytes, Action<JSValueRef> onException)

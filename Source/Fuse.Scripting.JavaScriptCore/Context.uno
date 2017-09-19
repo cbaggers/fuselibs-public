@@ -5,6 +5,11 @@ using Uno;
 
 namespace Fuse.Scripting.JavaScriptCore
 {
+	[extern(Android) Require("Gradle.Dependency.Compile", "org.webkit:android-jsc:r174650")]
+	[extern(Android) Require("LinkLibrary", "jsc")]
+	[extern(Android) Require("IncludeDirectory", "@(PACKAGE_DIR:Path)/3rdparty/JavaScriptCore/Headers")]
+	[extern(Android) Require("LinkDirectory", "${CMAKE_CURRENT_SOURCE_DIR}/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/jni/${ANDROID_ABI}")]
+	[extern(iOS) Require("Xcode.Framework", "JavaScriptCore")]
 	[Require("Header.Include", "JavaScriptCore/JavaScript.h")]
 	public extern(USE_JAVASCRIPTCORE) class Context: Fuse.Scripting.Context
 	{
@@ -19,10 +24,17 @@ namespace Fuse.Scripting.JavaScriptCore
 		readonly JSClassRef _unoFinalizerClass;
 		readonly JSClassRef _unoCallbackClass;
 
-		public Context(IThreadWorker worker): base(worker)
+		public Context(IThreadWorker worker): this(worker, JSContextRef.Create())
 		{
-			_context = JSContextRef.Create();
+		}
 
+		public Context(IThreadWorker worker, long contextPtr): this(worker, JSContextRef.Create(contextPtr))
+		{
+		}
+
+		Context(IThreadWorker worker, JSContextRef context) : base(worker)
+		{
+			_context = context;
 			// To not have to reconstruct the delegate all the
 			// time.  Note: Creates a cyclic reference to `this`,
 			// which can be broken with `Dispose`.

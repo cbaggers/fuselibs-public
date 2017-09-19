@@ -15,6 +15,7 @@
   ],
   "Includes": [
     "*",
-    "JSTypedArrayInclude.h:CHeader",
+    "3rdparty/**",
+    "JSTypedArrayInclude.h:CHeader"
   ]
 }
