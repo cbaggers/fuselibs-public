@@ -38,8 +38,41 @@ namespace Fuse.Scripting
 
 			static string _lastErrorPath;
 
+			bool GotReactNativeModules()
+			{
+				return (bool)_c.Evaluate(_m.FileName, "window.require != null");
+			}
+
+			object TryGetReactNativeModule(string id)
+			{
+				var require = (Function)_c.Evaluate(_m.FileName, "(function(id) { try { return window.require(id); } catch(e) { return null; } })");
+
+				var module = require.Call(new object[] { id });
+				if(module != null) return module;
+				
+				module = require.Call(new object[] { id + ".js" });
+				if(module != null) return module;
+				
+				module = require.Call(new object[] { id + "/index.js" });
+				if(module != null) return module;
+
+				module = require.Call(new object[] { id + "/lib/index.js" });
+				if(module != null) return module;
+
+				return null;
+			}
+
 			public object Require(string id)
 			{
+				if(GotReactNativeModules())
+				{
+					var m = TryGetReactNativeModule(id);
+					if(m != null)
+					{
+						return m;
+					}
+				}
+
 				bool isFile;
 				var path = _m.ComputePath(id, out isFile);
 
