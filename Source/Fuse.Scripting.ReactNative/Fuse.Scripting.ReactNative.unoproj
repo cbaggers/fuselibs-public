@@ -16,7 +16,7 @@
     "../Fuse.Common/Fuse.Common.unoproj"
   ],
   "Includes": [
-    "Context.uno:Source",
+    "ReactNativeSetup.uno:Source",
     "package.json:File",
     "Android.uxl"
   ]
