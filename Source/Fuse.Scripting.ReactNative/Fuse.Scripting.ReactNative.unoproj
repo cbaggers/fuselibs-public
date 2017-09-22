@@ -13,11 +13,15 @@
   ],
   "Projects": [
     "../Fuse.Scripting/Fuse.Scripting.unoproj",
-    "../Fuse.Common/Fuse.Common.unoproj"
+    "../Fuse.Common/Fuse.Common.unoproj",
+    "../Fuse.Nodes/Fuse.Nodes.unoproj",
+    "../Fuse.Controls.Native/Fuse.Controls.Native.unoproj",
+    "../Fuse.Controls.Panels/Fuse.Controls.Panels.unoproj"
   ],
   "Includes": [
     "ReactNativeSetup.uno:Source",
-    "package.json:File",
-    "Android.uxl"
+    "Android.uxl",
+    "ReactNativeComponent.uno:Source",
+    "ReactNativeComponentHost.ux"
   ]
 }

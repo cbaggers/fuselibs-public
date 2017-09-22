@@ -40,7 +40,7 @@ namespace Fuse.Scripting
 
 			bool GotReactNativeModules()
 			{
-				return (bool)_c.Evaluate(_m.FileName, "window.require != null");
+				return (bool)_c.Evaluate(_m.FileName, "window != null && window.require != null");
 			}
 
 			object TryGetReactNativeModule(string id)

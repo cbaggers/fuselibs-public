@@ -119,7 +119,7 @@ namespace Fuse.Reactive
 
 				if defined(USE_REACTNATIVE)
 				{
-					_rnManager.InvokeOnJSThread(CreateBuiltins);
+					_rnManager.InvokeOnJSThread(CreateBuiltins, HandleException);
 				}
 				else
 				{
@@ -155,7 +155,7 @@ namespace Fuse.Reactive
 						didAnything = true;
 						if defined(USE_REACTNATIVE)
 						{
-							_rnManager.InvokeOnJSThread(action);
+							_rnManager.InvokeOnJSThread(action, HandleException);
 						}
 						else
 						{
@@ -174,7 +174,7 @@ namespace Fuse.Reactive
 				{
 					if defined(USE_REACTNATIVE)
 					{
-						_rnManager.InvokeOnJSThread(UpdateModules);
+						_rnManager.InvokeOnJSThread(UpdateModules, HandleException);
 					}
 					else
 					{
@@ -194,6 +194,11 @@ namespace Fuse.Reactive
 					t = t2;
 				}
 			}
+		}
+
+		void HandleException(string e)
+		{
+			_exceptionQueue.Enqueue(new Exception(e));
 		}
 
 		static void CreateBuiltins()
