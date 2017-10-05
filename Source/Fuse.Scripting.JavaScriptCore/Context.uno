@@ -8,7 +8,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[extern(Android) Require("Gradle.Dependency.Compile", "org.webkit:android-jsc:r174650")]
 	[extern(Android) Require("LinkLibrary", "jsc")]
 	[extern(Android) Require("IncludeDirectory", "@(PACKAGE_DIR:Path)/3rdparty/JavaScriptCore/Headers")]
-	[extern(Android) Require("LinkDirectory", "${CMAKE_CURRENT_SOURCE_DIR}/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/jni/${ANDROID_ABI}")]
+	[extern(Android) Require("LinkDirectory", "@(OutputDirectory)/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/jni/${ANDROID_ABI}")]
 	[extern(iOS) Require("Xcode.Framework", "JavaScriptCore")]
 	[Require("Header.Include", "JavaScriptCore/JavaScript.h")]
 	public extern(USE_JAVASCRIPTCORE) class Context: Fuse.Scripting.Context
