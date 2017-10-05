@@ -30,17 +30,18 @@ namespace Fuse.Scripting.ReactNative
 		public event Action<string> ModuleNameChanged;
 	}
 
-	extern(!Android) public class ReactNativeComponent {
+	extern(!Android || !USE_REACTNATIVE) public class ReactNativeComponent {
 		[UXConstructor]
 		public ReactNativeComponent([UXParameter("Host")]ReactNativeComponentHostBase host) {}
 	}
 
 	[ForeignInclude(Language.Java, "com.facebook.react.*", "com.facebook.react.common.*")]
-	extern (Android) public class ReactNativeComponent : ViewHandle
+	extern (Android && USE_REACTNATIVE) public class ReactNativeComponent : ViewHandle
 	{
 		[UXConstructor]
 		public ReactNativeComponent([UXParameter("Host")]ReactNativeComponentHostBase host) : base(InstantiateViewGroupImpl())
 		{
+			if(host.ModuleName != null) OnModuleNameChanged(host.ModuleName);
 			host.ModuleNameChanged += OnModuleNameChanged;
 		}
 
