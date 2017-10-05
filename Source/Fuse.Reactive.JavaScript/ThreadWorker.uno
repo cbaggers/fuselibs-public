@@ -98,9 +98,10 @@ namespace Fuse.Reactive
 
 		void RunInner()
 		{
-			_ready.Set();
+			if defined(USE_REACTNATIVE)
+				_ready.Set();
 
-			if (_context == null)
+			try
 			{
 				if defined(USE_REACTNATIVE)
 				{
@@ -125,6 +126,11 @@ namespace Fuse.Reactive
 				{
 					CreateBuiltins();
 				}
+			}
+			finally
+			{
+				if defined(!USE_REACTNATIVE)
+					_ready.Set();
 			}
 
 			double t = Uno.Diagnostics.Clock.GetSeconds();
