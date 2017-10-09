@@ -46,7 +46,7 @@ namespace Fuse.Reactive
 			if defined(USE_REACTNATIVE)
 			{
 				debug_log("Use reactnative");
-				_rnManager = new Fuse.Scripting.ReactNative.ReactNativeSetup();
+				_rnManager = Fuse.Scripting.ReactNative.ReactNativeSetup.Instance;
 			}
 
 			_thread = new Thread(Run);

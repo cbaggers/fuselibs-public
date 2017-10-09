@@ -12,8 +12,20 @@ namespace Fuse.Scripting.ReactNative
 	[Require("Gradle.Repository", "maven { url '@(Project.NodeModules:Path)/react-native/android' }")]
 	public extern(Android && USE_REACTNATIVE) class ReactNativeSetup
 	{
-		public static Java.Object ReactInstanceManager { get; private set; }
+		public Java.Object ReactInstanceManager { get; private set; }
 		Java.Object _reactContext;
+		static ReactNativeSetup _instance;
+		public static ReactNativeSetup Instance
+		{
+			get
+			{
+				if (_instance == null)
+				{
+					_instance = new ReactNativeSetup();
+				}
+				return _instance;
+			}
+		}
 
 		long _javascriptContextPtr;
 		public long JavascriptContextPtr 

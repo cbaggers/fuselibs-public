@@ -47,7 +47,7 @@ namespace Fuse.Scripting.ReactNative
 
 		void OnModuleNameChanged(string moduleName)
 		{
-			InsertChild(new ViewHandle(CreateView(moduleName, ReactNativeSetup.ReactInstanceManager)));
+			InsertChild(new ViewHandle(CreateView(moduleName, ReactNativeSetup.Instance.ReactInstanceManager)));
 		}
 
 		[Foreign(Language.Java)]
