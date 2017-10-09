@@ -12,7 +12,7 @@ namespace Fuse.Scripting.ReactNative
 		string _moduleName;
 		public string ModuleName
 		{
-			get 
+			get
 			{
 				return _moduleName;
 			}
@@ -47,7 +47,25 @@ namespace Fuse.Scripting.ReactNative
 
 		void OnModuleNameChanged(string moduleName)
 		{
-			InsertChild(new ViewHandle(CreateView(moduleName, ReactNativeSetup.ReactInstanceManager)));
+			var update = new UpdateModule(this, moduleName);
+			ReactNativeSetup.Aquire().Then(update.Apply);
+		}
+
+		class UpdateModule
+		{
+			ReactNativeComponent _component;
+			string _moduleName;
+
+			public UpdateModule(ReactNativeComponent component, string moduleName)
+			{
+				_component = component;
+				_moduleName = moduleName;
+			}
+
+			public void Apply(ReactNativeSetup setup)
+			{
+				_component.InsertChild(new ViewHandle(CreateView(_moduleName, setup.InstanceManager)));
+			}
 		}
 
 		[Foreign(Language.Java)]
