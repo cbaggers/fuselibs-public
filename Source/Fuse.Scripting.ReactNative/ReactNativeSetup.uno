@@ -69,7 +69,8 @@ namespace Fuse.Scripting.ReactNative
 				.setJSBundleFile(bundleFileName)
 				.addPackage(new com.facebook.react.shell.MainReactPackage())
 				@(ReactNative.Package:Join('\n', '.addPackage(new ', '())'))
-				.setUseDeveloperSupport(false) //BuildConfig.DEBUG
+				// NOTE: if we set this to true uncomment the canDrawOverlays stuff below
+				.setUseDeveloperSupport(false) //BuildConfig.DEBUG 
 				.setInitialLifecycleState(LifecycleState.RESUMED);
 
 			final com.foreign.Uno.Action_Object reactContextInitialized = onReactContextInitialized;
