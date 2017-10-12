@@ -1,0 +1,12 @@
+{
+  "Packages": [
+  	"Fuse"
+  ],
+  "Includes": [
+    "*",
+    "CIL/Mono/HttpTest.java:Java:Android",
+    "CIL/Mono/MyCallback.java:Java:Android",
+    "ios/HttpClientObjc.h:ObjCHeader:iOS",
+    "ios/HttpClientObjc.mm:ObjCSource:iOS"
+  ]
+}
