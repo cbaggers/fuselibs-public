@@ -1,3 +1,6 @@
+using Uno;
+using Uno.Threading;
+
 namespace Fuse.Net.Http
 {
 	using Foundation;
@@ -12,7 +15,7 @@ namespace Fuse.Net.Http
 			_response = new Promise<Response>();
 		}
 		
-		public Future<Response> SendAsync(Request request, HttpCancelationToken c)
+		public Future<Response> SendAsync(Request request)
 		{
 			debug_log "Run";
 			var url = NSUrl.FromString(request.Url);
