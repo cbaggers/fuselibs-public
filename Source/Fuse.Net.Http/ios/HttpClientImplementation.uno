@@ -1,17 +1,17 @@
 using Uno;
-using Uno.Compiler.ExportTargetInterop;
 using Uno.Threading;
+using Uno.Compiler.ExportTargetInterop;
 
 namespace Fuse.Net.Http
 {
 	[Require("Xcode.Framework", "Foundation.framework")]
 	[ForeignInclude(Language.ObjC, "ios/HttpClientObjc.h")]
-	extern(iOS) class HttpClientCILImplementation : IDisposable
+	extern(iOS) class HttpClientImplementation : IDisposable
 	{
 		ObjC.Object _client;
 		Uno.Threading.Promise<Response> _promise;
 
-		public HttpClientCILImplementation()
+		public HttpClientImplementation()
 		{
 			_client = Create();
 		}
@@ -23,7 +23,7 @@ namespace Fuse.Net.Http
 		@}
 
 		
-		public Future<Response> SendAsync(Request request, HttpCancelationToken c)
+		public Future<Response> SendAsync(Request request)
 		{
 			_promise = new Uno.Threading.Promise<Response>();
 			Connect(request.Url, Continue);
@@ -49,7 +49,7 @@ namespace Fuse.Net.Http
 		[Foreign(Language.ObjC)]
 		void Connect(string strURL, Action<string> completeHandler)
 		@{
-			[@{HttpClientCILImplementation:Of(_this)._client:Get()} connect:strURL onCompleteHandler:^(NSString * response) {
+			[@{HttpClientImplementation:Of(_this)._client:Get()} connect:strURL onCompleteHandler:^(NSString * response) {
 					completeHandler(response);
 				}];
 		@}

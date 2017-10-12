@@ -4,7 +4,7 @@ using Uno.Compiler.ExportTargetInterop;
 
 using Uno.Threading;
 
-namespace Fuse.Net.Http
+namespace Foundation
 {
 	/*[DotNetType("MonoMac.AppKit.NSApplication")]
 	extern(CIL && OSX) internal class NSApplication

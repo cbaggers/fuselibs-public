@@ -4,16 +4,20 @@ using Uno.Compiler.ExportTargetInterop;
 
 namespace Fuse.Net.Http
 {
+	using System;
+	using System.Net;
 	using System.Net.Http;
 	//using System.Security.Authentication;
 	using System.Net.Security;
+	using System.Threading;
+	using System.Threading.Tasks;
 	using System.Security.Cryptography.X509Certificates;
 
-	extern(DOTNET && !HOST_MAC) class HttpClientCILImplementation
+	extern(DOTNET && !HOST_MAC) class HttpClientImplementation
 	{
 		Uno.Threading.Promise<Response> _promise;
 
-		public Uno.Threading.Future<Response> SendAsync(Request request, HttpCancelationToken c)
+		public Uno.Threading.Future<Response> SendAsync(Request request)
 		{
 			_promise = new Uno.Threading.Promise<Response>();
 			debug_log "Run";
@@ -110,19 +114,28 @@ namespace System.Net.Security
 	{}
 
 	[DotNetType("System.Net.Security.RemoteCertificateValidationCallback")]
-	extern(DOTNET && !HOST_MAC) public delegate bool RemoteCertificateValidationCallback(object sender,	X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors);
-
-	[DotNetType("System.Net.ServicePointManager")]
-	extern(DOTNET && !HOST_MAC) public class ServicePointManager
+	extern(DOTNET && !HOST_MAC) public delegate bool RemoteCertificateValidationCallback(object sender,
+		X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors);
+}
+namespace System.Threading
+{	
+	[DotNetType("System.Threading.CancellationTokenSource")]
+	extern(DOTNET && !HOST_MAC) internal class CancellationTokenSource
 	{
-		public extern static RemoteCertificateValidationCallback ServerCertificateValidationCallback { get; set; }
+		public extern CancellationToken Token { get; }
+	}
+	[DotNetType("System.Threading.CancellationToken")]
+	extern(DOTNET && !HOST_MAC) internal class CancellationToken
+	{
+		public extern void Cancel();
 	}
 }
-namespace System.Net.Http
+namespace System.Threading.Tasks
 {
 	[DotNetType("System.Threading.Tasks.Task")]
 	extern(DOTNET && !HOST_MAC) internal class Task
 	{}
+
 	[DotNetType("System.Threading.Tasks.Task`1")]
 	extern(DOTNET && !HOST_MAC) internal class Task<TResult>
 	{
@@ -132,19 +145,36 @@ namespace System.Net.Http
 		public extern bool IsCompleted { get; }
 		public extern bool IsFaulted { get; }
 	}
-
+}
+namespace System
+{
 	[DotNetType("System.Uri")]
 	extern(DOTNET) internal class Uri
 	{
 		public extern Uri(string s) {}
 	}
+}
+namespace System.Net
+{
+	[DotNetType("System.Net.HttpStatusCode")]
+	extern(DOTNET && !HOST_MAC) internal enum HttpStatusCode
+	{}
 
+	[DotNetType("System.Net.ServicePointManager")]
+	extern(DOTNET && !HOST_MAC) public class ServicePointManager
+	{
+		public extern static System.Net.Security.RemoteCertificateValidationCallback ServerCertificateValidationCallback { get; set; }
+	}
+}
+namespace System.Net.Http
+{
 	[DotNetType("System.Net.Http.HttpClient")]
 	extern(DOTNET && !HOST_MAC) internal class HttpClient
 	{
-		public extern Task<HttpResponseMessage> SendAsync(HttpRequestMessage request);
-		public extern Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken);
-		public extern Task<string> GetStringAsync(string uri);
+		public extern System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(HttpRequestMessage request);
+		public extern System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+			HttpCompletionOption completionOption, System.Threading.CancellationToken cancellationToken);
+		public extern System.Threading.Tasks.Task<string> GetStringAsync(string uri);
 	}
 	
 	[DotNetType("System.Net.Http.HttpRequestMessage")]
@@ -170,25 +200,12 @@ namespace System.Net.Http
 		ResponseContentRead,
 		ResponseHeadersRead
 	}
-	
-	[DotNetType("System.Threading.CancellationTokenSource")]
-	extern(DOTNET && !HOST_MAC) internal class CancellationTokenSource
-	{
-		public extern CancellationToken Token { get; }
-	}
-	[DotNetType("System.Threading.CancellationToken")]
-	extern(DOTNET && !HOST_MAC) internal class CancellationToken
-	{
-		public extern void Cancel();
-	}
+
 	[DotNetType("System.Net.Http.HttpResponseMessage")]
 	extern(DOTNET && !HOST_MAC) internal class HttpResponseMessage
 	{
 		public extern HttpStatusCode StatusCode { get; }
 	}
-	[DotNetType("System.Net.HttpStatusCode")]
-	extern(DOTNET && !HOST_MAC) internal enum HttpStatusCode
-	{}
 
 	[DotNetType("System.Net.Http.WebRequestHandler")]
 	extern(DOTNET && !HOST_MAC) internal class WebRequestHandler

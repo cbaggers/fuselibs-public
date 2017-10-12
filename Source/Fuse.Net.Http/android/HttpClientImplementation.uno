@@ -5,11 +5,11 @@ using Uno.Compiler.ExportTargetInterop;
 namespace Fuse.Net.Http
 {
 	[ForeignInclude(Language.Java, "com.fusetools.http.*")]
-	extern(Android) class HttpClientAndroid
+	extern(Android) class HttpClientImplementation
 	{
 		Uno.Threading.Promise<Response> _promise;
 
-		public Uno.Threading.Future<Response> SendAsync(Request request, HttpCancelationToken c)
+		public Uno.Threading.Future<Response> SendAsync(Request request)
 		{
 			_promise = new Uno.Threading.Promise<Response>();
 			debug_log "Run";

@@ -16,7 +16,7 @@
 		</WhileFalse>
 	</Panel>
 
-	<Panel Clicked="sendRequest" HitTestMode="LocalBounds">
+	<Panel Clicked="SendRequest" HitTestMode="LocalBounds">
 		<Busy ux:Name="isBusy" IsActive="false" />
 		<WhileBusy>
 			<Change loadingPanel.Opacity="1" Duration=".4" />
