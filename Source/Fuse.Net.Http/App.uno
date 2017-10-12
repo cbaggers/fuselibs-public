@@ -9,7 +9,48 @@ public partial class App2
 	public App2()
 	{
 		_client = new HttpClient();
+		_client.ClientCertificates.Add(LoadClientCertificateFromBundle());
+		_client.ServerCertificateValidationCallback = ValidateServerCertificate;
+
 		InitializeUX();
+	}
+
+	X509Certificate LoadClientCertificateFromBundle()
+	{
+		return null;
+	}
+
+	bool ValidateServerCertificate(X509Certificate certificate, X509Chain certificateChain, SslPolicyErrors sslPolicyErrors)
+	{
+		debug_log "ValidateServerCertificate";
+		debug_log certificate.Subject;
+		debug_log certificate.Issuer;
+		debug_log certificate.Thumbprint;
+		if (sslPolicyErrors == SslPolicyErrors.None)
+		{
+			// Good certificate.
+			return true;
+		}
+
+		/*var localServerCert = LoadLocalServerCertificate();
+
+		bool certMatch = false; // Assume failure
+		byte[] certHash = certificate.GetCertHash();
+		if (certHash.Length == apiCertHash.Length)
+		{
+			certMatch = true; // Now assume success.
+			for (int idx = 0; idx < certHash.Length; idx++)
+			{
+				if (certHash[idx] != apiCertHash[idx])
+				{
+					certMatch = false; // No match
+					break;
+				}
+			}
+		}
+
+		return certMatch;*/
+		return false;
 	}
 
 	void SendRequest(object a1, EventArgs a2)

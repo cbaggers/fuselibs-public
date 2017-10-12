@@ -8,9 +8,11 @@ namespace Fuse.Net.Http
 	extern(DOTNET && HOST_MAC) class HttpClientImplementation : NSUrlSessionDelegate
 	{
 		Promise<Response> _response;
-		
-		public HttpClientImplementation()
+		HttpClient _client;
+
+		public HttpClientImplementation(HttpClient client)
 		{
+			_client = client;
 			//NSApplication.Init();
 			_response = new Promise<Response>();
 		}

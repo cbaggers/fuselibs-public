@@ -16,6 +16,12 @@ namespace Fuse.Net.Http
 	extern(DOTNET && !HOST_MAC) class HttpClientImplementation
 	{
 		Uno.Threading.Promise<Response> _promise;
+		HttpClient _client;
+
+		public HttpClientImplementation(HttpClient client)
+		{
+			_client = client;
+		}
 
 		public Uno.Threading.Future<Response> SendAsync(Request request)
 		{
@@ -85,11 +91,15 @@ namespace Fuse.Net.Http
 			}
 		}
 
-		static bool Validate(object sender,	X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+		bool Validate(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate,
+			System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
 		{
-			debug_log "Validate";
-			debug_log "issuer " + certificate.Issuer;
-			return true;
+			if (_client.ServerCertificateValidationCallback != null)
+			{
+				var c = new X509Certificate(certificate.Subject, certificate.Issuer, certificate.GetCertHashString());
+				return _client.ServerCertificateValidationCallback(c, new X509Chain(), (SslPolicyErrors)(int)sslPolicyErrors);
+			}
+			return false;
 		}
 	}
 }
@@ -98,7 +108,9 @@ namespace System.Security.Cryptography.X509Certificates
 	[DotNetType("System.Security.Cryptography.X509Certificates.X509Certificate")]
 	extern(DOTNET && !HOST_MAC) public class X509Certificate
 	{
+		public extern string Subject { get; }
 		public extern string Issuer { get; }
+		public extern virtual string GetCertHashString();
 	}
 
 	[DotNetType("System.Security.Cryptography.X509Certificates.X509Chain")]
@@ -110,8 +122,13 @@ namespace System.Net.Security
 	using System.Security.Cryptography.X509Certificates;
 
 	[DotNetType("System.Net.Security.SslPolicyErrors")]
-	extern(DOTNET && !HOST_MAC) public class SslPolicyErrors
-	{}
+	extern(DOTNET && !HOST_MAC) public enum SslPolicyErrors
+	{
+		None = 0,
+		RemoteCertificateNotAvailable = 1,
+		RemoteCertificateNameMismatch = 2,
+		RemoteCertificateChainErrors = 4,
+	}
 
 	[DotNetType("System.Net.Security.RemoteCertificateValidationCallback")]
 	extern(DOTNET && !HOST_MAC) public delegate bool RemoteCertificateValidationCallback(object sender,

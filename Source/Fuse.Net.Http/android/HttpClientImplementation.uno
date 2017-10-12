@@ -8,6 +8,12 @@ namespace Fuse.Net.Http
 	extern(Android) class HttpClientImplementation
 	{
 		Uno.Threading.Promise<Response> _promise;
+		HttpClient _client;
+
+		public HttpClientImplementation(HttpClient client)
+		{
+			_client = client;
+		}
 
 		public Uno.Threading.Future<Response> SendAsync(Request request)
 		{

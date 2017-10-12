@@ -10,9 +10,11 @@ namespace Fuse.Net.Http
 	{
 		ObjC.Object _client;
 		Uno.Threading.Promise<Response> _promise;
+		HttpClient _httpClient;
 
-		public HttpClientImplementation()
+		public HttpClientImplementation(HttpClient client)
 		{
+			_httpClient = client;
 			_client = Create();
 		}
 		
