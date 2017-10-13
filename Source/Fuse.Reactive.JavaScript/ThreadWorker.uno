@@ -4,6 +4,7 @@ using Uno.Collections;
 using Uno.Testing;
 using Uno.Threading;
 using Fuse.Scripting;
+using Uno.Compiler.ExportTargetInterop;
 
 namespace Fuse.Reactive
 {
@@ -31,25 +32,59 @@ namespace Fuse.Reactive
 		static FuseJS.Builtins _fuseJS;
 		public static FuseJS.Builtins FuseJS { get { return _fuseJS; } }
 
-		readonly Thread _thread;
-		readonly ManualResetEvent _ready = new ManualResetEvent(false);
 		readonly ManualResetEvent _idle = new ManualResetEvent(true);
 		readonly ManualResetEvent _terminate = new ManualResetEvent(false);
-
 		readonly ConcurrentQueue<Action> _queue = new ConcurrentQueue<Action>();
 		readonly ConcurrentQueue<Exception> _exceptionQueue = new ConcurrentQueue<Exception>();
 
-		extern(USE_REACTNATIVE) readonly Fuse.Scripting.ReactNative.ReactNativeSetup _rnManager;
+		Thread _thread;
+		extern(USE_REACTNATIVE) Fuse.Scripting.ReactNative.ReactNativeSetup _rnManager;
 
 		public ThreadWorker()
 		{
 			if defined(USE_REACTNATIVE)
 			{
-				debug_log("Use reactnative");
-				_rnManager = Fuse.Scripting.ReactNative.ReactNativeSetup.Instance;
+				var setupPromise = Fuse.Scripting.ReactNative.ReactNativeSetup.Aquire();
+				setupPromise.Then(Foo);
 			}
+			else
+			{
+				Begin();
+			}
+		}
 
+		[Foreign(Language.Java)]
+		extern(USE_REACTNATIVE) void Foo(Fuse.Scripting.ReactNative.ReactNativeSetup setup)
+		@{
+			// Set
+			@{ThreadWorker:Of(_this)._rnManager:Set(setup)};
+
+			// unpack
+			final com.facebook.react.bridge.ReactContext reactContext = (com.facebook.react.bridge.ReactContext)@{Fuse.Scripting.ReactNative.ReactNativeSetup:Of(setup).ReactContext:Get()};
+			final com.facebook.react.ReactInstanceManager instManager = (com.facebook.react.ReactInstanceManager)@{Fuse.Scripting.ReactNative.ReactNativeSetup:Of(setup).InstanceManager:Get()};
+
+			// Make context on JS thread
+			final long ctxPtr = reactContext.getJavaScriptContext();
+			reactContext.runOnJSQueueThread(new java.lang.Runnable()
+			{
+				public void run()
+				{
+					@{ThreadWorker._context:Set(@{Fuse.Scripting.JavaScriptCore.Context(IThreadWorker, long):New(_this, ctxPtr)})};
+					com.fuse.Activity.getRootActivity().runOnUiThread(new Runnable()
+					{
+						public void run()
+						{
+							@{ThreadWorker:Of(_this).Begin():Call()};
+						}
+					});
+				}
+			});
+		@}
+
+		void Begin()
+		{
 			_thread = new Thread(Run);
+
 			if defined(DotNet)
 			{
 				// TODO: Create a method for canceling the thread safely
@@ -60,8 +95,6 @@ namespace Fuse.Reactive
 			}
 
 			_thread.Start();
-			_ready.WaitOne();
-			_ready.Dispose();
 		}
 
 		void OnTerminating(Fuse.Platform.ApplicationState newState)
@@ -93,44 +126,32 @@ namespace Fuse.Reactive
 			}
 
 			if (_context != null)
+			{
 				_context.Dispose();
+			}
 		}
 
 		void RunInner()
 		{
-			if defined(USE_REACTNATIVE)
-				_ready.Set();
-
-			try
+			if defined(!USE_REACTNATIVE)
 			{
-				if defined(USE_REACTNATIVE)
-				{
-					_context = new Fuse.Scripting.JavaScriptCore.Context(this, _rnManager.JavascriptContextPtr);
-				}
-				else
-				{
-					_context = CreateContext(this);
-				}
-
-				if (_context == null)
-				{
-					throw new Exception("Could not create script context");
-				}
-				UpdateManager.AddAction(CheckAndThrow);
-
-				if defined(USE_REACTNATIVE)
-				{
-					_rnManager.InvokeOnJSThread(CreateBuiltins, HandleException);
-				}
-				else
-				{
-					CreateBuiltins();
-				}
+				_context = CreateContext(this);
 			}
-			finally
+
+			if (_context == null)
 			{
-				if defined(!USE_REACTNATIVE)
-					_ready.Set();
+				throw new Exception("Could not create script context");
+			}
+
+			UpdateManager.AddAction(CheckAndThrow);
+
+			if defined(USE_REACTNATIVE)
+			{
+				_rnManager.InvokeOnJSThread(CreateBuiltins, HandleException);
+			}
+			else
+			{
+				CreateBuiltins();
 			}
 
 			double t = Uno.Diagnostics.Clock.GetSeconds();
