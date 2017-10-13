@@ -109,18 +109,14 @@ namespace Foundation
 		
 		public extern virtual string Host { get; }
 
-		public extern SecTrust ServerSecTrust { get; }
+		public extern Security.SecTrust ServerSecTrust { get; }
 	}
 
 	[DotNetType("Foundation.NSUrlCredential")]
 	extern(DOTNET && HOST_MAC) internal class NSUrlCredential
 	{
-		public extern static NSUrlCredential FromTrust(SecTrust trust);
+		public extern static NSUrlCredential FromTrust(Security.SecTrust trust);
 	}
-
-	[DotNetType("Security.SecTrust")]
-	extern(DOTNET && HOST_MAC) internal class SecTrust
-	{}
 
 	[DotNetType("Foundation.NSUrlSessionAuthChallengeDisposition")]
 	extern(DOTNET && HOST_MAC) internal enum NSUrlSessionAuthChallengeDisposition : long
@@ -129,5 +125,38 @@ namespace Foundation
 		PerformDefaultHandling,
 		CancelAuthenticationChallenge,
 		RejectProtectionSpace
+	}
+}
+namespace Security
+{
+	[DotNetType("Security.SecTrust")]
+	extern(DOTNET && HOST_MAC) internal class SecTrust
+	{
+		public extern SecCertificate this[int index] { get; }
+		
+		public extern int Count { get; }
+	}
+
+	[DotNetType("Security.SecCertificate")]
+	public class SecCertificate
+	{
+		/*public extern X509Certificate ToX509Certificate();
+		public extern X509Certificate2 ToX509Certificate2();
+		public extern NSData DerData { get; }*/
+		public extern string SubjectSummary { get; }
+
+		public extern string GetCommonName();
+
+		public extern string[] GetEmailAddresses();
+
+		public extern Foundation.NSData GetNormalizedIssuerSequence();
+
+		public extern Foundation.NSData GetNormalizedSubjectSequence();
+
+		public extern Foundation.NSData GetPublicKey();
+
+		public extern Foundation.NSData GetSerialNumber();
+
+		//public static extern nint GetTypeID();
 	}
 }

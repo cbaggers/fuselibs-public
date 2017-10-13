@@ -4,6 +4,7 @@ using Uno.Threading;
 namespace Fuse.Net.Http
 {
 	using Foundation;
+	using Security;
 	
 	extern(DOTNET && HOST_MAC) class HttpClientImplementation : NSUrlSessionDelegate
 	{
@@ -82,9 +83,27 @@ namespace Fuse.Net.Http
 		public override void DidReceiveChallenge(NSUrlSession session, NSUrlAuthenticationChallenge challenge, Action<NSUrlSessionAuthChallengeDisposition, NSUrlCredential> completionHandler)
 		{
 			debug_log "DidReceiveChallenge";
+			if (_client.ServerCertificateValidationCallback != null)
+			{
+				var secCertificateRef = challenge.ProtectionSpace.ServerSecTrust;
+				/*
+				SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
+    			SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 0);
+SecCertificateCopySubjectSummary(secCertificateRef)
+				*/
+				NSUrlProtectionSpace protectionSpace = challenge.ProtectionSpace;
+				debug_log protectionSpace.Host;
+
+				SecTrust secTrust = protectionSpace.ServerSecTrust;
+				SecCertificate certificate = secTrust[0];
+
+				var c = new X509Certificate(certificate.SubjectSummary, certificate.GetNormalizedIssuerSequence().ToString(), certificate.GetSerialNumber().ToString());
+				var restult = _client.ServerCertificateValidationCallback(c, new X509Chain(), (SslPolicyErrors)(int)0);
+			}
+
+			
 			if(challenge.ProtectionSpace.AuthenticationMethod == "NSURLAuthenticationMethodServerTrust")
 			{
-				debug_log challenge.ProtectionSpace.Host;
 				if(challenge.ProtectionSpace.Host == "uno-http-testing.azurewebsites.net")
 				{
 					var credential = NSUrlCredential.FromTrust(challenge.ProtectionSpace.ServerSecTrust);
