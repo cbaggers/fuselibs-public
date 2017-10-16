@@ -126,7 +126,7 @@ namespace Fuse.Reactive
 		{
 			if (!IsRootingStarted) return;
 			DisposeModuleInstance();
-			_moduleInstance = new ModuleInstance(Worker, this);
+			_moduleInstance = new ModuleInstance(Context, _worker, this);
 		}
 
 		void DisposeModuleInstance()

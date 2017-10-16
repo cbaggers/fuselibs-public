@@ -59,7 +59,7 @@ namespace Fuse.Scripting
 			return sb.ToString();
 		}
 
-		IThreadWorker _worker;
+		readonly IThreadWorker _worker;
 
 		protected Context(IThreadWorker worker)
 		{

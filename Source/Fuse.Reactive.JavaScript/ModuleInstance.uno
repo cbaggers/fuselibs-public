@@ -6,19 +6,21 @@ namespace Fuse.Reactive
 {
 	class ModuleInstance: DiagnosticSubject
 	{
+		readonly Scripting.Context _context;
 		readonly ThreadWorker _worker;
 		readonly JavaScript _js;
 		readonly Dictionary<string, object> _deps = new Dictionary<string, object>();
 
 		// UI thread
-		public ModuleInstance(ThreadWorker worker, JavaScript js)
+		public ModuleInstance(Scripting.Context context, ThreadWorker worker, JavaScript js)
 		{
+			_context = context;
 			for (var i = 0; i < js.Dependencies.Count; i++)
 				_deps.Add(js.Dependencies[i].Name, worker.Unwrap(js.Dependencies[i].Value));
 
 			_js = js;
 			_worker = worker;
-			_worker.Invoke(Evaluate);
+			_context.Invoke(Evaluate);
 		}
 
 		// JS thread
@@ -82,7 +84,7 @@ namespace Fuse.Reactive
 
 			lock (_resetHookMutex)
 			{
-				var newModuleResult = _js.ScriptModule.Evaluate(_worker.Context, globalId);
+				var newModuleResult = _js.ScriptModule.Evaluate(_context, globalId);
 				newModuleResult.AddDependency(_js.DispatchEvaluate);
 
 				if (newModuleResult.Error == null)

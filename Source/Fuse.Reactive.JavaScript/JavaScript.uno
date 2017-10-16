@@ -22,12 +22,15 @@ namespace Fuse.Reactive
 	{
 		static int _javaScriptCounter;
 		static ThreadWorker _worker;
+
+		// TODO: remove once Fuse.Testing/TestRootPanel.uno is fixed
 		internal static ThreadWorker Worker { get { return _worker; } }
 
 		internal readonly NameTable _nameTable;
 		RootableScriptModule _scriptModule;
 		internal RootableScriptModule ScriptModule { get { return _scriptModule; } }
-
+		readonly Scripting.Context Context;
+		
 		[UXConstructor]
 		public JavaScript([UXAutoNameTable] NameTable nameTable)
 		{
@@ -36,6 +39,7 @@ namespace Fuse.Reactive
 			
 			_nameTable = nameTable;
 			_scriptModule = new RootableScriptModule(_worker, nameTable);
+			Context = null;
 		}
 
 		protected override void OnRooted()

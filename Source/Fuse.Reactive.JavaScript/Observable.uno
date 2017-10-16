@@ -52,6 +52,7 @@ namespace Fuse.Reactive
 		{
 			static int _counter = 1;
 			readonly int _origin;
+			readonly Scripting.Context _context;
 			public int Origin { get { return _origin; } }
 			//actual remove is deferred until safe (`Perform` locks the removals)
 			public bool Removed { get; private set; }
@@ -65,8 +66,9 @@ namespace Fuse.Reactive
 			readonly IObserver _obs;
 			public IObserver Observer { get { return _obs; } }
 
-			public Subscription(Observable om, IObserver obs)
+			public Subscription(Scripting.Context context, Observable om, IObserver obs)
 			{
+				_context = context;
 				Removed = false;
 				_origin = _counter++;
 
@@ -107,7 +109,7 @@ namespace Fuse.Reactive
 				for (int i = 0; i < arr.Length; i++)
 					arr[i] = _om._worker.Unwrap(newValues[i]);
 
-				var sa = _om._worker.Context.NewArray(arr);
+				var sa = _context.NewArray(arr);
 
 				_om.Object.CallMethod("replaceAllWithOrigin", sa, _origin);
 			}
@@ -138,7 +140,7 @@ namespace Fuse.Reactive
 		*/
 		public ISubscription Subscribe(IObserver observer)
 		{
-			return new Subscription(this, observer);
+			return new Subscription(_context, this, observer);
 		}
 
 		IDisposable IObservableArray.Subscribe(IObserver observer)
@@ -152,18 +154,20 @@ namespace Fuse.Reactive
 		internal Scripting.Object Object { get { return _observable; } }
 
 		Scripting.Function _observeChange;
-
-		internal Observable(ThreadWorker worker, Scripting.Object obj, bool suppressCallback): base(obj)
+		readonly Scripting.Context _context;
+		
+		internal Observable(Scripting.Context context, ThreadWorker worker, Scripting.Object obj, bool suppressCallback): base(obj)
 		{
+			_context = context;
 			_worker = worker;
 			_observable = obj;
-			_observeChange = worker.Context.CallbackToFunction((Scripting.Callback)ObserveChange);
+			_observeChange = _context.CallbackToFunction((Scripting.Callback)ObserveChange);
 			obj.CallMethod("addSubscriber", _observeChange, suppressCallback);
 		}
 
-		internal static Observable Create(ThreadWorker worker)
+		internal static Observable Create(Scripting.Context context, ThreadWorker worker)
 		{
-			return new Observable(worker, (Scripting.Object)worker.Context.Observable.Call(), true);
+			return new Observable(context, worker, (Scripting.Object)context.Observable.Call(), true);
 		}
 
 		int ToInt(object obj)

@@ -91,32 +91,32 @@ namespace Fuse.Reactive
 
 		Scripting.Array ToArray(float2 v)
 		{
-			return Context.NewArray((double)v.X, (double)v.Y);
+			return _context.NewArray((double)v.X, (double)v.Y);
 		}
 
 		Scripting.Array ToArray(float3 v)
 		{
-			return Context.NewArray((double)v.X, (double)v.Y, (double)v.Z);
+			return _context.NewArray((double)v.X, (double)v.Y, (double)v.Z);
 		}
 
 		Scripting.Array ToArray(float4 v)
 		{
-			return Context.NewArray((double)v.X, (double)v.Y, (double)v.Z, (double)v.W);
+			return _context.NewArray((double)v.X, (double)v.Y, (double)v.Z, (double)v.W);
 		}
 
 		Scripting.Array ToArray(int2 v)
 		{
-			return Context.NewArray((double)v.X, (double)v.Y);
+			return _context.NewArray((double)v.X, (double)v.Y);
 		}
 
 		Scripting.Array ToArray(int3 v)
 		{
-			return Context.NewArray((double)v.X, (double)v.Y, (double)v.Z);
+			return _context.NewArray((double)v.X, (double)v.Y, (double)v.Z);
 		}
 
 		Scripting.Array ToArray(int4 v)
 		{
-			return Context.NewArray((double)v.X, (double)v.Y, (double)v.Z, (double)v.W);
+			return _context.NewArray((double)v.X, (double)v.Y, (double)v.Z, (double)v.W);
 		}
 	}
 }

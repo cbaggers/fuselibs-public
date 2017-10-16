@@ -26,7 +26,7 @@ namespace Fuse.Reactive
 			var ctor = GetClass(sc);
 			var res = ctor.Construct(ext);
 
-			if (so != null) so.SetScriptObject(res, Context);
+			if (so != null) so.SetScriptObject(res, _context);
 			return res;
 		}
 
@@ -47,14 +47,14 @@ namespace Fuse.Reactive
 
 		Function RegisterClass(ScriptClass sc)
 		{
-			var cl = (Function)Context.Evaluate(sc.Type.FullName + " (ScriptClass)", "(function(external_object) { this.external_object = external_object; })");
+			var cl = (Function)_context.Evaluate(sc.Type.FullName + " (ScriptClass)", "(function(external_object) { this.external_object = external_object; })");
 
 			if (sc.SuperType != null)
 			{
 				var super = GetClass(sc.SuperType);
 
 				if (_setSuperclass == null)
-					_setSuperclass = (Function)Context.Evaluate("(set-superclass)", "(function(cl, superclass) { cl.prototype = new superclass(); cl.prototype.constructor = cl; })");
+					_setSuperclass = (Function)_context.Evaluate("(set-superclass)", "(function(cl, superclass) { cl.prototype = new superclass(); cl.prototype.constructor = cl; })");
 
 				_setSuperclass.Call(cl, super);
 			}
@@ -64,8 +64,8 @@ namespace Fuse.Reactive
 				var inlineMethod = sc.Members[i] as ScriptMethodInline;
 				if (inlineMethod != null)
 				{
-					var m = (Function)Context.Evaluate(sc.Type.FullName + "." + inlineMethod.Name + " (ScriptMethod)", "(function(cl, Observable) { cl.prototype." + inlineMethod.Name + " = " + inlineMethod.Code + "; })");
-					m.Call(cl, Context.Observable);
+					var m = (Function)_context.Evaluate(sc.Type.FullName + "." + inlineMethod.Name + " (ScriptMethod)", "(function(cl, Observable) { cl.prototype." + inlineMethod.Name + " = " + inlineMethod.Code + "; })");
+					m.Call(cl, _context.Observable);
 					continue;
 				}
 
@@ -97,7 +97,7 @@ namespace Fuse.Reactive
 		{
 			public ReadonlyPropertyClosure(Function cl, ScriptReadonlyProperty constant, ThreadWorker worker)
 			{
-				var definer = (Function)worker.Context.Evaluate(constant.Name + " (ScriptReadonlyProperty)",
+				var definer = (Function)_context.Evaluate(constant.Name + " (ScriptReadonlyProperty)",
 					"(function(cl,propValue)"
 					+ "{"
 						+ "Object.defineProperty("
@@ -131,7 +131,7 @@ namespace Fuse.Reactive
 				// The backing observable may be recycled between accesses if the associated view
 				// is unrooted. This is why we need to call getObservable() every time and check if it has changed.
 
-				var definer = (Function)worker.Context.Evaluate(p.Name + " (ScriptProperty)",
+				var definer = (Function)_context.Evaluate(p.Name + " (ScriptProperty)",
 						"(function(cl, getObservable) { Object.defineProperty(cl.prototype, '" + p.Name + "', "
 							+ "{" 
 								+ "get: function() { "
@@ -165,7 +165,7 @@ namespace Fuse.Reactive
 				_m = m;
 				_worker = worker;
 
-				var factory = (Function)_worker.Context.Evaluate(m.Name + " (ScriptMethod)", "(function (cl, callback) { cl.prototype." + m.Name + 
+				var factory = (Function)_context.Evaluate(m.Name + " (ScriptMethod)", "(function (cl, callback) { cl.prototype." + m.Name + 
 					" = function() { return callback(this.external_object, Array.prototype.slice.call(arguments)); }})");
 				
 				factory.Call(cl, (Callback)Callback);	
@@ -177,7 +177,7 @@ namespace Fuse.Reactive
 			{
 				var self = ((External)args[0]).Object;
 				var realArgs = CopyArgs((Scripting.Array)args[1]);
-				var res = _worker.Unwrap(_m.Call(_worker.Context, self, realArgs));
+				var res = _worker.Unwrap(_m.Call(_context, self, realArgs));
 				return res;
 			}
 
@@ -208,7 +208,7 @@ namespace Fuse.Reactive
 				var ni = n.Properties.Get(_classInstanceProperty) as ClassInstance;
 				if (ni == null) 
 				{
-					ni = new ClassInstance(this, obj, rootTable);
+					ni = new ClassInstance(_context, this, obj, rootTable);
 					n.Properties.Set(_classInstanceProperty, ni);
 				}
 				return ni;

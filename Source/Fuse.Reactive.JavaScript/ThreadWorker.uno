@@ -27,7 +27,6 @@ namespace Fuse.Reactive
 		}
 
 		static Scripting.Context _context;
-		public Scripting.Context Context { get { return _context; } }
 
 		static FuseJS.Builtins _fuseJS;
 		public static FuseJS.Builtins FuseJS { get { return _fuseJS; } }
