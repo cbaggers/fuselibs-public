@@ -23,21 +23,25 @@ namespace Fuse.Net.Http
 
 	[Require("Entity","SecCertHandle")]
 	extern(iOS)
-	public class LoadCertificateFromBytes : Promise<X509Certificate>
+	public static class LoadCertificateFromBytes
 	{
-		public LoadCertificateFromBytes(byte[] data) : this(ForeignDataView.Create(data)) {}
+		public static X509Certificate Load(byte[] data)
+		{
+			return Load(ForeignDataView.Create(data));
+		}
 
-		public LoadCertificateFromBytes(ForeignDataView view)
+		static X509Certificate Load(ForeignDataView view)
 		{
 			var certRef = Impl(view);
 			if (!SecCertHandle.IsNull(certRef))
 			{
 				// TODO: Extract details here
-				Resolve(new X509Certificate("a", "b", "c"));
+				return new X509Certificate("a", "b", "c");
 			}
 			else
 			{
-				Reject(new Exception("LoadCertificateFromBytes Failed. Certificate was null"));
+				throw new Exception("LoadCertificateFromBytes Failed. Certificate was null");
+				return null;
 			}
 		}
 

@@ -5,11 +5,12 @@ using Uno.Threading;
 namespace Fuse.Net.Http
 {
 	extern(!android && !iOS)
-	public class LoadCertificateFromBytes : Promise<X509Certificate>
+	public static class LoadCertificateFromBytes
 	{
-		public LoadCertificateFromBytes(byte[] data)
+		public static X509Certificate Load(byte[] data)
 		{
-			Reject(new Exception("LoadCertificateFromBytes is not implemented on this platform"));
+			throw new Exception("LoadCertificateFromBytes is not implemented on this platform");
+			return null;
 		}
 	}
 }

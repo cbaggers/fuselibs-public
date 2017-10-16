@@ -18,7 +18,7 @@ public partial class App2
 
 	X509Certificate LoadClientCertificateFromBundle(BundleFile bundleFile)
 	{
-		var foo = new LoadCertificateFromBytes(bundleFile.ReadAllBytes());
+		var foo = LoadCertificateFromBytes.Load(bundleFile.ReadAllBytes());
 		return null;
 	}
 
