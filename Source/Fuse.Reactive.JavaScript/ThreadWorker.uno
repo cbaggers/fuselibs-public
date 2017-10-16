@@ -8,12 +8,7 @@ using Uno.Compiler.ExportTargetInterop;
 
 namespace Fuse.Reactive
 {
-	interface IMirror
-	{
-		object Reflect(object obj);
-	}
-
-	partial class ThreadWorker: IDisposable, IDispatcher, IThreadWorker, IMirror
+	partial class ThreadWorker: IDisposable, IDispatcher, IThreadWorker
 	{
 		IDispatcher IThreadWorker.Dispatcher { get { return this; } }
 		Function IThreadWorker.Observable { get { return FuseJS.Observable; } }

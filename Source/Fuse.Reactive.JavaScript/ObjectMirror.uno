@@ -1,4 +1,5 @@
 using Uno.Collections;
+using Fuse.Scripting;
 using Uno;
 
 namespace Fuse.Reactive

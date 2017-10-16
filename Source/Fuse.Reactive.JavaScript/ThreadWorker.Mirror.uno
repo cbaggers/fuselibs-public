@@ -5,10 +5,16 @@ using Uno.Threading;
 
 namespace Fuse.Reactive
 {
-	partial class ThreadWorker
+	public class TypeMirror : IMirror
 	{
 		// Used for stack overflow protection
 		int _reflectionDepth;
+		Scripting.Context _context;
+
+		public TypeMirror(Scripting.Context context)
+		{
+			_context = context;
+		}
 
 		public object Reflect(object obj)
 		{
@@ -51,7 +57,7 @@ namespace Fuse.Reactive
 			var f = obj as Scripting.Function;
 			if (f != null)
 			{
-				return new FunctionMirror(_context, f);
+				return new FunctionMirror(_context.Mirror, f);
 			}
 
 			var o = obj as Scripting.Object;

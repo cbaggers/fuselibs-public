@@ -15,6 +15,11 @@ namespace Fuse.Scripting
 		object Wrap(object obj);
 	}
 
+	public interface IMirror
+	{
+		object Reflect(object obj);
+	}
+
 	public abstract partial class Context: Uno.IDisposable
 	{
 		ConcurrentDictionary<string, ModuleResult> _moduleResults = new ConcurrentDictionary<string, ModuleResult>();
@@ -61,12 +66,14 @@ namespace Fuse.Scripting
 
 		readonly IThreadWorker _worker;
 
-		protected Context(IThreadWorker worker)
+		protected Context(IThreadWorker worker, IMirror mirror)
 		{
 			_worker = worker;
+			Mirror = mirror;
 		}
 
 		public IThreadWorker ThreadWorker { get { return _worker; } }
+		public readonly IMirror Mirror { get; };
 
 		public object Wrap(object obj) { return _worker.Wrap(obj); }
 		public object Unwrap(object obj) { return _worker.Unwrap(obj); }
