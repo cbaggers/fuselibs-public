@@ -77,7 +77,7 @@ namespace Foundation
 	{}
 
 	[DotNetType("Foundation.NSData")]
-	extern(DOTNET && HOST_MAC) internal class NSData
+	extern(DOTNET && HOST_MAC) public class NSData
 	{}
 
 	[DotNetType("Foundation.NSUrlSessionConfiguration")]
@@ -138,7 +138,7 @@ namespace Security
 	}
 
 	[DotNetType("Security.SecCertificate")]
-	public class SecCertificate
+	extern(DOTNET && HOST_MAC) public class SecCertificate
 	{
 		/*public extern X509Certificate ToX509Certificate();
 		public extern X509Certificate2 ToX509Certificate2();
