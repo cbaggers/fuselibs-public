@@ -1,12 +1,13 @@
 using Uno;
 using Uno.UX;
 using Uno.Collections;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
 	class LazyObservableProperty: ObservableProperty
 	{
-		public LazyObservableProperty(Scripting.Context context, Scripting.Object obj, Uno.UX.Property p)
+		public LazyObservableProperty(JavaScriptContext context, Scripting.Object obj, Uno.UX.Property p)
 		: base(context, obj, p)
 		{
 			context.ObjectDefineProperty(obj, p.Name.ToString(), Get);
@@ -26,11 +27,11 @@ namespace Fuse.Reactive
 	*/
 	class ObservableProperty: IObserver, IPropertyListener
 	{
-		protected readonly Scripting.Context _context;
+		protected readonly JavaScriptContext _context;
 		Uno.UX.Property _property;
 		Scripting.Object _obj;
 
-		public ObservableProperty(Scripting.Context context, Scripting.Object obj, Uno.UX.Property p)
+		public ObservableProperty(JavaScriptContext context, Scripting.Object obj, Uno.UX.Property p)
 		{
 			_context = context;
 			_obj = obj;

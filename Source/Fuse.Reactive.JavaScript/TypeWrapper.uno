@@ -5,6 +5,7 @@ using Uno.Text;
 using Uno.Threading;
 using Uno.IO;
 using Uno.UX;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
@@ -13,9 +14,9 @@ namespace Fuse.Reactive
 		const long DotNetTicksInJsTick = 10000L;
 		const long UnixEpochInDotNetTicks = 621355968000000000L;
 
-		public static DateTime ConvertDateToDateTime(Scripting.Object date)
+		public static DateTime ConvertDateToDateTime(Scripting.Context context, Scripting.Object date)
 		{
-			var jsTicks = (long)(double)ThreadWorker.Wrap(date.CallMethod("getTime"));
+			var jsTicks = (long)(double)context.Wrap(date.CallMethod("getTime"));
 			var dotNetTicksRelativeToUnixEpoch = jsTicks * DotNetTicksInJsTick;
 			var dotNetTicks = dotNetTicksRelativeToUnixEpoch + UnixEpochInDotNetTicks;
 
@@ -37,9 +38,9 @@ namespace Fuse.Reactive
 
 	class TypeWrapper : ITypeWrapper
 	{
-		Scripting.Context _context;
+		JavaScriptContext _context;
 
-		public TypeWrapper(Scripting.Context context)
+		public TypeWrapper(JavaScriptContext context)
 		{
 			_context = context;
 		}
@@ -53,9 +54,9 @@ namespace Fuse.Reactive
 			{
 				var sobj = (Scripting.Object)obj;
 
-				if (sobj.InstanceOf(FuseJS.Date))
+				if (sobj.InstanceOf(_worker.FuseJS.Date))
 				{
-					return DateTimeConverterHelpers.ConvertDateToDateTime(sobj);
+					return DateTimeConverterHelpers.ConvertDateToDateTime(_context, sobj);
 				}
 				else if (sobj.ContainsKey("external_object"))
 				{

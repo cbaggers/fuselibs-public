@@ -1,6 +1,7 @@
 using Uno.Collections;
 using Fuse.Scripting;
 using Uno;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {

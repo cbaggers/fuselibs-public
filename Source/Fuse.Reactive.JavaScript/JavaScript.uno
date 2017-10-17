@@ -5,6 +5,7 @@ using Uno.Compiler;
 using Fuse.Scripting;
 using Uno.Testing;
 using Uno.Threading;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
@@ -25,9 +26,9 @@ namespace Fuse.Reactive
 		internal readonly NameTable _nameTable;
 		RootableScriptModule _scriptModule;
 		internal RootableScriptModule ScriptModule { get { return _scriptModule; } }
-		readonly Scripting.Context Context;
+		readonly JavaScriptContext Context;
 
-		internal static Context CreateContext()
+		internal static JavaScriptContext CreateContext()
 		{
 			if defined(USE_JAVASCRIPTCORE && !USE_REACTNATIVE) return new Fuse.Scripting.JavaScriptCore.Context();
 			else if defined(USE_V8) return new Fuse.Scripting.V8.Context();

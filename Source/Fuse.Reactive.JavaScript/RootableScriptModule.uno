@@ -4,6 +4,7 @@ using Uno.Collections;
 using Fuse.Scripting;
 using Uno.Testing;
 using Uno.Threading;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {

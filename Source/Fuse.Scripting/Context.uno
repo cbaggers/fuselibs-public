@@ -13,17 +13,6 @@ namespace Fuse.Scripting
 		IDispatcher Dispatcher { get; }
 	}
 
-	public interface ITypeWrapper
-	{
-		object Unwrap(object obj);
-		object Wrap(object obj);
-	}
-
-	public interface IMirror
-	{
-		object Reflect(object obj);
-	}
-
 	public abstract partial class Context: Uno.IDisposable
 	{
 		ConcurrentDictionary<string, ModuleResult> _moduleResults = new ConcurrentDictionary<string, ModuleResult>();
@@ -72,21 +61,12 @@ namespace Fuse.Scripting
 
 		protected Context()
 		{
-			_worker = AquireThreadWorker();
-			Mirror = AquireMirror();
-			TypeWrapper = AquireTypeWrapper(this);
+			_worker = AquireThreadWorker(this);
 		}
 
-		protected abstract IThreadWorker AquireThreadWorker(); // new ThreadWorker();
-		protected abstract IMirror AquireMirror();
-		protected abstract ITypeWrapper AquireTypeWrapper(Scripting.Context ctx);
+		protected abstract IThreadWorker AquireThreadWorker(Context context); // new ThreadWorker();
 
 		public IThreadWorker ThreadWorker { get { return _worker; } }
-		public readonly IMirror Mirror;
-		readonly ITypeWrapper TypeWrapper;
-
-		public object Wrap(object obj) { return TypeWrapper.Wrap(obj); }
-		public object Unwrap(object obj) { return TypeWrapper.Unwrap(obj); }
 
 		public IDispatcher Dispatcher { get { return _worker.Dispatcher; } }
 
@@ -94,6 +74,9 @@ namespace Fuse.Scripting
 		{
 			_worker.Dispatcher.Invoke(action);
 		}
+
+		public abstract object Wrap(object obj);
+		public abstract object Unwrap(object obj);
 
 		public Function Observable
 		{

@@ -1,4 +1,5 @@
 using Uno;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {

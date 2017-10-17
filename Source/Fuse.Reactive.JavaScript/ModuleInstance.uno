@@ -1,17 +1,18 @@
 using Uno;
 using Uno.Collections;
 using Fuse.Scripting;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
 	class ModuleInstance: DiagnosticSubject
 	{
-		readonly Scripting.Context _context;
+		readonly JavaScriptContext _context;
 		readonly JavaScript _js;
 		readonly Dictionary<string, object> _deps = new Dictionary<string, object>();
 
 		// UI thread
-		public ModuleInstance(Scripting.Context context, JavaScript js)
+		public ModuleInstance(JavaScriptContext context, JavaScript js)
 		{
 			_context = context;
 			for (var i = 0; i < js.Dependencies.Count; i++)

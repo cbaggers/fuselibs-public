@@ -2,6 +2,7 @@ using Fuse.Scripting;
 using Uno;
 using Uno.Collections;
 using Uno.Threading;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
@@ -9,9 +10,9 @@ namespace Fuse.Reactive
 	{
 		// Used for stack overflow protection
 		int _reflectionDepth;
-		Scripting.Context _context;
+		JavaScriptContext _context;
 
-		public TypeMirror(Scripting.Context context)
+		public TypeMirror(JavaScriptContext context)
 		{
 			_context = context;
 		}
@@ -67,9 +68,9 @@ namespace Fuse.Reactive
 				{
 					return new Observable(_context, o, false);
 				}
-				else if (o.InstanceOf(FuseJS.Date))
+				else if (o.InstanceOf(_worker.FuseJS.Date))
 				{
-					return DateTimeConverterHelpers.ConvertDateToDateTime(o);
+					return DateTimeConverterHelpers.ConvertDateToDateTime(_context, o);
 				}
 				else
 				{

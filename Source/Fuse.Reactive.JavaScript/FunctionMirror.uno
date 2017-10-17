@@ -3,18 +3,19 @@ using Uno.Collections;
 using Uno.Testing;
 using Uno.Threading;
 using Fuse.Scripting;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
 	class FunctionMirror: DiagnosticSubject, IEventHandler, IRaw
 	{
 		readonly Function _func;
-		readonly Scripting.Context _context;
+		readonly JavaScriptContext _context;
 
 		public object Raw { get { return _func; } }
 		public object ReflectedRaw { get { return _func; } }
 
-		public FunctionMirror(Scripting.Context context, Function func)
+		public FunctionMirror(JavaScriptContext context, Function func)
 		{
 			_func = func;
 			_context = context;

@@ -2,6 +2,7 @@ using Uno;
 using Uno.UX;
 using Uno.Collections;
 using Fuse.Scripting;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
@@ -72,20 +73,20 @@ namespace Fuse.Reactive
 				var method = sc.Members[i] as ScriptMethod;
 				if (method != null)
 				{
-					new MethodClosure(cl, method, this);
+					new MethodClosure(cl, method, _context);
 					continue;
 				}
 
 				var property = sc.Members[i] as ScriptProperty;
 				if (property != null)
 				{
-					new PropertyClosure(cl, property, this);
+					new PropertyClosure(cl, property, _context);
 					continue;
 				}
 				var readonlyProperty = sc.Members[i] as ScriptReadonlyProperty;
 				if (readonlyProperty != null)
 				{
-					new ReadonlyPropertyClosure(cl, readonlyProperty, this);
+					new ReadonlyPropertyClosure(cl, readonlyProperty, _context);
 					continue;
 				}
 			}
@@ -95,7 +96,7 @@ namespace Fuse.Reactive
 
 		class ReadonlyPropertyClosure
 		{
-			public ReadonlyPropertyClosure(Function cl, ScriptReadonlyProperty constant, ThreadWorker worker)
+			public ReadonlyPropertyClosure(Function cl, ScriptReadonlyProperty constant, JavaScriptContext context)
 			{
 				var definer = (Function)_context.Evaluate(constant.Name + " (ScriptReadonlyProperty)",
 					"(function(cl,propValue)"
@@ -111,18 +112,18 @@ namespace Fuse.Reactive
 							+ "}"
 						+ ");"
 					+ "})");
-				definer.Call(cl, worker.Unwrap(constant.Value));
+				definer.Call(cl, context.Unwrap(constant.Value));
 			}
 		}
 
 		class PropertyClosure
 		{
-			readonly ThreadWorker _worker;
+			readonly JavaScriptContext _context;
 			readonly ScriptProperty _p;
 
-			public PropertyClosure(Function cl, ScriptProperty p, ThreadWorker worker)
+			public PropertyClosure(Function cl, ScriptProperty p, JavaScriptContext context)
 			{
-				_worker = worker;
+				_context = context;
 				_p = p;
 
 				var rawField = "this._raw_" + p.Name;
@@ -150,7 +151,7 @@ namespace Fuse.Reactive
 
 			object GetObservable(object[] args)
 			{
-				var obj = ThreadWorker.Wrap(args[0]) as PropertyObject;
+				var obj = _context.Wrap(args[0]) as PropertyObject;
 				var ci = _worker.GetClassInstance(obj, null);
 				return ci.GetPropertyObservable(_p.GetProperty(obj));
 			}
@@ -159,11 +160,11 @@ namespace Fuse.Reactive
 		class MethodClosure
 		{
 			readonly ScriptMethod _m;
-			readonly ThreadWorker _worker;
-			public MethodClosure(Function cl, ScriptMethod m, ThreadWorker worker)
+			readonly JavaScriptContext _context;
+			public MethodClosure(Function cl, ScriptMethod m, JavaScriptContext context)
 			{
 				_m = m;
-				_worker = worker;
+				_context = context;
 
 				var factory = (Function)_context.Evaluate(m.Name + " (ScriptMethod)", "(function (cl, callback) { cl.prototype." + m.Name + 
 					" = function() { return callback(this.external_object, Array.prototype.slice.call(arguments)); }})");
@@ -177,14 +178,14 @@ namespace Fuse.Reactive
 			{
 				var self = ((External)args[0]).Object;
 				var realArgs = CopyArgs((Scripting.Array)args[1]);
-				var res = _worker.Unwrap(_m.Call(_context, self, realArgs));
+				var res = _context.Unwrap(_m.Call(_context, self, realArgs));
 				return res;
 			}
 
-			static object[] CopyArgs(Scripting.Array args)
+			object[] CopyArgs(Scripting.Array args)
 			{
 				var res = new object[args.Length];
-				for (int i = 0; i < res.Length; i++) res[i] = ThreadWorker.Wrap(args[i]);
+				for (int i = 0; i < res.Length; i++) res[i] = _context.Wrap(args[i]);
 				return res;
 			}
 		}
@@ -208,7 +209,7 @@ namespace Fuse.Reactive
 				var ni = n.Properties.Get(_classInstanceProperty) as ClassInstance;
 				if (ni == null) 
 				{
-					ni = new ClassInstance(_context, this, obj, rootTable);
+					ni = new ClassInstance(_context, obj, rootTable);
 					n.Properties.Set(_classInstanceProperty, ni);
 				}
 				return ni;

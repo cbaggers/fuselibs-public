@@ -4,6 +4,7 @@ using Fuse.Scripting;
 using Uno.Threading;
 using Uno.IO;
 using Uno.Collections;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive.FuseJS
 {
@@ -77,7 +78,7 @@ namespace Fuse.Reactive.FuseJS
 					console.log("This will run every 10 seconds until forever");
 				}, 10000, true);
 		*/
-		object Create(Fuse.Scripting.Context context, object[] args)
+		object Create(Scripting.Context context, object[] args)
 		{
 			if (args.Length < 3)
 				throw new Error("create(): requires at least three arguments");
@@ -118,7 +119,7 @@ namespace Fuse.Reactive.FuseJS
 			}, 2000, true);
 			```
 		*/
-		object Delete(Fuse.Scripting.Context context, object[] args)
+		object Delete(Scripting.Context context, object[] args)
 		{
 			if (args.Length < 1)
 				throw new Error("delete(): requires one argument");

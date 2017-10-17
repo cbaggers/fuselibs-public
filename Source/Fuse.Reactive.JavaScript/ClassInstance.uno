@@ -1,6 +1,7 @@
 using Uno;
 using Uno.UX;
 using Uno.Collections;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
@@ -9,7 +10,7 @@ namespace Fuse.Reactive
 	*/
 	class ClassInstance
 	{
-		readonly Scripting.Context _context;
+		readonly JavaScriptContext _context;
 		readonly NameTable _rootTable;
 		readonly object _obj;
 		Scripting.Object _self;
@@ -26,7 +27,7 @@ namespace Fuse.Reactive
 		/** Should only be called by ThreadWorker.
 			To retrieve an instance, use ThreadWorker.GetClassInstance()
 		 */
-		internal ClassInstance(Scripting.Context context, object obj, NameTable rootTable)
+		internal ClassInstance(JavaScriptContext context, object obj, NameTable rootTable)
 		{
 			_context = context;
 			_rootTable = rootTable;

@@ -11,7 +11,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[extern(Android) Require("LinkDirectory", "@(OutputDirectory)/app/build/intermediates/exploded-aar/org.webkit/android-jsc/r174650/jni/${ANDROID_ABI}")]
 	[extern(iOS) Require("Xcode.Framework", "JavaScriptCore")]
 	[Require("Header.Include", "JavaScriptCore/JavaScript.h")]
-	public extern(USE_JAVASCRIPTCORE) class Context: Fuse.Scripting.Context
+	public extern(USE_JAVASCRIPTCORE) class Context: Fuse.Scripting.JavaScript.JavaScriptContext
 	{
 		internal bool _disposed;
 		internal readonly JSContextRef _context;

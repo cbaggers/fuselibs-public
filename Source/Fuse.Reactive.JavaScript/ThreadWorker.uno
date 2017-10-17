@@ -5,6 +5,7 @@ using Uno.Testing;
 using Uno.Threading;
 using Fuse.Scripting;
 using Uno.Compiler.ExportTargetInterop;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
@@ -13,7 +14,7 @@ namespace Fuse.Reactive
 		IDispatcher IThreadWorker.Dispatcher { get { return this; } }
 		Function IThreadWorker.Observable { get { return FuseJS.Observable; } }
 
-		static Scripting.Context _context;
+		static JavaScriptContext _context;
 
 		static FuseJS.Builtins _fuseJS;
 		public static FuseJS.Builtins FuseJS { get { return _fuseJS; } }

@@ -23,6 +23,7 @@
     "../Fuse.Scripting.JavaScriptCore/Fuse.Scripting.JavaScriptCore.unoproj",
     "../Fuse.Scripting.V8/Fuse.Scripting.V8.unoproj",
     "../Fuse.Scripting/Fuse.Scripting.unoproj",
+    "../Fuse.Scripting.JavaScript/Fuse.Scripting.JavaScript.unoproj",
     "../Fuse.Triggers/Fuse.Triggers.unoproj",
     "../Fuse.Nodes/Fuse.Nodes.unoproj",
     "../Fuse.Common/Fuse.Common.unoproj",

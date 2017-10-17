@@ -1,6 +1,7 @@
 using Uno;
 using Uno.IO;
 using Fuse.Scripting;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive.FuseJS
 {
@@ -13,7 +14,7 @@ namespace Fuse.Reactive.FuseJS
 		internal readonly Function Date;
 		internal readonly Function DateCtor;
 
-		internal Builtins(Fuse.Scripting.Context context)
+		internal Builtins(JavaScriptContext context)
 		{
 			// Init builtin objects
 			DebugLog.Init(context);
@@ -71,7 +72,7 @@ namespace Fuse.Reactive.FuseJS
 			}
 		}
 
-		internal void UpdateModules(Fuse.Scripting.Context context)
+		internal void UpdateModules(JavaScriptContext context)
 		{
 			if(_timer != null)
 				_timer.UpdateModule();

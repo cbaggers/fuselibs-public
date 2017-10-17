@@ -1,5 +1,6 @@
 using Uno;
 using Uno.Collections;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive
 {
@@ -52,7 +53,7 @@ namespace Fuse.Reactive
 		{
 			static int _counter = 1;
 			readonly int _origin;
-			readonly Scripting.Context _context;
+			readonly JavaScriptContext _context;
 			public int Origin { get { return _origin; } }
 			//actual remove is deferred until safe (`Perform` locks the removals)
 			public bool Removed { get; private set; }
@@ -66,7 +67,7 @@ namespace Fuse.Reactive
 			readonly IObserver _obs;
 			public IObserver Observer { get { return _obs; } }
 
-			public Subscription(Scripting.Context context, Observable om, IObserver obs)
+			public Subscription(JavaScriptContext context, Observable om, IObserver obs)
 			{
 				_context = context;
 				Removed = false;
@@ -152,9 +153,9 @@ namespace Fuse.Reactive
 		internal Scripting.Object Object { get { return _observable; } }
 
 		Scripting.Function _observeChange;
-		readonly Scripting.Context _context;
+		readonly JavaScriptContext _context;
 		
-		internal Observable(Scripting.Context context, Scripting.Object obj, bool suppressCallback): base(obj)
+		internal Observable(JavaScriptContext context, Scripting.Object obj, bool suppressCallback): base(obj)
 		{
 			_context = context;
 			_observable = obj;
@@ -162,7 +163,7 @@ namespace Fuse.Reactive
 			obj.CallMethod("addSubscriber", _observeChange, suppressCallback);
 		}
 
-		internal static Observable Create(Scripting.Context context)
+		internal static Observable Create(JavaScriptContext context)
 		{
 			return new Observable(context, (Scripting.Object)context.Observable.Call(), true);
 		}

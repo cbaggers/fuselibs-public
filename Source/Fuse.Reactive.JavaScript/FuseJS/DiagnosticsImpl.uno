@@ -1,7 +1,7 @@
 using Uno;
 using Uno.UX;
-
 using Fuse.Scripting;
+using Fuse.Scripting.JavaScript;
 
 namespace Fuse.Reactive.FuseJS
 {
@@ -23,7 +23,7 @@ namespace Fuse.Reactive.FuseJS
 			AddMember(new NativeFunction("report", (NativeCallback)Report));
 		}
 		
-		object Report(Fuse.Scripting.Context context, object[] args)
+		object Report(Scripting.Context context, object[] args)
 		{
 			if (args.Length != 2)
 			{
