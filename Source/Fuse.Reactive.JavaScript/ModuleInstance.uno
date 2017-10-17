@@ -7,19 +7,17 @@ namespace Fuse.Reactive
 	class ModuleInstance: DiagnosticSubject
 	{
 		readonly Scripting.Context _context;
-		readonly ThreadWorker _worker;
 		readonly JavaScript _js;
 		readonly Dictionary<string, object> _deps = new Dictionary<string, object>();
 
 		// UI thread
-		public ModuleInstance(Scripting.Context context, ThreadWorker worker, JavaScript js)
+		public ModuleInstance(Scripting.Context context, JavaScript js)
 		{
 			_context = context;
 			for (var i = 0; i < js.Dependencies.Count; i++)
-				_deps.Add(js.Dependencies[i].Name, worker.Unwrap(js.Dependencies[i].Value));
+				_deps.Add(js.Dependencies[i].Name, context.Unwrap(js.Dependencies[i].Value));
 
 			_js = js;
-			_worker = worker;
 			_context.Invoke(Evaluate);
 		}
 
@@ -30,12 +28,12 @@ namespace Fuse.Reactive
 			while (nt != null)
 			{
 				for (int i = 0; i < nt.Entries.Length; ++i)
-					_deps.Add(nt.Entries[i], _worker.Unwrap(nt.Objects[i]));
+					_deps.Add(nt.Entries[i], _context.Unwrap(nt.Objects[i]));
 				nt = nt.ParentTable;
 			}
 
 			_js.ScriptModule.Dependencies = _deps;
-			_dc = _worker.Reflect(EvaluateExports());
+			_dc = _context.Mirror.Reflect(EvaluateExports());
 			UpdateManager.PostAction(SetDataContext);
 		}
 

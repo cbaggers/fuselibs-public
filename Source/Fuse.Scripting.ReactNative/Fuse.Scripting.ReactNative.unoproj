@@ -13,6 +13,8 @@
   ],
   "Projects": [
     "../Fuse.Scripting/Fuse.Scripting.unoproj",
+    "../Fuse.Scripting.JavaScript/Fuse.Scripting.JavaScript.unoproj",
+    "../Fuse.Scripting.JavaScriptCore/Fuse.Scripting.JavaScriptCore.unoproj",
     "../Fuse.Common/Fuse.Common.unoproj",
     "../Fuse.Nodes/Fuse.Nodes.unoproj",
     "../Fuse.Controls.Native/Fuse.Controls.Native.unoproj",

@@ -119,10 +119,12 @@ namespace Fuse.Reactive
 
 		void RunInner()
 		{
-			if defined(!USE_REACTNATIVE)
-			{
-				_context = CreateContext(this);
-			}
+			// TODO: ENSURE THIS HAS BEEN DEALT WITH
+			//
+			// if defined(!USE_REACTNATIVE)
+			// {
+			// 	_context = CreateContext(this);
+			// }
 
 			if (_context == null)
 			{

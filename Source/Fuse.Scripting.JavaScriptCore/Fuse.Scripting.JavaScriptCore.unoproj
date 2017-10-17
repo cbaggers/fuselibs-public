@@ -11,6 +11,7 @@
   ],
   "Projects": [
     "../Fuse.Scripting/Fuse.Scripting.unoproj",
+    "../Fuse.Scripting.JavaScript/Fuse.Scripting.JavaScript.unoproj",
     "../Fuse.Common/Fuse.Common.unoproj"
   ],
   "Includes": [

@@ -90,7 +90,7 @@ namespace Fuse.Reactive
 				
 				try
 				{
-					_om.Object.CallMethod("setValueWithOrigin", _om._worker.Unwrap(newValue), _origin);
+					_om.Object.CallMethod("setValueWithOrigin", _om._context.Unwrap(newValue), _origin);
 				}
 				catch (Scripting.ScriptException ex)
 				{
@@ -107,7 +107,7 @@ namespace Fuse.Reactive
 			{
 				var arr = new object[newValues.Length];
 				for (int i = 0; i < arr.Length; i++)
-					arr[i] = _om._worker.Unwrap(newValues[i]);
+					arr[i] = _om._context.Unwrap(newValues[i]);
 
 				var sa = _context.NewArray(arr);
 
@@ -148,26 +148,23 @@ namespace Fuse.Reactive
 			return Subscribe(observer);
 		}
 
-		readonly ThreadWorker _worker;
-
 		Scripting.Object _observable;
 		internal Scripting.Object Object { get { return _observable; } }
 
 		Scripting.Function _observeChange;
 		readonly Scripting.Context _context;
 		
-		internal Observable(Scripting.Context context, ThreadWorker worker, Scripting.Object obj, bool suppressCallback): base(obj)
+		internal Observable(Scripting.Context context, Scripting.Object obj, bool suppressCallback): base(obj)
 		{
 			_context = context;
-			_worker = worker;
 			_observable = obj;
 			_observeChange = _context.CallbackToFunction((Scripting.Callback)ObserveChange);
 			obj.CallMethod("addSubscriber", _observeChange, suppressCallback);
 		}
 
-		internal static Observable Create(Scripting.Context context, ThreadWorker worker)
+		internal static Observable Create(Scripting.Context context)
 		{
-			return new Observable(context, worker, (Scripting.Object)context.Observable.Call(), true);
+			return new Observable(context, (Scripting.Object)context.Observable.Call(), true);
 		}
 
 		int ToInt(object obj)
@@ -186,7 +183,7 @@ namespace Fuse.Reactive
 
 			if (op == "set")
 			{
-				UpdateManager.PostAction(new Set(this, _worker.Reflect(args[3]), origin).Perform);
+				UpdateManager.PostAction(new Set(this, _context.Mirror.Reflect(args[3]), origin).Perform);
 			}
 			else if (op == "clear") 
 			{
@@ -194,15 +191,15 @@ namespace Fuse.Reactive
 			}
 			else if (op == "newAt")
 			{
-				UpdateManager.PostAction(new NewAt(this, ToInt(args[3]), _worker.Reflect(args[4])).Perform);
+				UpdateManager.PostAction(new NewAt(this, ToInt(args[3]), _context.Mirror.Reflect(args[4])).Perform);
 			}
 			else if (op == "newAll") 
 			{
-				UpdateManager.PostAction(new NewAll(this, (ArrayMirror)_worker.Reflect(args[3]), origin).Perform);
+				UpdateManager.PostAction(new NewAll(this, (ArrayMirror)_context.Mirror.Reflect(args[3]), origin).Perform);
 			}
 			else if (op == "add") 
 			{
-				UpdateManager.PostAction(new Add(this, _worker.Reflect(args[3])).Perform);
+				UpdateManager.PostAction(new Add(this, _context.Mirror.Reflect(args[3])).Perform);
 			}
 			else if (op == "removeAt")
 			{
@@ -210,7 +207,7 @@ namespace Fuse.Reactive
 			}
 			else if (op == "insertAt")
 			{
-				UpdateManager.PostAction(new InsertAt(this, ToInt(args[3]), _worker.Reflect(args[4])).Perform);
+				UpdateManager.PostAction(new InsertAt(this, ToInt(args[3]), _context.Mirror.Reflect(args[4])).Perform);
 			}
 			else if (op == "removeRange")
 			{
@@ -218,7 +215,7 @@ namespace Fuse.Reactive
 			}
 			else if (op == "insertAll") 
 			{
-				UpdateManager.PostAction(new InsertAll(this, ToInt(args[3]), (ArrayMirror)_worker.Reflect(args[4])).Perform);
+				UpdateManager.PostAction(new InsertAll(this, ToInt(args[3]), (ArrayMirror)_context.Mirror.Reflect(args[4])).Perform);
 			}
 			else if (op == "failed")
 			{
@@ -243,7 +240,7 @@ namespace Fuse.Reactive
 			if (!_isUnsubscribed)
 			{
 				_isUnsubscribed = true;
-				_worker.Invoke(RemoveSubscriber);
+				_context.Invoke(RemoveSubscriber);
 			}
 		}
 

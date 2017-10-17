@@ -35,11 +35,18 @@ namespace Fuse.Reactive
 		}
 	}
 
-	partial class ThreadWorker
+	class TypeWrapper : ITypeWrapper
 	{
+		Scripting.Context _context;
+
+		public TypeWrapper(Scripting.Context context)
+		{
+			_context = context;
+		}
+
 		/** Wraps an object that came from the script VM in an appropriate wrapper
 			for use in the Uno world. */
-		public static object Wrap(object obj)
+		public object Wrap(object obj)
 		{
 			if (obj is Scripting.External) return ((Scripting.External)obj).Object;
 			else if (obj is Scripting.Object)
@@ -60,11 +67,6 @@ namespace Fuse.Reactive
 			if (obj is int) return (double)(int)obj;
 			if (obj is uint) return (double)(uint)obj;
 			return obj;
-		}
-
-		object Scripting.IThreadWorker.Wrap(object obj)
-		{
-			return ThreadWorker.Wrap(obj);
 		}
 
 		/** Takes an object from the Uno world, removes any wrapping applied by @Wrap
@@ -117,6 +119,23 @@ namespace Fuse.Reactive
 		Scripting.Array ToArray(int4 v)
 		{
 			return _context.NewArray((double)v.X, (double)v.Y, (double)v.Z, (double)v.W);
+		}
+
+		object WrapScriptClass(object obj)
+		{
+			var so = obj as IScriptObject;
+			if (so != null && so.ScriptObject != null) return so.ScriptObject;
+
+			var ext = new External(obj);
+
+			var sc = ScriptClass.Get(obj.GetType());
+			if (sc == null) return ext;
+
+			var ctor = GetClass(sc);
+			var res = ctor.Construct(ext);
+
+			if (so != null) so.SetScriptObject(res, _context);
+			return res;
 		}
 	}
 }

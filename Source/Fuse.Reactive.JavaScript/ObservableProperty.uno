@@ -6,15 +6,15 @@ namespace Fuse.Reactive
 {
 	class LazyObservableProperty: ObservableProperty
 	{
-		public LazyObservableProperty(Scripting.Context context, ThreadWorker w, Scripting.Object obj, Uno.UX.Property p)
-		: base(context, w, obj, p)
+		public LazyObservableProperty(Scripting.Context context, Scripting.Object obj, Uno.UX.Property p)
+		: base(context, obj, p)
 		{
 			context.ObjectDefineProperty(obj, p.Name.ToString(), Get);
 		}
 
 		object Get(object[] args)
 		{
-			return _worker.Unwrap(GetObservable());
+			return _context.Unwrap(GetObservable());
 		}
 	}
 
@@ -26,16 +26,14 @@ namespace Fuse.Reactive
 	*/
 	class ObservableProperty: IObserver, IPropertyListener
 	{
-		readonly Scripting.Context _context;
-		protected readonly ThreadWorker _worker;
+		protected readonly Scripting.Context _context;
 		Uno.UX.Property _property;
 		Scripting.Object _obj;
 
-		public ObservableProperty(Scripting.Context context, ThreadWorker w, Scripting.Object obj, Uno.UX.Property p)
+		public ObservableProperty(Scripting.Context context, Scripting.Object obj, Uno.UX.Property p)
 		{
 			_context = context;
 			_obj = obj;
-			_worker = w;
 			_property = p;
 		}
 
@@ -47,7 +45,7 @@ namespace Fuse.Reactive
 		{
 			if (_observable == null)
 			{
-				_observable = Observable.Create(_context, _worker);
+				_observable = Observable.Create(_context);
 				Subscribe();
 			}
 			return _observable;
@@ -125,7 +123,7 @@ namespace Fuse.Reactive
 			if (obj != _property.Object) return;
 			if (_subscription == null) return;
 
-			_worker.Invoke(new PushCapture(PushValue, _property.GetAsObject()).Run);
+			_context.Invoke(new PushCapture(PushValue, _property.GetAsObject()).Run);
 		}
 
 		class PushCapture

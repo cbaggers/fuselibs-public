@@ -27,7 +27,7 @@ namespace Fuse.Reactive
 		internal RootableScriptModule ScriptModule { get { return _scriptModule; } }
 		readonly Scripting.Context Context;
 
-		internal static Context CreateContext(IThreadWorker worker)
+		internal static Context CreateContext()
 		{
 			if defined(USE_JAVASCRIPTCORE && !USE_REACTNATIVE) return new Fuse.Scripting.JavaScriptCore.Context();
 			else if defined(USE_V8) return new Fuse.Scripting.V8.Context();

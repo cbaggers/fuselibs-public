@@ -11,6 +11,10 @@ namespace Fuse.Scripting
 	{
 		Function Observable { get; }
 		IDispatcher Dispatcher { get; }
+	}
+
+	public interface ITypeWrapper
+	{
 		object Unwrap(object obj);
 		object Wrap(object obj);
 	}
@@ -69,17 +73,20 @@ namespace Fuse.Scripting
 		protected Context()
 		{
 			_worker = AquireThreadWorker();
-			Mirror = AquireMirror;
+			Mirror = AquireMirror();
+			TypeWrapper = AquireTypeWrapper(this);
 		}
 
 		protected abstract IThreadWorker AquireThreadWorker(); // new ThreadWorker();
 		protected abstract IMirror AquireMirror();
+		protected abstract ITypeWrapper AquireTypeWrapper(Scripting.Context ctx);
 
 		public IThreadWorker ThreadWorker { get { return _worker; } }
 		public readonly IMirror Mirror;
+		readonly ITypeWrapper TypeWrapper;
 
-		public object Wrap(object obj) { return _worker.Wrap(obj); }
-		public object Unwrap(object obj) { return _worker.Unwrap(obj); }
+		public object Wrap(object obj) { return TypeWrapper.Wrap(obj); }
+		public object Unwrap(object obj) { return TypeWrapper.Unwrap(obj); }
 
 		public IDispatcher Dispatcher { get { return _worker.Dispatcher; } }
 

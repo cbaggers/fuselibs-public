@@ -57,7 +57,7 @@ namespace Fuse.Reactive
 			var f = obj as Scripting.Function;
 			if (f != null)
 			{
-				return new FunctionMirror(_context.Mirror, f);
+				return new FunctionMirror(_context, f);
 			}
 
 			var o = obj as Scripting.Object;
@@ -65,7 +65,7 @@ namespace Fuse.Reactive
 			{
 				if (o.InstanceOf(_context.Observable)) 
 				{
-					return new Observable(_context, this, o, false);
+					return new Observable(_context, o, false);
 				}
 				else if (o.InstanceOf(FuseJS.Date))
 				{

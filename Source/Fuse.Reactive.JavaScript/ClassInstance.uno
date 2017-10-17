@@ -10,7 +10,6 @@ namespace Fuse.Reactive
 	class ClassInstance
 	{
 		readonly Scripting.Context _context;
-		readonly ThreadWorker _worker;
 		readonly NameTable _rootTable;
 		readonly object _obj;
 		Scripting.Object _self;
@@ -27,10 +26,9 @@ namespace Fuse.Reactive
 		/** Should only be called by ThreadWorker.
 			To retrieve an instance, use ThreadWorker.GetClassInstance()
 		 */
-		internal ClassInstance(Scripting.Context context, ThreadWorker worker, object obj, NameTable rootTable)
+		internal ClassInstance(Scripting.Context context, object obj, NameTable rootTable)
 		{
 			_context = context;
-			_worker = worker;
 			_rootTable = rootTable;
 			_obj = obj;
 		}
@@ -51,7 +49,7 @@ namespace Fuse.Reactive
 			var n = _obj as INotifyUnrooted;
 			if (n != null) n.Unrooted += DispatchUnroot;
 
-			_self = _worker.Unwrap(_obj) as Scripting.Object;
+			_self = _context.Unwrap(_obj) as Scripting.Object;
 
 			if (_properties == null)
 			{
@@ -62,7 +60,7 @@ namespace Fuse.Reactive
 					{
 						var p = _rootTable.Properties[i];
 						if (!_properties.ContainsKey(p))
-							_properties.Add(p, new LazyObservableProperty(_context, _worker, _self, p));
+							_properties.Add(p, new LazyObservableProperty(_context, _self, p));
 					}
 				}
 			}
@@ -87,7 +85,7 @@ namespace Fuse.Reactive
 			ObservableProperty op;
 			if (!_properties.TryGetValue(p, out op))
 			{
-				op = new ObservableProperty(_context, _worker, _self, p);
+				op = new ObservableProperty(_context, _self, p);
 				_properties.Add(p, op);
 			}
 			return op.GetObservable().Object;
