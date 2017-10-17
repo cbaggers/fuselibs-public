@@ -13,14 +13,6 @@ namespace Fuse.Reactive
 		IDispatcher IThreadWorker.Dispatcher { get { return this; } }
 		Function IThreadWorker.Observable { get { return FuseJS.Observable; } }
 
-		internal static Context CreateContext(IThreadWorker worker)
-		{
-			if defined(USE_JAVASCRIPTCORE && !USE_REACTNATIVE) return new Fuse.Scripting.JavaScriptCore.Context(worker);
-			else if defined(USE_V8) return new Fuse.Scripting.V8.Context(worker);
-			else if defined(USE_DUKTAPE) return new Fuse.Scripting.Duktape.Context(worker);
-			else throw new Exception("No JavaScript VM available for this platform");
-		}
-
 		static Scripting.Context _context;
 
 		static FuseJS.Builtins _fuseJS;

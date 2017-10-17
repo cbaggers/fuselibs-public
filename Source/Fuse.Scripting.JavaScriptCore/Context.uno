@@ -24,15 +24,15 @@ namespace Fuse.Scripting.JavaScriptCore
 		readonly JSClassRef _unoFinalizerClass;
 		readonly JSClassRef _unoCallbackClass;
 
-		public Context(IThreadWorker worker): this(worker, JSContextRef.Create())
+		public Context(): this(JSContextRef.Create())
 		{
 		}
 
-		public Context(IThreadWorker worker, long contextPtr): this(worker, JSContextRef.Create(contextPtr))
+		public Context(long contextPtr): this(JSContextRef.Create(contextPtr))
 		{
 		}
 
-		Context(IThreadWorker worker, JSContextRef context) : base(worker)
+		Context(JSContextRef context) : base()
 		{
 			_context = context;
 			// To not have to reconstruct the delegate all the

@@ -22,24 +22,26 @@ namespace Fuse.Reactive
 	{
 		static int _javaScriptCounter;
 		static ThreadWorker _worker;
-
-		// TODO: remove once Fuse.Testing/TestRootPanel.uno is fixed
-		internal static ThreadWorker Worker { get { return _worker; } }
-
 		internal readonly NameTable _nameTable;
 		RootableScriptModule _scriptModule;
 		internal RootableScriptModule ScriptModule { get { return _scriptModule; } }
 		readonly Scripting.Context Context;
-		
+
+		internal static Context CreateContext(IThreadWorker worker)
+		{
+			if defined(USE_JAVASCRIPTCORE && !USE_REACTNATIVE) return new Fuse.Scripting.JavaScriptCore.Context();
+			else if defined(USE_V8) return new Fuse.Scripting.V8.Context();
+			else if defined(USE_DUKTAPE) return new Fuse.Scripting.Duktape.Context();
+			else throw new Exception("No JavaScript VM available for this platform");
+		}
+
 		[UXConstructor]
 		public JavaScript([UXAutoNameTable] NameTable nameTable)
 		{
-			if (_worker == null)
-				_worker = new ThreadWorker();
-			
+			Context = CreateContext();
 			_nameTable = nameTable;
 			_scriptModule = new RootableScriptModule(_worker, nameTable);
-			Context = null;
+			
 		}
 
 		protected override void OnRooted()

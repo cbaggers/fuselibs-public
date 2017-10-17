@@ -66,14 +66,17 @@ namespace Fuse.Scripting
 
 		readonly IThreadWorker _worker;
 
-		protected Context(IThreadWorker worker, IMirror mirror)
+		protected Context()
 		{
-			_worker = worker;
-			Mirror = mirror;
+			_worker = AquireThreadWorker();
+			Mirror = AquireMirror;
 		}
 
+		protected abstract IThreadWorker AquireThreadWorker(); // new ThreadWorker();
+		protected abstract IMirror AquireMirror();
+
 		public IThreadWorker ThreadWorker { get { return _worker; } }
-		public readonly IMirror Mirror { get; };
+		public readonly IMirror Mirror;
 
 		public object Wrap(object obj) { return _worker.Wrap(obj); }
 		public object Unwrap(object obj) { return _worker.Unwrap(obj); }
