@@ -35,12 +35,11 @@
   ],
   "Includes": [
     "**.uno:Source",
+    "**.uxl:Extensions",
     "3rdparty/es6-promise.min.js:File",
     "FuseJS/setTimeout.js:File",
     "FuseJS/Observable.js:File",
     "FuseJS/EventEmitter.js:Bundle",
-    "JavaScriptEngine.cil.uxl:Extensions",
-    "JavaScriptEngine.cpp.uxl:Extensions",
 
     "V8/include/V8Simple.h",
     "V8/lib/Android.stuff:Stuff",
