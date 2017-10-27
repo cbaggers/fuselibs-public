@@ -19,7 +19,7 @@ namespace Fuse.Scripting.JavaScript
 			{
 				var sobj = (Scripting.Object)obj;
 
-				if (sobj.InstanceOf(ThreadWorker.FuseJS.Date))
+				if (sobj.InstanceOf(ThreadWorker.GetFuseJS(context).Date))
 				{
 					return DateTimeConverterHelpers.ConvertDateToDateTime(context, sobj);
 				}
@@ -51,7 +51,7 @@ namespace Fuse.Scripting.JavaScript
 			else if (dc is int2) return ToArray(context, (int2)dc);
 			else if (dc is int3) return ToArray(context, (int3)dc);
 			else if (dc is int4) return ToArray(context, (int4)dc);
-			else if (dc is DateTime) return DateTimeConverterHelpers.ConvertDateTimeToJSDate(context, (DateTime)dc, ThreadWorker.FuseJS.DateCtor);
+			else if (dc is DateTime) return DateTimeConverterHelpers.ConvertDateTimeToJSDate(context, (DateTime)dc, ThreadWorker.GetFuseJS(context).DateCtor);
 			else if (dc.GetType().IsClass) return WrapScriptClass(context, dc);
 			else if (dc.GetType().IsEnum) return dc.ToString();
 			else return dc;
@@ -97,7 +97,7 @@ namespace Fuse.Scripting.JavaScript
 			var sc = ScriptClass.Get(obj.GetType());
 			if (sc == null) return ext;
 
-			var ctor = context.GetClass(sc);
+			var ctor = context.GetClass(context, sc);
 			var res = ctor.Construct(ext);
 
 			if (so != null) so.SetScriptObject(res, context);

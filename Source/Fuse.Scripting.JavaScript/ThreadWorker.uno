@@ -14,16 +14,17 @@ namespace Fuse.Scripting.JavaScript
 
 	class ThreadWorker: IDisposable, IThreadWorker
 	{
-		public Function Observable { get { return FuseJS.Observable; } }
-
 		internal JSContext _context;
 
 		static Fuse.Reactive.FuseJS.Builtins _fuseJS;
-		public static Fuse.Reactive.FuseJS.Builtins FuseJS { get { return _fuseJS; } }
+		public static Fuse.Reactive.FuseJS.Builtins GetFuseJS(Scripting.Context context)
+		{
+			return _fuseJS;
+		}
 
 		readonly Thread _thread;
 
-		readonly ManualResetEvent _ready = new ManualResetEvent(false);
+		readonly object _createContextMutex = new object();
 		readonly ManualResetEvent _idle = new ManualResetEvent(true);
 		readonly ManualResetEvent _terminate = new ManualResetEvent(false);
 
@@ -43,8 +44,6 @@ namespace Fuse.Scripting.JavaScript
 			}
 
 			_thread.Start();
-			_ready.WaitOne();
-			_ready.Dispose();
 		}
 
 		void OnTerminating(Fuse.Platform.ApplicationState newState)
@@ -81,7 +80,7 @@ namespace Fuse.Scripting.JavaScript
 
 		void RunInner()
 		{
-			try
+			lock (_createContextMutex)
 			{
 				if (_context == null)
 				{
@@ -94,10 +93,6 @@ namespace Fuse.Scripting.JavaScript
 
 					_fuseJS = new Fuse.Reactive.FuseJS.Builtins(_context);
 				}
-			}
-			finally
-			{
-				_ready.Set();
 			}
 
 			double t = Uno.Diagnostics.Clock.GetSeconds();

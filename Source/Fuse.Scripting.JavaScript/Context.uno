@@ -95,15 +95,15 @@ namespace Fuse.Scripting.JavaScript
 			var o = obj as Scripting.Object;
 			if (o != null)
 			{
-				if (o.InstanceOf(Fuse.Scripting.JavaScript.ThreadWorker.FuseJS.Observable))
+				if (o.InstanceOf(Fuse.Scripting.JavaScript.ThreadWorker.GetFuseJS(this).Observable))
 				{
 					return new Observable(this, (ThreadWorker)ThreadWorker, o, false);
 				}
-				else if (o.InstanceOf(Fuse.Scripting.JavaScript.ThreadWorker.FuseJS.Date))
+				else if (o.InstanceOf(Fuse.Scripting.JavaScript.ThreadWorker.GetFuseJS(this).Date))
 				{
 					return DateTimeConverterHelpers.ConvertDateToDateTime(this, o);
 				}
-				else if (o.InstanceOf(Fuse.Scripting.JavaScript.ThreadWorker.FuseJS.TreeObservable))
+				else if (o.InstanceOf(Fuse.Scripting.JavaScript.ThreadWorker.GetFuseJS(this).TreeObservable))
 				{
 					return new TreeObservable(this, o);
 				}
@@ -116,24 +116,24 @@ namespace Fuse.Scripting.JavaScript
 			return null;
 		}
 
-		internal Function GetClass(ScriptClass sc)
+		internal Function GetClass(Scripting.Context context, ScriptClass sc)
 		{
 			Function cl;
 			if (!_registeredClasses.TryGetValue(sc, out cl))
 			{
-				cl = RegisterClass(sc);
+				cl = RegisterClass(context, sc);
 				_registeredClasses.Add(sc, cl);
 			}
 			return cl;
 		}
 
-		Function RegisterClass(ScriptClass sc)
+		Function RegisterClass(Scripting.Context context, ScriptClass sc)
 		{
 			var cl = (Function)Evaluate(sc.Type.FullName + " (ScriptClass)", "(function(external_object) { this.external_object = external_object; })");
 
 			if (sc.SuperType != null)
 			{
-				var super = GetClass(sc.SuperType);
+				var super = GetClass(context, sc.SuperType);
 
 				if (_setSuperclass == null)
 					_setSuperclass = (Function)Evaluate("(set-superclass)", "(function(cl, superclass) { cl.prototype = new superclass(); cl.prototype.constructor = cl; })");
@@ -147,7 +147,7 @@ namespace Fuse.Scripting.JavaScript
 				if (inlineMethod != null)
 				{
 					var m = (Function)Evaluate(sc.Type.FullName + "." + inlineMethod.Name + " (ScriptMethod)", "(function(cl, Observable) { cl.prototype." + inlineMethod.Name + " = " + inlineMethod.Code + "; })");
-					m.Call(this, cl, ((ThreadWorker)ThreadWorker).Observable);
+					m.Call(this, cl, Fuse.Scripting.JavaScript.ThreadWorker.GetFuseJS(context).Observable);
 					continue;
 				}
 
