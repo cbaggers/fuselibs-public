@@ -97,7 +97,6 @@ namespace Fuse.Scripting.JavaScript
 			{
 				var ta = SubscriptionSubject as TreeArray;
 
-				var worker = Fuse.Reactive.JavaScript.Worker;
 				var replaceAll = new ReplaceAllOperation((Scripting.Array)ta.Raw, values);
 				replaceAll.Perform(context);
 
