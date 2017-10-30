@@ -162,7 +162,7 @@ namespace Fuse.Scripting.JavaScript
 			Throws an exception that was generated on the thread. If there are more than one then the previous
 			ones will be reported and the last one thrown.
 		*/
-		public void CheckAndThrow()
+		void CheckAndThrow()
 		{
 			Exception next = null, prev = null;
 			while (_exceptionQueue.TryDequeue(out next))
