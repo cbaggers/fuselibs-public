@@ -83,17 +83,9 @@ namespace Fuse.Scripting.JavaScript
 		{
 			try
 			{
-				if (_context == null)
-				{
-					_context = Fuse.Scripting.JavaScript.JSContext.Create();
-					if (_context == null)
-					{
-						throw new Exception("Could not create script context");
-					}
-					UpdateManager.AddAction(CheckAndThrow);
-
-					_fuseJS = new Fuse.Reactive.FuseJS.Builtins(_context);
-				}
+				_context = Fuse.Scripting.JavaScript.JSContext.Create();
+				UpdateManager.AddAction(CheckAndThrow);
+				_fuseJS = new Fuse.Reactive.FuseJS.Builtins(_context);
 			}
 			finally
 			{
