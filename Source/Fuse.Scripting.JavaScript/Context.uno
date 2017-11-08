@@ -32,11 +32,13 @@ namespace Fuse.Scripting.JavaScript
 
 		protected JSContext() : base () {}
 
+		// Called from the ThreadWorker's thread
 		internal static JSContext Create()
 		{
 			JSContext result;
 
-			if defined(USE_JAVASCRIPTCORE) result = new Fuse.Scripting.JavaScriptCore.Context();
+			if defined(USE_REACTNATIVE) result = Fuse.Scripting.ReactNative.ReactNativeContext.Create();
+			else if defined(USE_JAVASCRIPTCORE) result = new Fuse.Scripting.JavaScriptCore.Context();
 			else if defined(USE_V8) result = new Fuse.Scripting.V8.Context();
 			else if defined(USE_DUKTAPE) result = new Fuse.Scripting.Duktape.Context();
 			else throw new Exception("No JavaScript VM available for this platform");
@@ -44,11 +46,16 @@ namespace Fuse.Scripting.JavaScript
 			// The reason for populating FuseJS here and not in the constructor is that if the
 			// context is not fully constructed when passed to `new Builtins` a segmentation fault
 			// occurs on (at least some) c++ backends
-			result.FuseJS = new Fuse.Reactive.FuseJS.Builtins(result);
+			result.FuseJS = result.CreateBuiltins();
 			return result;
 		}
-
-		public sealed override object Wrap(object obj)
+		
+		protected virtual Fuse.Reactive.FuseJS.Builtins CreateBuiltins()
+		{
+			return new Fuse.Reactive.FuseJS.Builtins(this);
+		}
+		
+		public override object Wrap(object obj)
 		{
 			return TypeWrapper.Wrap(this, obj);
 		}

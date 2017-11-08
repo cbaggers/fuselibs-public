@@ -25,13 +25,17 @@ namespace Fuse.Reactive
 	{
 		public static void Init(Context c)
 		{
-
 			var console = c.NewObject();
 			console["log"] = (Callback)Log;
 			console["warn"] = (Callback)Warn;
 			console["info"] = (Callback)Info;
 			console["error"] = (Callback)Error;
 			console["dir"] = (Callback)Dir;
+
+			if defined(USE_REACTNATIVE)
+			{
+				c.GlobalObject["awesomeconsole"] = console;
+			}
 			c.GlobalObject["console"] = console;
 		}
 

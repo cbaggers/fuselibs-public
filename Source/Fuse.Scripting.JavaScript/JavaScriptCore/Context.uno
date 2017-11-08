@@ -16,33 +16,37 @@ namespace Fuse.Scripting.JavaScriptCore
 		internal bool _disposed;
 		internal readonly JSContextRef _context;
 		internal Action<JSValueRef> _onError;
-		readonly Scripting.Object _global;
-		readonly JSObjectRef _functionType;
-		readonly JSObjectRef _arrayType;
-		readonly JSObjectRef _arrayBufferType;
-		readonly JSObjectRef _byteArrayType;
-		readonly JSClassRef _unoFinalizerClass;
-		readonly JSClassRef _unoCallbackClass;
+		Scripting.Object _global;
+		JSObjectRef _functionType;
+		JSObjectRef _arrayType;
+		JSObjectRef _arrayBufferType;
+		JSObjectRef _byteArrayType;
+		JSClassRef _unoFinalizerClass;
+		JSClassRef _unoCallbackClass;
 
 		int _vmDepth;
 		internal Exception _pendingException;
 
-		public Context(): this(JSContextRef.Create())
+		public Context(): this(JSContextRef.Create(), true)
 		{
 		}
 
-		public Context(IntPtr contextPtr): this(JSContextRef.Create(contextPtr))
+		public Context(IntPtr contextPtr, bool init): this(JSContextRef.Create(contextPtr), init)
 		{
 		}
 
-		Context(JSContextRef context): base()
+		Context(JSContextRef context, bool init): base()
 		{
 			_context = context;
 			// To not have to reconstruct the delegate all the
 			// time.  Note: Creates a cyclic reference to `this`,
 			// which can be broken with `Dispose`.
 			_onError = OnError;
+			if (init) Init(context);
+		}
 
+		protected void Init(JSContextRef context)
+		{
 			var global = _context.GlobalObject;
 			_global = new Object(this, global);
 

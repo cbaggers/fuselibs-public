@@ -27,6 +27,7 @@
     "../Fuse.Marshal/Fuse.Marshal.unoproj"
   ],
   "InternalsVisibleTo": [
+    "Fuse.ReactNative",
     "Fuse.Scripting.JavaScript.Test",
     "Fuse.Reactive.Bindings.Test",
     "Fuse.Scripting.Test",
@@ -69,6 +70,9 @@
     "JavaScriptCore/3rdparty/JavaScriptCore/JSVirtualMachine.h:File",
     "JavaScriptCore/3rdparty/JavaScriptCore/JavaScript.h:File",
     "JavaScriptCore/3rdparty/JavaScriptCore/JavaScriptCore.h:File",
-    "JavaScriptCore/3rdparty/JavaScriptCore/WebKitAvailability.h:File"
+    "JavaScriptCore/3rdparty/JavaScriptCore/WebKitAvailability.h:File",
+
+    "ReactNative/ReactNativeContext.uno:Source",
+    "ReactNative/Android.uxl"
   ]
 }

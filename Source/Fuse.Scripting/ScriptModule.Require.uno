@@ -40,6 +40,18 @@ namespace Fuse.Scripting
 
 			object Require(Context context, string id)
 			{
+				if defined(USE_REACTNATIVE)
+				{
+					if (GotReactNativeModules(context))
+					{
+						var m = TryGetReactNativeModule(id);
+						if(m != null)
+						{
+							return m;
+						}
+					}
+				}
+
 				bool isFile;
 				var path = _m.ComputePath(id, out isFile);
 
@@ -92,6 +104,30 @@ namespace Fuse.Scripting
 				}
 
 				return module.GetExports(context);
+			}
+
+			bool GotReactNativeModules(Context context)
+			{
+				return (bool)_c.Evaluate(_m.FileName, "window != null && window.require != null");
+			}
+
+			object TryGetReactNativeModule(string id)
+			{
+				var require = (Function)_c.Evaluate(_m.FileName, "(function(id) { try { return window.require(id); } catch(e) { return null; } })");
+
+				var module = require.Call(_c, new object[] { id });
+				if(module != null) return module;
+
+				module = require.Call(_c, new object[] { id + ".js" });
+				if(module != null) return module;
+
+				module = require.Call(_c, new object[] { id + "/index.js" });
+				if(module != null) return module;
+
+				module = require.Call(_c, new object[] { id + "/lib/index.js" });
+				if(module != null) return module;
+
+				return null;
 			}
 		}
 
