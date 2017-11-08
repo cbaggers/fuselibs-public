@@ -27,10 +27,17 @@ namespace Fuse.Scripting.JavaScriptCore
 		int _vmDepth;
 		internal Exception _pendingException;
 
-		public Context(): base()
+		public Context(): this(JSContextRef.Create())
 		{
-			_context = JSContextRef.Create();
+		}
 
+		public Context(IntPtr contextPtr): this(JSContextRef.Create(contextPtr))
+		{
+		}
+
+		Context(JSContextRef context): base()
+		{
+			_context = context;
 			// To not have to reconstruct the delegate all the
 			// time.  Note: Creates a cyclic reference to `this`,
 			// which can be broken with `Dispose`.
