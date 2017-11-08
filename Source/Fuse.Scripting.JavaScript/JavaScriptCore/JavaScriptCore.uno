@@ -358,6 +358,11 @@ namespace Fuse.Scripting.JavaScriptCore
 	{
 		IntPtr _dummy;
 
+		public static JSContextRef Create(IntPtr context)
+		@{
+			return (@{JSContextRef})context;
+		@}
+
 		public static JSContextRef Create()
 		@{
 			return (@{JSContextRef})::JSGlobalContextCreate(NULL);
