@@ -1,0 +1,26 @@
+{
+  "Copyright": "Copyright (c) Fusetools AS 2017",
+  "Description": "ReactNative Components for Fuse",
+  "Publisher": "Fusetools AS",
+  "Version": "1.4.0-rc4",
+  "Package": {
+    "ProjectUrl": "https://fusetools.com"
+  },
+  "Packages": [
+    "Uno.Collections",
+    "Uno.Data.Json",
+    "Uno.Net.Http",
+    "Uno.Net.Sockets",
+    "Uno.Testing",
+    "Uno.Threading",
+  ],
+  "Projects": [
+    "../Fuse.Controls.Panels/Fuse.Controls.Panels.unoproj",
+    "../Fuse.Scripting.JavaScript/Fuse.Scripting.JavaScript.unoproj",
+    "../Fuse.Nodes/Fuse.Nodes.unoproj",
+  ],
+  "Includes": [
+    "ReactNativeComponent.uno:Source",
+    "ReactNativeComponentHost.ux"
+  ]
+}

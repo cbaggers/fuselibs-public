@@ -52,6 +52,9 @@
     "Duktape/duk_config.h:File",
     "Duktape/duktape.c:File",
     "Duktape/duktape.h:File",
-    "Duktape/duktape_helpers.h:File"
+    "Duktape/duktape_helpers.h:File",
+
+    "ReactNative/ReactNativeContext.uno:Source",
+    "ReactNative/Android.uxl"
   ]
 }

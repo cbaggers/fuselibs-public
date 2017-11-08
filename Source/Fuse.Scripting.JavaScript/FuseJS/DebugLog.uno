@@ -29,7 +29,7 @@ namespace Fuse.Reactive
 			 console["log"] = (Callback)Log;
 			 console["dir"] = (Callback)Dir;
 			 // TODO: console["error"] Uno.Diagnostics.Debug.Log( msg + " " + ex.ToString() + obj, Uno.Diagnostics.DebugMessageType.Error,	filePath, lineNumber );
-			 c.GlobalObject["console"] = console;
+			 c.GlobalObject["awesomeconsole"] = console;
 		}
 
 		static object Log(Context context, object[] args)
