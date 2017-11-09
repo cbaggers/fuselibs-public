@@ -5,7 +5,6 @@ using Uno.Compiler;
 using Fuse.Scripting;
 using Uno.Testing;
 using Uno.Threading;
-using Fuse.Reactive;
 
 namespace Fuse.Reactive
 {
@@ -22,25 +21,16 @@ namespace Fuse.Reactive
 	public partial class JavaScript: Behavior, IModuleProvider, ValueForwarder.IValueListener, Node.ISiblingDataProvider, IContext
 	{
 		static int _javaScriptCounter;
-		static internal Fuse.Scripting.JavaScript.ThreadWorker Worker;
 
 		internal readonly NameTable _nameTable;
 		Fuse.Scripting.JavaScript.RootableScriptModule _scriptModule;
 		internal Fuse.Scripting.JavaScript.RootableScriptModule ScriptModule { get { return _scriptModule; } }
 
-		// Not ideal, the tag shouldnt own the VM, but until the VM has it's own class this method lives here
-		static internal void EnsureVMStarted()
-		{
-			if (Worker == null)
-				Worker = new Fuse.Scripting.JavaScript.ThreadWorker();
-		}
-
 		[UXConstructor]
 		public JavaScript([UXAutoNameTable] NameTable nameTable)
 		{
-			EnsureVMStarted();
 			_nameTable = nameTable;
-			_scriptModule = new Fuse.Scripting.JavaScript.RootableScriptModule(Worker, nameTable);
+			_scriptModule = new Fuse.Scripting.JavaScript.RootableScriptModule(Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker, nameTable);
 		}
 
 		protected override void OnRooted()

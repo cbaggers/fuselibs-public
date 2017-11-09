@@ -24,7 +24,7 @@ namespace Fuse.Scripting.JavaScript
 
 		public override void Unsubscribe()
 		{
-			Fuse.Reactive.JavaScript.Worker.Invoke(NullifyCallbacks);
+			Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker.Invoke(NullifyCallbacks);
 		}
 
 		void NullifyCallbacks()

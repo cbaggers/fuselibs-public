@@ -20,7 +20,7 @@ namespace Fuse.Scripting.JavaScript
 		{
 			get
 			{
-				return Fuse.Reactive.JavaScript.Worker;
+				return Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker;
 			}
 		}
 

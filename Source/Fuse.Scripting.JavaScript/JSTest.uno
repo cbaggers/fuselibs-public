@@ -21,9 +21,9 @@ namespace Fuse.Scripting.JavaScript.Test
 
 		JSTest(Action<Fuse.Scripting.Context> test)
 		{
-			Fuse.Reactive.JavaScript.EnsureVMStarted();
+			var worker = Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker;
 			_test = test;
-			Fuse.Reactive.JavaScript.Worker.Invoke(TestBodyWrapper);
+			worker.Invoke(TestBodyWrapper);
 		}
 
 		void AddTestToJSContext(Fuse.Scripting.Context context)

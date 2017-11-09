@@ -130,7 +130,7 @@ namespace Fuse.Reactive
 		{
 			if (!IsRootingStarted) return;
 			DisposeModuleInstance();
-			_moduleInstance = new Fuse.Scripting.JavaScript.ModuleInstance(Worker, this);
+			_moduleInstance = new Fuse.Scripting.JavaScript.ModuleInstance(Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker, this);
 		}
 
 		protected bool _preserveModuleInstance = false;

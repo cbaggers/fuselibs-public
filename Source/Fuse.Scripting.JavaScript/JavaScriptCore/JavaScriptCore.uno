@@ -27,7 +27,7 @@ namespace Fuse.Scripting.JavaScriptCore
 
 		public void DeferedUnprotect()
 		{
-			Fuse.Reactive.JavaScript.Worker.Invoke(DeferedUnprotectInner);
+			Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker.Invoke(DeferedUnprotectInner);
 		}
 
 		void DeferedUnprotectInner(Fuse.Scripting.Context ctx)

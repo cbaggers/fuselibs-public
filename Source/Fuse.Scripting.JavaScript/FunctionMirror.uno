@@ -55,7 +55,7 @@ namespace Fuse.Scripting
 
 		public void Dispatch(IEventRecord e)
 		{
-			Fuse.Reactive.JavaScript.Worker.Invoke(new CallClosure(this, e).Call);
+			Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker.Invoke(new CallClosure(this, e).Call);
 		}
 	}
 }

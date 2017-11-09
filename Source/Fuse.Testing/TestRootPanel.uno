@@ -178,7 +178,7 @@ namespace Fuse.Testing
 				
 			if (flags.HasFlag(StepFlags.WaitJS))
 			{
-				var w = Fuse.Reactive.JavaScript.Worker;
+				var w = Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker;
 				if (w != null)
 					w.WaitIdle();
 			}
@@ -228,7 +228,7 @@ namespace Fuse.Testing
 		*/
 		internal void StepFrameJS()
 		{
-			var fence = Fuse.Reactive.JavaScript.Worker.PostFence();
+			var fence = Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker.PostFence();
 			var loop = true;
 			while(loop)
 			{

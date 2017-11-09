@@ -53,7 +53,7 @@ namespace Fuse.Scripting.JavaScript
 				var t = (TreeObject)SubscriptionSubject;
 
 				// Must be done first - to ensure the operations happen in the right order on the JS thread
-				Fuse.Reactive.JavaScript.Worker.Invoke(new JSThreadSet((Scripting.Object)t.Raw, key, newValue).Perform);
+				Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker.Invoke(new JSThreadSet((Scripting.Object)t.Raw, key, newValue).Perform);
 
 				// then notify the UI (which in turn can trigger re-evaluation of scripts)
 				t.Set(key, newValue, this);
