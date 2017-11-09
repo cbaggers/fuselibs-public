@@ -5,7 +5,6 @@ using Uno.Compiler;
 using Fuse.Scripting;
 using Uno.Testing;
 using Uno.Threading;
-using Fuse.Reactive;
 
 namespace Fuse.Reactive
 {
@@ -31,9 +30,7 @@ namespace Fuse.Reactive
 		[UXConstructor]
 		public JavaScript([UXAutoNameTable] NameTable nameTable)
 		{
-			if (Worker == null)
-				Worker = new Fuse.Scripting.JavaScript.ThreadWorker();
-
+			Worker = Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker;
 			_nameTable = nameTable;
 			_scriptModule = new Fuse.Scripting.JavaScript.RootableScriptModule(Worker, nameTable);
 		}
