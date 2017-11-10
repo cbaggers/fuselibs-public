@@ -15,7 +15,9 @@
     "Uno.Threading",
   ],
   "Projects": [
+    "../Fuse.Common/Fuse.Common.unoproj",
     "../Fuse.Controls.Panels/Fuse.Controls.Panels.unoproj",
+    "../Fuse.Scripting/Fuse.Scripting.unoproj",
     "../Fuse.Scripting.JavaScript/Fuse.Scripting.JavaScript.unoproj",
     "../Fuse.Nodes/Fuse.Nodes.unoproj",
   ],

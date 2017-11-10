@@ -27,6 +27,7 @@
     "../Fuse.Marshal/Fuse.Marshal.unoproj"
   ],
   "InternalsVisibleTo": [
+    "Fuse.ReactNative",
     "Fuse.Scripting.JavaScript.Test",
     "Fuse.Reactive.Bindings.Test",
     "Fuse.Scripting.Test",

@@ -21,13 +21,21 @@ namespace Fuse.Scripting.ReactNative
 				if(_moduleName != value)
 				{
 					_moduleName = value;
-					if(ModuleNameChanged != null)
-						ModuleNameChanged(_moduleName);
+					Fuse.Scripting.ReactNative.ReactNativeContext.AquireInstanceManager().Then(SetWithManager);
 				}
 			}
 		}
 
-		public event Action<string> ModuleNameChanged;
+		void SetWithManager(object manager)
+		{
+			var handler = ModuleNameChanged;
+			if (handler != null)
+			{
+				handler(_moduleName, manager);
+			}
+		}
+
+		public event Action<string, object> ModuleNameChanged;
 	}
 
 	extern(!Android || !USE_REACTNATIVE) public class ReactNativeComponent {
@@ -38,16 +46,28 @@ namespace Fuse.Scripting.ReactNative
 	[ForeignInclude(Language.Java, "com.facebook.react.*", "com.facebook.react.common.*")]
 	extern (Android && USE_REACTNATIVE) public class ReactNativeComponent : ViewHandle
 	{
+		string _moduleName;
+
 		[UXConstructor]
 		public ReactNativeComponent([UXParameter("Host")]ReactNativeComponentHostBase host) : base(InstantiateViewGroupImpl())
 		{
-			if(host.ModuleName != null) OnModuleNameChanged(host.ModuleName);
+			if(host.ModuleName != null)
+			{
+				_moduleName = host.ModuleName;
+				Fuse.Scripting.ReactNative.ReactNativeContext.AquireInstanceManager().Then(SetWithManager);
+			}
 			host.ModuleNameChanged += OnModuleNameChanged;
 		}
 
-		void OnModuleNameChanged(string moduleName)
+		void SetWithManager(object manager)
 		{
-			InsertChild(new ViewHandle(CreateView(moduleName, ReactNativeContext.HACK.InstanceManager)));
+			OnModuleNameChanged(_moduleName, manager);
+		}
+
+		void OnModuleNameChanged(string moduleName, object instanceManager)
+		{
+			var manager = (Java.Object)instanceManager;
+			InsertChild(new ViewHandle(CreateView(moduleName, manager)));
 		}
 
 		[Foreign(Language.Java)]

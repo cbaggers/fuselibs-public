@@ -54,6 +54,42 @@ namespace Fuse.Scripting.ReactNative
 			});
 		@}
 
+		Future<object> AquireInstanceManager()
+		{
+			var promise = new Promise<object>();
+			if (InstanceManager != null)
+			{
+				promise.Resolve(InstanceManager);
+			}
+			else
+			{
+				Invoke(new WaitOnInstanceManager(promise).WaitOnJS);
+			}
+			return promise;
+		}
+
+		class WaitOnInstanceManager
+		{
+			Promise<object> _promise;
+			object _manager;
+
+			public IndirectOnNameChange(Promise<object> promise)
+			{
+				_promise = promise;
+			}
+
+			public void WaitOnJS(Scripting.Context ctx)
+			{
+				_manager = ((ReactNativeContext)ctx).InstanceManager;
+				Fuse.UpdateManager.PostAction(BackOnUI);
+			}
+
+			void BackOnUI()
+			{
+				_promise.Resolve(_manager);
+			}
+		}
+
 		class ASyncInitBox
 		{
 			public ManualResetEvent Ready = new ManualResetEvent(false);
