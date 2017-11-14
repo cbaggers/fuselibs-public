@@ -1,8 +1,9 @@
-using Uno.Compiler.ExportTargetInterop;
-using Uno.Threading;
-using Uno.UX;
 using Uno;
 using Uno.IO;
+using Uno.UX;
+using Uno.Threading;
+using Uno.Collections;
+using Uno.Compiler.ExportTargetInterop;
 
 namespace Fuse.Scripting.ReactNative
 {
@@ -10,17 +11,23 @@ namespace Fuse.Scripting.ReactNative
 	[Require("AndroidManifest.ActivityElement", "<activity android:name=\"com.facebook.react.devsupport.DevSettingsActivity\" />")]
 	[Require("Gradle.Dependency.Compile", "com.facebook.react:react-native:+")]
 	[Require("Gradle.Repository", "maven { url '@(Project.NodeModules:Path)/react-native/android' }")]
-	public extern(USE_JAVASCRIPTCORE) class ReactNativeContext : Fuse.Scripting.JavaScriptCore.Context
+	public extern(USE_REACTNATIVE) class ReactNativeContext : Fuse.Scripting.JavaScriptCore.Context
 	{
-		public readonly Java.Object ReactContext;
-		public readonly Java.Object InstanceManager;
-		public readonly IntPtr JavascriptContextPtr;
+		static readonly Java.Object _reactContext;
+		static readonly Java.Object _instanceManager;
+		static readonly IntPtr _javascriptContextPtr;
+		static readonly List<Action<object>> _queue = new List<Action<object>>();
 
 		ReactNativeContext(ASyncInitBox box) : base(box.ContextPtr)
 		{
-			JavascriptContextPtr = box.ContextPtr;
-			InstanceManager = box.InstanceManager;
-			ReactContext = box.ReactContext;
+			// lock (_queue)
+			// {
+				_javascriptContextPtr = box.ContextPtr;
+				_instanceManager = box.InstanceManager;
+				_reactContext = box.ReactContext;
+
+			// 	Fuse.UpdateManager.PostAction(DispatchActionsWaitingOnManager);
+			// }
 		}
 
 		public static Fuse.Scripting.JavaScript.JSContext Create()
@@ -31,11 +38,37 @@ namespace Fuse.Scripting.ReactNative
 			return new ReactNativeContext(init);
 		}
 
+		protected override Fuse.Reactive.FuseJS.Builtins CreateBuiltins()
+		{
+			var box = new ASyncInitBuiltinsBox();
+			box.Ready.WaitOne();
+			box.Ready.Dispose();
+			return box.BuiltIns;
+		}
+
+		class ASyncInitBuiltinsBox
+		{
+			public ManualResetEvent Ready = new ManualResetEvent(false);
+			public Fuse.Reactive.FuseJS.Builtins BuiltIns;
+
+			public ASyncInitBuiltinsBox()
+			{
+				InvokeOnJSThread(box.OnJS, null);
+			}
+
+			public bool OnJS(Fuse.Scripting.JavaScript.JSContext ctx)
+			{
+				BuiltIns = new Fuse.Reactive.FuseJS.Builtins(ctx);
+				Ready.Set();
+				return false;
+			}
+		}
+
 		[Foreign(Language.Java)]
-		public void InvokeOnJSThread(Action action, Action<string> exceptionCallback)
+		public void InvokeOnJSThread(Func<Fuse.Scripting.JavaScript.JSContext, bool> action, Action<string> exceptionCallback)
 		@{
-			ReactContext ctx = (ReactContext)@{ReactNativeContext:Of(_this).ReactContext:Get()};
-			final com.foreign.Uno.Action javaAction = action;
+			ReactContext ctx = (ReactContext)@{ReactNativeContext._reactContext:Get()};
+			final com.foreign.Uno.Func_UnoObject javaAction = action;
 			final com.foreign.Uno.Action_String exception = exceptionCallback;
 			ctx.runOnJSQueueThread(new java.lang.Runnable()
 			{
@@ -43,7 +76,7 @@ namespace Fuse.Scripting.ReactNative
 				{
 					try
 					{
-						javaAction.run();
+						javaAction.run(_this);
 					}
 					catch(java.lang.Exception e)
 					{
@@ -53,42 +86,6 @@ namespace Fuse.Scripting.ReactNative
 				}
 			});
 		@}
-
-		Future<object> AquireInstanceManager()
-		{
-			var promise = new Promise<object>();
-			if (InstanceManager != null)
-			{
-				promise.Resolve(InstanceManager);
-			}
-			else
-			{
-				Invoke(new WaitOnInstanceManager(promise).WaitOnJS);
-			}
-			return promise;
-		}
-
-		class WaitOnInstanceManager
-		{
-			Promise<object> _promise;
-			object _manager;
-
-			public IndirectOnNameChange(Promise<object> promise)
-			{
-				_promise = promise;
-			}
-
-			public void WaitOnJS(Scripting.Context ctx)
-			{
-				_manager = ((ReactNativeContext)ctx).InstanceManager;
-				Fuse.UpdateManager.PostAction(BackOnUI);
-			}
-
-			void BackOnUI()
-			{
-				_promise.Resolve(_manager);
-			}
-		}
 
 		class ASyncInitBox
 		{
@@ -199,5 +196,28 @@ namespace Fuse.Scripting.ReactNative
 				});
 			@}
 		}
+
+		public static void RunWithInstanceManager(Action<object> act)
+		{
+			// if (_instanceManager != null)
+			// {
+			// 	act(_instanceManager);
+			// }
+			// else
+			// {
+			// 	lock (_queue)
+			// 	{
+			// 		_queue.Add(act);
+			// 	}
+			// }
+		}
+
+		static void DispatchActionsWaitingOnManager()
+		{
+			foreach (var act in _queue)
+			{
+				act(_instanceManager);
+			}
+		} 
 	}
 }

@@ -107,7 +107,15 @@ namespace Fuse.Scripting.JavaScript
 
 				if defined(CPLUSPLUS) extern "uAutoReleasePool ____pool";
 
-				bool didAnything = RunOnce(context);
+				bool didAnything = false;
+				if defined(USE_REACTNATIVE)
+				{
+					((Fuse.Scripting.ReactNative.ReactNativeContext)context).InvokeOnJSThread(RunOnce, HandleException);
+				}
+				else
+				{
+					didAnything = RunOnce(context);
+				}
 
 				var t2 = Uno.Diagnostics.Clock.GetSeconds();
 
@@ -120,6 +128,11 @@ namespace Fuse.Scripting.JavaScript
 					t = t2;
 				}
 			}
+		}
+
+		void HandleException(string e)
+		{
+			// _exceptionQueue.Enqueue(new Exception(e));
 		}
 
 		/**

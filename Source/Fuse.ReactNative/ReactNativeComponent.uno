@@ -21,7 +21,10 @@ namespace Fuse.Scripting.ReactNative
 				if(_moduleName != value)
 				{
 					_moduleName = value;
-					Fuse.Scripting.ReactNative.ReactNativeContext.AquireInstanceManager().Then(SetWithManager);
+					if defined(USE_REACTNATIVE)
+					{
+						Fuse.Scripting.ReactNative.ReactNativeContext.RunWithInstanceManager(SetWithManager);
+					}
 				}
 			}
 		}
@@ -51,11 +54,16 @@ namespace Fuse.Scripting.ReactNative
 		[UXConstructor]
 		public ReactNativeComponent([UXParameter("Host")]ReactNativeComponentHostBase host) : base(InstantiateViewGroupImpl())
 		{
+			// By requesting the ThreadWorker we ensure a VM is available. ThreadWorker is available immediately and the
+			// JS vm thread will be started asyncronously
+			var forceInit = Fuse.Scripting.JavaScript.JavaScriptVM.ThreadWorker;
+
 			if(host.ModuleName != null)
 			{
 				_moduleName = host.ModuleName;
-				Fuse.Scripting.ReactNative.ReactNativeContext.AquireInstanceManager().Then(SetWithManager);
+				Fuse.Scripting.ReactNative.ReactNativeContext.RunWithInstanceManager(SetWithManager);
 			}
+
 			host.ModuleNameChanged += OnModuleNameChanged;
 		}
 
@@ -73,6 +81,7 @@ namespace Fuse.Scripting.ReactNative
 		[Foreign(Language.Java)]
 		static Java.Object CreateView(string moduleName, Java.Object reactInstanceManager)
 		@{
+			debug_log("sUp!");
 			ReactRootView reactRootView = new ReactRootView(com.fuse.Activity.getRootActivity());
 			reactRootView.startReactApplication((ReactInstanceManager)reactInstanceManager, moduleName);
 			reactRootView.setLayoutParams(

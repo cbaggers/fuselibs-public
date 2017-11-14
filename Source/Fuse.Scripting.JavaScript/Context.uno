@@ -32,6 +32,7 @@ namespace Fuse.Scripting.JavaScript
 
 		protected JSContext() : base () {}
 
+		// Called from the ThreadWorker's thread
 		internal static JSContext Create()
 		{
 			JSContext result;
@@ -45,8 +46,13 @@ namespace Fuse.Scripting.JavaScript
 			// The reason for populating FuseJS here and not in the constructor is that if the
 			// context is not fully constructed when passed to `new Builtins` a segmentation fault
 			// occurs on (at least some) c++ backends
-			result.FuseJS = new Fuse.Reactive.FuseJS.Builtins(result);
+			result.FuseJS = result.CreateBuiltins();
 			return result;
+		}
+
+		protected virtual Fuse.Reactive.FuseJS.Builtins CreateBuiltins()
+		{
+			return new Fuse.Reactive.FuseJS.Builtins(this);
 		}
 
 		public override object Wrap(object obj)
