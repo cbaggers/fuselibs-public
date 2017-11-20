@@ -8,7 +8,7 @@
 			p.removeAt(0);
 		}
 
-		module.exports = { p, remove }
+		module.exports = { p: p, remove: remove };
 	</JavaScript>
 
 	<FuseTest.Invoke Handler="{remove}" ux:Name="CallRemove"/>
@@ -16,7 +16,7 @@
 	<Each Items="{p}">
 		<Page ux:Class="UX.ClearBindingTestPage">
 			<JavaScript>
-				module.exports = { foo : "123" }
+				module.exports = { foo : "123" };
 			</JavaScript>
 			<Text ux:Name="t1" Value="{Clear foo}" />
 			<Text ux:Name="t2" Value="{foo}" />

@@ -1,44 +1,44 @@
 <Panel ux:Class="UX.Observable.InnerTwoWayNonObservable">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		var sourceItems = Observable("a")
-		exports.sourceItems = sourceItems
-		var items = sourceItems._forceInnerTwoWay()
-		exports.items = items
+		var sourceItems = Observable("a");
+		exports.sourceItems = sourceItems;
+		var items = sourceItems._forceInnerTwoWay();
+		exports.items = items;
 		
 		//some use "items" and some "sourceItems". We don't need an exhaustive check since the code is shared
 		exports.step1 = function() {
-			items.add( "b" )
-		}
+			items.add( "b" );
+		};
 		
 		exports.step2 = function() {
-			sourceItems.insertAt(0, "c")
-		}
+			sourceItems.insertAt(0, "c");
+		};
 		
 		exports.step3 = function() {
-			items.removeAt(1)
-		}
+			items.removeAt(1);
+		};
 		
 		exports.step4 = function() {
-			sourceItems.insertAll(1, ["d","e","f","g"] )
-		}
+			sourceItems.insertAll(1, ["d","e","f","g"] );
+		};
 		
 		exports.step5 = function() {
-			items.removeRange(2,3)
-		}
+			items.removeRange(2,3);
+		};
 		
 		exports.step6 = function() {
-			sourceItems.replaceAt(2,"h")
-		}
+			sourceItems.replaceAt(2,"h");
+		};
 		
 		exports.step7 = function() {
-			items.clear()
-		}
+			items.clear();
+		};
 		
 		exports.step8 = function() {
-			sourceItems.value = "i"
-		}
+			sourceItems.value = "i";
+		};
 	</JavaScript>
 	<FuseTest.ObservableCollector ux:Name="SC" Items="{sourceItems}"/>
 	<FuseTest.ObservableCollector ux:Name="OC" Items="{items}"/>

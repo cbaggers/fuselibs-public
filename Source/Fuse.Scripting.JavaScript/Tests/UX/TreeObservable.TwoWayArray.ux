@@ -10,7 +10,7 @@
 		tree.items = Object.assign([1,2,3], { __fuse_id: 1 });
 		tree.itemsRef = tree.items;
 
-		module.exports = { tree:tree };
+		module.exports = { tree: tree };
 	</JavaScript>
 	
 	<FuseTest.ObservableCollector ux:Name="OC" Items="{tree.itemsRef}" />

@@ -1,27 +1,27 @@
 <Panel ux:Class="UX.Observable.RefreshAll">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		var items = Observable()
-		exports.items = items
+		var items = Observable();
+		exports.items = items;
 		
-		items.refreshAll( [1,2,3,4,11,12,13,14] )
+		items.refreshAll( [1,2,3,4,11,12,13,14] );
 		
 		exports.step1 = function() {
-			items.refreshAll( [1,2,5] )
-		}
+			items.refreshAll( [1,2,5] );
+		};
 		
 		exports.step2 = function() {
-			items.refreshAll( [2,5,6,7,8] )
-		}
+			items.refreshAll( [2,5,6,7,8] );
+		};
 		
 		exports.step3 = function() {
-			items.refreshAll( [] )
-		}
+			items.refreshAll( [] );
+		};
 		
 		exports.step4 = function() {
-			items.refreshAll( [9] )
-		}
+			items.refreshAll( [9] );
+		};
 	</JavaScript>
 	<FuseTest.ObservableCollector ux:Name="OC" Items="{items}"/>
 	

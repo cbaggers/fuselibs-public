@@ -16,7 +16,7 @@
 	                console.log("toggled");
 	                searchMode.value = !searchMode.value;
 	            }
-	        }
+	        };
 	    </JavaScript>
 
 

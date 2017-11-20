@@ -1,9 +1,9 @@
 <Panel ux:Class="UX.DataBinding.NodeName">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		exports.node = Observable("A")
-		exports.trigger = "B"
+		exports.node = Observable("A");
+		exports.trigger = "B";
 	</JavaScript>
 	
 	<FuseTest.BindingNode Node="{node}" Trigger="{trigger}" Visual="{node}" ux:Name="Bind"/>
