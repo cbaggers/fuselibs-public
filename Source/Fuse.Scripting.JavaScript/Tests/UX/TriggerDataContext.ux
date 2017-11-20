@@ -10,7 +10,7 @@
 			],
 			title: "wrong title",
 			higherUp: "correct title"
-		}
+		};
 	</JavaScript>
 	<StackPanel ux:Name="stack">
 		<Each Items="{items}">

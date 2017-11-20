@@ -4,7 +4,7 @@
 
 		var items = Observable();
 		for (var i=0; i < 10000; i++) {
-			items.add("foo")
+			items.add("foo");
 		}
 
 		var foo = Observable("a");
@@ -18,7 +18,7 @@
 		module.exports = {
 			foo: foo,
 			bar: bar,
-		}
+		};
 	</JavaScript>
 
 	<TextInput Value="{foo}" />

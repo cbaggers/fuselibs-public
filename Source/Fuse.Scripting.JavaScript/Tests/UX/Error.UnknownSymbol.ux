@@ -1,5 +1,5 @@
 <Panel ux:Class="UX.Error.UnknownSymbol">
 	<JavaScript>
-		none()
+		none();
 	</JavaScript>
 </Panel>

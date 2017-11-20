@@ -1,42 +1,42 @@
 <Panel ux:Class="UX.Observable.SubscriptionChain">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 
-		exports.countB = Observable(0)
-		exports.countC = Observable(0)
-		exports.countD = Observable(0)
+		exports.countB = Observable(0);
+		exports.countC = Observable(0);
+		exports.countD = Observable(0);
 		
-		var a = Observable("one")
+		var a = Observable("one");
 		var b = a.map( function(v) {
-			exports.countB.value++
-			return v
-		})
+			exports.countB.value++;
+			return v;
+		});
 		var c = b.map( function(v) {
-			exports.countC.value++
-			return v
-		})
+			exports.countC.value++;
+			return v;
+		});
 		var d = a.map( function(v) {
-			exports.countD.value++
-			return v
-		})
+			exports.countD.value++;
+			return v;
+		});
 
-		exports.countSA = Observable(0)
+		exports.countSA = Observable(0);
 		exports.step1 = function() {
-			a.addSubscriber( function() { 
-				exports.countSA.value++
-			} )
-		}
+			a.addSubscriber( function() {
+				exports.countSA.value++;
+			});
+		};
 		
-		exports.countSC = Observable(0)
+		exports.countSC = Observable(0);
 		exports.step2 = function() {
 			c.addSubscriber( function() {
-				exports.countSC.value++
-			})
-		}
+				exports.countSC.value++;
+			});
+		};
 		
 		exports.step3 = function() {
-			a.add("two")
-		}
+			a.add("two");
+		};
 	</JavaScript>
 	<Text Value="{countB}" ux:Name="CB"/>
 	<Text Value="{countC}" ux:Name="CC"/>

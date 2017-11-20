@@ -8,7 +8,6 @@
 			bar: bar,
 			run: function() {
 				foo.value = foo.value + 1;
-
 				var baz = bar.value.baz;
 				bar.clear();
 				bar.value = {

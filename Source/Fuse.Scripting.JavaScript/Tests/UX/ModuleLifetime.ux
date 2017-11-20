@@ -11,7 +11,7 @@
 			remove: function() {
 				items.removeAt(1);
 			}
-		}
+		};
 
 	</JavaScript>
 
@@ -25,7 +25,7 @@
 					function callback()
 					{
 						// do nothing
-					}
+					};
 
 					this.Foo.onValueChanged(module, callback);
 				</JavaScript>

@@ -1,23 +1,23 @@
 <Panel ux:Class="UX.Observable.Failed">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		exports.failed = Observable()
-		exports.a = Observable(1)
+		exports.failed = Observable();
+		exports.a = Observable(1);
 		
 		exports.a.onFailed( module, function(err) {
-			exports.failed.value = err
+			exports.failed.value = err;
 		}, function() {
-			exports.failed.clear()
-		})
+			exports.failed.clear();
+		});
 		
 		exports.fail = function() {
-			exports.a.failed( "NO" )
-		}
+			exports.a.failed( "NO" );
+		};
 		
 		exports.restore = function() {
-			exports.a.value = 2
-		}
+			exports.a.value = 2;
+		};
 	</JavaScript>
 	<FuseTest.Invoke Handler="{fail}" ux:Name="CallFail"/>
 	<FuseTest.Invoke Handler="{restore}" ux:Name="CallRestore"/>

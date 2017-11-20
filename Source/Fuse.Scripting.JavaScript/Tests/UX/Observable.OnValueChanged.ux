@@ -1,34 +1,34 @@
 <Panel ux:Class="UX.Observable.OnValueChanged">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		var a = Observable()
-		var b = Observable("init")
+		var a = Observable();
+		var b = Observable("init");
 		b.onValueChanged( module, function(v) {
-			a.value = v
-		})
+			a.value = v;
+		});
 		
-		exports.a = a
+		exports.a = a;
 		
 		exports.set = function() {
-			b.value = "set"
-		}
+			b.value = "set";
+		};
 		
 		exports.clear = function() {
-			b.clear()
-		}
+			b.clear();
+		};
 		
 		exports.add = function() {
-			b.add( "add" )
-		}
+			b.add( "add" );
+		};
 		
 		exports.replaceAll = function() {	
-			b.replaceAll( [ "one", "two", "three" ] )
-		}
+			b.replaceAll( [ "one", "two", "three" ] );
+		};
 		
 		exports.failed = function() {
-			b.failed("nope")
-		}
+			b.failed("nope");
+		};
 	</JavaScript>
 	<Text Value="{ReadClear a}" ux:Name="A"/>
 	

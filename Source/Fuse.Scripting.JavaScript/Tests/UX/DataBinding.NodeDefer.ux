@@ -1,8 +1,8 @@
 <Panel ux:Class="UX.DataBinding.NodeDefer">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		exports.node = "A"
+		exports.node = "A";
 	</JavaScript>
 	
 	<FuseTest.BindingNode Node="{node}" ux:Name="Bind"/>
