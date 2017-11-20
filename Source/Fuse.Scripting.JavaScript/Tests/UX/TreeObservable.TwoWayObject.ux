@@ -21,7 +21,7 @@
 
 		Tree.prototype = Object.create(TreeObservable.prototype);
 		var tree = new Tree();
-		module.exports = { tree:tree };
+		module.exports = { tree: tree };
 	</JavaScript>
 	
 	<TextInput ux:Name="ti" Value="{tree.thing.foo}" />

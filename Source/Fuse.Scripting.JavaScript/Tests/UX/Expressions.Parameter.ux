@@ -1,21 +1,21 @@
 <Panel ux:Class="UX.ParameterFunction">
 	<Router ux:Name="router" IsMasterRouter="false" />
 	<JavaScript>
-		router.goto("foo", { param: 1447 })
+		router.goto("foo", { param: 1447 });
 
 		function step1() {
-			router.goto("foo", {param: 900})
+			router.goto("foo", {param: 900});
 		}
 
 		function step2() {
-			router.goto("bar", {param: 300})
+			router.goto("bar", {param: 300});
 		}
 
 		function step3() {
-			router.goto("foo", {param: 400, bar:"yeah"})
+			router.goto("foo", {param: 400, bar:"yeah"});
 		}
 
-		module.exports = { step1, step2, step3 }
+		module.exports = { step1: step1, step2: step2, step3: step3 };
 
 	</JavaScript>
 	<Navigator>

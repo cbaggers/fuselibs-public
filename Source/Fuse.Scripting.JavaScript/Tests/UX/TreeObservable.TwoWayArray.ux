@@ -7,10 +7,12 @@
 		Tree.prototype = Object.create(TreeObservable.prototype);
 		var tree = new Tree();
 
-		tree.items = Object.assign([1,2,3], { __fuse_id: 1 });
+		var newItems = [1,2,3];
+		newItems["__fuse_id"] = 1;
+		tree.items = newItems;
 		tree.itemsRef = tree.items;
 
-		module.exports = { tree:tree };
+		module.exports = { tree: tree };
 	</JavaScript>
 	
 	<FuseTest.ObservableCollector ux:Name="OC" Items="{tree.itemsRef}" />

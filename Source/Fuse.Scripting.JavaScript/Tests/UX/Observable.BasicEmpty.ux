@@ -1,17 +1,17 @@
 <Panel ux:Class="UX.Observable.BasicEmpty">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		var items = Observable()
-		exports.items = items
+		var items = Observable();
+		exports.items = items;
 		
 		exports.step1 = function() {
-			items.add( "a" )
-		}
+			items.add( "a" );
+		};
 		
 		exports.step2 = function() {
-			items.clear()
-		}
+			items.clear();
+		};
 	</JavaScript>
 	<FuseTest.ObservableCollector ux:Name="OC" Items="{items}"/>
 	

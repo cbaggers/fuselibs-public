@@ -1,24 +1,24 @@
 <Panel ux:Class="UX.Observable.NotNull">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		exports.count = Observable(0)
-		var items = Observable()
-		var notNull = items.notNull()
+		exports.count = Observable(0);
+		var items = Observable();
+		var notNull = items.notNull();
 		notNull.onValueChanged( module, function(v) {
-			exports.count.value++
-		})
+			exports.count.value++;
+		});
 		
-		exports.notNull = notNull
-		exports.nnCount  = notNull.count()
+		exports.notNull = notNull;
+		exports.nnCount  = notNull.count();
 		
 		exports.step1 = function() {
-			items.value = "a"
-		}
+			items.value = "a";
+		};
 		
 		exports.step2 = function() {
-			items.value = null
-		}
+			items.value = null;
+		};
 	</JavaScript>
 	<Text Value="{count}" ux:Name="C"/>
 	<Text Value="{nnCount}" ux:Name="NC"/>

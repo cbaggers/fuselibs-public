@@ -1,29 +1,29 @@
 <Panel ux:Class="UX.Observable.CombineArrays">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		
-		var a = Observable("1","2")
-		var b = Observable("a","b","c")
-		var c = Observable()
+		var a = Observable("1","2");
+		var b = Observable("a","b","c");
+		var c = Observable();
 		
 		exports.items = a.combineArrays( b,c, function(a,b,c) {
-			var values = []
+			var values = [];
 			for (var i=0; i < Math.max(a.length, b.length, c.length); ++i ) {
-				values.push( (a[i] || "*") + (b[i] || "*") + (c[i] || "*") )
+				values.push( (a[i] || "*") + (b[i] || "*") + (c[i] || "*") );
 			}
-			return values
+			return values;
 		})
 		
 		exports.step1 = function() {
-			c.add( "%" )
+			c.add( "%" );
 		}
 		
 		exports.failed = function() {
-			c.failed("nope")
+			c.failed("nope");
 		}
 		
 		exports.restore = function() {
-			c.value = "#"
+			c.value = "#";
 		}
 	</JavaScript>
 	<FuseTest.ObservableCollector ux:Name="OC" Items="{items}"/>

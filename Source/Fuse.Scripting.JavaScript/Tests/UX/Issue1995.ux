@@ -1,16 +1,16 @@
 <Panel ux:Class="UX.Issue1995">
 	<JavaScript>
-		var Observable = require( "FuseJS/Observable" )
+		var Observable = require( "FuseJS/Observable" );
 		
-		exports.text = Observable("Start")
+		exports.text = Observable("Start");
 		
-		exports.items = Observable()
+		exports.items = Observable();
 		for (var i=0; i < 10; ++i ) {
-			exports.items.add({ text: "#" + i })
+			exports.items.add({ text: "#" + i });
 		}
 		
 		exports.click = function(args) {
-			exports.text.value = args.data.text
+			exports.text.value = args.data.text;
 		}
 	</JavaScript>
 	<Text Value="{text}" ux:Name="T"/>

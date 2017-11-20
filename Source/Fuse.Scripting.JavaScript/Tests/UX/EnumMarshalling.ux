@@ -1,6 +1,6 @@
 <Panel ux:Class="UX.EnumMarshalling">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
+		var Observable = require("FuseJS/Observable");
 		var foo = Observable("FooValue");
 
 		module.exports = { 'foo': foo };

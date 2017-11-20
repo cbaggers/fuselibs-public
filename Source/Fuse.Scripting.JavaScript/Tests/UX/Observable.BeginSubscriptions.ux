@@ -1,35 +1,35 @@
 <Panel ux:Class="UX.Observable.BeginSubscriptions">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable")
-		Observable._testResetDeprecated()
+		var Observable = require("FuseJS/Observable");
+		Observable._testResetDeprecated();
 
-		exports.watchers = Observable()
+		exports.watchers = Observable();
 		
-		var watch = Observable(1)
+		var watch = Observable(1);
 		watch.beginSubscriptions = function() {
-			exports.watchers.add( "W" )
-		}
+			exports.watchers.add( "W" );
+		};
 		watch.endSubscriptions = function() {
-			exports.watchers.remove( "W" )
-		}
+			exports.watchers.remove( "W" );
+		};
 		
-		var noWatch = Observable(2)
+		var noWatch = Observable(2);
 		noWatch.beginSubscriptions = function() {
-			exports.watchers.add( "NW" )
-		}
+			exports.watchers.add( "NW" );
+		};
 		noWatch.endSubscriptions = function() {
-			throw new Exception("Never expected")
-		}
+			throw new Exception("Never expected");
+		};
 		
 		function subscriber() { }
 		
 		exports.add = function() {
-			watch.addSubscriber(subscriber)
-		}
+			watch.addSubscriber(subscriber);
+		};
 		
 		exports.remove = function() {
-			watch.removeSubscriber(subscriber)
-		}
+			watch.removeSubscriber(subscriber);
+		};
 	</JavaScript>
 	<FuseTest.ObservableCollector ux:Name="W" Items="{watchers}"/>
 	

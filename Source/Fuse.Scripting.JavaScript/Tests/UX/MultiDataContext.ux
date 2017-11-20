@@ -10,7 +10,7 @@
 			bar: "correct",
 			foo: "incorrect",
 			moo: "incorrect"
-		}
+		};
 	</JavaScript>
 	<JavaScript>
 		module.exports = {
@@ -22,7 +22,7 @@
 			],
 			foo: "incorrect",
 			moo: "incorrect"
-		}
+		};
 	</JavaScript>
 	<Panel ux:Name="items">
 		<Each Items="{items}">
@@ -32,14 +32,14 @@
 				<JavaScript>
 					module.exports = {
 						moo: "incorrect"
-					}
+					};
 				</JavaScript>
 			</Text>
 			<Panel>
 				<JavaScript>
 					module.exports = {
 						moo: "incorrect"
-					}
+					};
 				</JavaScript>
 				<Text Value="{foo}" />
 			</Panel>

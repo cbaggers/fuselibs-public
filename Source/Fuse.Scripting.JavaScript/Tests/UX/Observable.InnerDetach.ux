@@ -28,20 +28,20 @@
 	<Panel>
 		<JavaScript>
 			var Observable = require('FuseJS/Observable');
-			var a = Observable()
-			var b = Observable()
-			var c = b.innerTwoWay()
+			var a = Observable();
+			var b = Observable();
+			var c = b.innerTwoWay();
 			
 			exports.d = c.map( function(v) {
 				if (v instanceof Observable) {
-					throw new Exception("That observable should not be seen here" )
+					throw new Exception("That observable should not be seen here" );
 				}
-				return v
+				return v;
 			})
 			
 			exports.step1 = function() {
 				b.value = a
-			}
+			};
 		</JavaScript>
 		<FuseTest.Invoke Handler="{step1}" ux:Name="Step1"/>
 		<Text Value="{d}" ux:Name="D"/>
