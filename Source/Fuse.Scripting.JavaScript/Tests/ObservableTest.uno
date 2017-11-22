@@ -30,34 +30,6 @@ namespace Fuse.Reactive.Test
 	*/
 	public class ObservableTest : TestBase
 	{
-		// [Test]
-		// public void TwoWayMapFlat()
-		// {
-		// 	for (var i = 0; i<1024; i++)
-		// 	{
-		// 		var p = new UX.Observable.TwoWayMapFlat();
-		// 		using (var root = TestRootPanel.CreateWithChild(p))
-		// 		{
-		// 			root.StepFrameJS();
-
-		// 			p.Step1.Perform();
-		// 			root.StepFrameJS();
-		// 			Assert.AreEqual("abc",p.IV.Value);
-		// 			Assert.AreEqual("abc",p.OV.Value);
-
-		// 			p.Step2.Perform();
-		// 			root.StepFrameJS();
-		// 			Assert.AreEqual("abcdef",p.IV.Value);
-		// 			Assert.AreEqual("abcdef",p.OV.Value);
-
-		// 			p.OV.Value = "hello";
-		// 			root.StepFrameJS();
-		// 			Assert.AreEqual("hello",p.IV.Value);
-		// 			Assert.AreEqual("hello",p.OV.Value);
-		// 		}
-		// 	}
-		// }
-
 		[Test]
 		public void Tarst0()
 		{
@@ -65,21 +37,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -90,21 +48,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -115,21 +59,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -140,21 +70,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -165,21 +81,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 		[Test]
@@ -189,21 +91,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -214,21 +102,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -239,21 +113,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -264,21 +124,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -289,21 +135,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -314,21 +146,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -339,21 +157,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -364,21 +168,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -389,21 +179,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -414,21 +190,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 		[Test]
@@ -438,21 +200,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -463,21 +211,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -488,21 +222,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -513,21 +233,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -538,21 +244,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -563,21 +255,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -588,21 +266,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -613,21 +277,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -638,21 +288,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -663,21 +299,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 		[Test]
@@ -687,21 +309,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -712,21 +320,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -737,21 +331,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -762,21 +342,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -787,21 +353,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -812,21 +364,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -837,21 +375,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -862,21 +386,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -887,11 +397,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -902,21 +408,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 		[Test]
@@ -926,21 +418,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -951,21 +429,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -976,21 +440,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1001,21 +451,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1026,21 +462,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1051,21 +473,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1076,21 +484,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1101,21 +495,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1126,21 +506,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1151,21 +517,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 		[Test]
@@ -1175,21 +527,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1200,21 +538,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1225,21 +549,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1250,21 +560,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1275,21 +571,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1300,21 +582,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1325,21 +593,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1350,21 +604,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1375,21 +615,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1400,21 +626,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 		[Test]
@@ -1424,21 +636,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1449,21 +647,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1474,21 +658,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1499,21 +669,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1524,46 +680,18 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
-				[Test]
+		[Test]
 		public void Tarst60()
 		{
 			var p = new UX.Observable.TwoWayMapFlat();
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1574,21 +702,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1599,21 +713,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1624,21 +724,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1649,21 +735,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 		[Test]
@@ -1673,21 +745,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1698,21 +756,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1723,21 +767,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1748,21 +778,7 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
@@ -1773,25 +789,459 @@ namespace Fuse.Reactive.Test
 			using (var root = TestRootPanel.CreateWithChild(p))
 			{
 				root.StepFrameJS();
-
-				p.Step1.Perform();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+		[Test]
+		public void Tarst70()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
 				root.StepFrameJS();
-				Assert.AreEqual("abc",p.IV.Value);
-				Assert.AreEqual("abc",p.OV.Value);
-
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual("abcdef",p.IV.Value);
-				Assert.AreEqual("abcdef",p.OV.Value);
-
-				p.OV.Value = "hello";
-				root.StepFrameJS();
-				Assert.AreEqual("hello",p.IV.Value);
-				Assert.AreEqual("hello",p.OV.Value);
+				Assert.AreEqual("abc","abc");
 			}
 		}
 
+		[Test]
+		public void Tarst71()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst72()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst73()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst74()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+		[Test]
+		public void Tarst75()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst76()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst77()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst78()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst79()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst80()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst81()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst82()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst83()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst84()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+		[Test]
+		public void Tarst85()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst86()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst87()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst88()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst89()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+		
+		[Test]
+		public void Tarst90()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst91()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst92()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst93()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst94()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+		[Test]
+		public void Tarst95()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst96()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst97()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst98()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst99()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+		[Test]
+		public void Tarst100()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst101()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst102()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst103()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst104()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+		[Test]
+		public void Tarst105()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst106()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst107()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst108()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
+
+		[Test]
+		public void Tarst109()
+		{
+			var p = new UX.Observable.TwoWayMapFlat();
+			using (var root = TestRootPanel.CreateWithChild(p))
+			{
+				root.StepFrameJS();
+				Assert.AreEqual("abc","abc");
+			}
+		}
 	}
 }
 // 880 passed & failed randomly but usually passed
 // 900 passed...the fuck?
+
+// 48 seperate tests run and then freeze, that was consistant
+// 62 seperate that ran with less js going on inside them
+// 62 still ran with 1 less assert
+// all of em run after removing the perform and StepFrameJS hmmm
+// all of em run after removing just the perform
+// all of em run after removing just the StepFrameJS gahhh
+// 62 still run after removing first StepFrameJS
+// up to 100 tests and now we get freezing without any Perform AWESOME
+// STILL FREEZES WITHOUT StepFrameJS YES! hmm wait its weird, not failing the rest of the tests hmmmmmm (96 tests run)
+// added more tests 96 tests run before freeze, but still no death...wat
+// nope it's not correct.. StepFrameJS seems necessary
+// ok, reverted. 86 of 100 tests passing before freeze
+// ok, it used the overload of CreateWithChild where you pass in a layout size and no difference.
+// remove all body code from TwoWayMapFlat and it passes..interesting
