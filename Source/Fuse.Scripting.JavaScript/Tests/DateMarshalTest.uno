@@ -52,84 +52,84 @@ namespace Fuse.Reactive.Test
 
 	public class DateMarshalTest : TestBase
 	{
-		[Test]
-		public void JSRoundTripDateMatches()
-		{
-			var e = new UX.DateMarshal.DateRoundTrip();
-			using (var root = TestRootPanel.CreateWithChild(e))
-			{
-				e.RoundTripComponent.CallReadDate.Perform();
-				root.StepFrameJS();
-			}
-		}
+		// [Test]
+		// public void JSRoundTripDateMatches()
+		// {
+		// 	var e = new UX.DateMarshal.DateRoundTrip();
+		// 	using (var root = TestRootPanel.CreateWithChild(e))
+		// 	{
+		// 		e.RoundTripComponent.CallReadDate.Perform();
+		// 		root.StepFrameJS();
+		// 	}
+		// }
 
-		[Test]
-		public void JSRoundTripDateTimeMatches()
-		{
-			var e = new UX.DateMarshal.DateRoundTrip();
-			using (var root = TestRootPanel.CreateWithChild(e))
-			{
-				root.StepFrameJS();
+		// [Test]
+		// public void JSRoundTripDateTimeMatches()
+		// {
+		// 	var e = new UX.DateMarshal.DateRoundTrip();
+		// 	using (var root = TestRootPanel.CreateWithChild(e))
+		// 	{
+		// 		root.StepFrameJS();
 
-				// Expected date/time (UTC): November 1 1997 10:15:00
-				const long expectedTicks = 630139761000000000L;
-				var expectedDateTime = new DateTime(expectedTicks, DateTimeKind.Utc);
+		// 		// Expected date/time (UTC): November 1 1997 10:15:00
+		// 		const long expectedTicks = 630139761000000000L;
+		// 		var expectedDateTime = new DateTime(expectedTicks, DateTimeKind.Utc);
 
-				Assert.AreEqual(e.DateTimeComponent.TheDateTime, expectedDateTime);
-			}
-		}
+		// 		Assert.AreEqual(e.DateTimeComponent.TheDateTime, expectedDateTime);
+		// 	}
+		// }
 
-		[Test]
-		public void JSRoundTripUnixEpochDateMatches()
-		{
-			var e = new UX.DateMarshal.UnixEpochDateRoundTrip();
-			using (var root = TestRootPanel.CreateWithChild(e))
-			{
-				e.RoundTripComponent.CallReadDate.Perform();
-				root.StepFrameJS();
-			}
-		}
+		// [Test]
+		// public void JSRoundTripUnixEpochDateMatches()
+		// {
+		// 	var e = new UX.DateMarshal.UnixEpochDateRoundTrip();
+		// 	using (var root = TestRootPanel.CreateWithChild(e))
+		// 	{
+		// 		e.RoundTripComponent.CallReadDate.Perform();
+		// 		root.StepFrameJS();
+		// 	}
+		// }
 
-		[Test]
-		public void JSRoundTripUnixEpochDateTimeMatches()
-		{
-			var e = new UX.DateMarshal.UnixEpochDateRoundTrip();
-			using (var root = TestRootPanel.CreateWithChild(e))
-			{
-				root.StepFrameJS();
+		// [Test]
+		// public void JSRoundTripUnixEpochDateTimeMatches()
+		// {
+		// 	var e = new UX.DateMarshal.UnixEpochDateRoundTrip();
+		// 	using (var root = TestRootPanel.CreateWithChild(e))
+		// 	{
+		// 		root.StepFrameJS();
 
-				// Expected date/time (UTC): January 1 1970 00:00:00 (Unix Epoch)
-				const long expectedTicks = 621355968000000000L;
-				var expectedDateTime = new DateTime(expectedTicks, DateTimeKind.Utc);
+		// 		// Expected date/time (UTC): January 1 1970 00:00:00 (Unix Epoch)
+		// 		const long expectedTicks = 621355968000000000L;
+		// 		var expectedDateTime = new DateTime(expectedTicks, DateTimeKind.Utc);
 
-				Assert.AreEqual(e.DateTimeComponent.TheDateTime, expectedDateTime);
-			}
-		}
+		// 		Assert.AreEqual(e.DateTimeComponent.TheDateTime, expectedDateTime);
+		// 	}
+		// }
 
-		[Test]
-		public void NativeModuleDateRoundTripAddsAnHour()
-		{
-			var e = new UX.DateMarshal.NativeModuleDateRoundTrip();
-			using (var root = TestRootPanel.CreateWithChild(e))
-			{
-				e.CallTest.Perform();
-				root.StepFrameJS();
-			}
-		}
+		// [Test]
+		// public void NativeModuleDateRoundTripAddsAnHour()
+		// {
+		// 	var e = new UX.DateMarshal.NativeModuleDateRoundTrip();
+		// 	using (var root = TestRootPanel.CreateWithChild(e))
+		// 	{
+		// 		e.CallTest.Perform();
+		// 		root.StepFrameJS();
+		// 	}
+		// }
 
-		[Test]
-		public void PassDateToScriptClassAsDateTime()
-		{
-			var e = new UX.DateMarshal.PassDateToScriptClass();
-			using (var root = TestRootPanel.CreateWithChild(e))
-			{
-				e.CallTest.Perform();
-				root.StepFrameJS();
+		// [Test]
+		// public void PassDateToScriptClassAsDateTime()
+		// {
+		// 	var e = new UX.DateMarshal.PassDateToScriptClass();
+		// 	using (var root = TestRootPanel.CreateWithChild(e))
+		// 	{
+		// 		e.CallTest.Perform();
+		// 		root.StepFrameJS();
 
-				// Expected date/time (UTC): January 3 1337 03:07:13.371
-				const long expectedTicks = 421602736333710000L;
-				Assert.AreEqual(e.ScriptClassInstance.DateTime, new DateTime(expectedTicks, DateTimeKind.Utc));
-			}
-		}
+		// 		// Expected date/time (UTC): January 3 1337 03:07:13.371
+		// 		const long expectedTicks = 421602736333710000L;
+		// 		Assert.AreEqual(e.ScriptClassInstance.DateTime, new DateTime(expectedTicks, DateTimeKind.Utc));
+		// 	}
+		// }
 	}
 }

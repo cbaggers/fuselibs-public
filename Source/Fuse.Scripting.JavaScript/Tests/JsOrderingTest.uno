@@ -11,46 +11,46 @@ namespace Fuse.Reactive.Test
 {
 	public class JsOrderingTest : TestBase
 	{
-		[Test]
-		public void Basic()
-		{
-			var p = new UX.JsOrdering.Basic();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				//there is no guarantee of initial order, so just reset 
-				p.order.ResetAction();
+		// [Test]
+		// public void Basic()
+		// {
+		// 	var p = new UX.JsOrdering.Basic();
+		// 	using (var root = TestRootPanel.CreateWithChild(p))
+		// 	{
+		// 		root.StepFrameJS();
+		// 		//there is no guarantee of initial order, so just reset 
+		// 		p.order.ResetAction();
 				
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual( "B=2,C=3", p.order.Action );
+		// 		p.Step1.Perform();
+		// 		root.StepFrameJS();
+		// 		Assert.AreEqual( "B=2,C=3", p.order.Action );
 				
-				p.order.ResetAction();
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual( "C=4,A=5,B=6", p.order.Action );
-			}
-		}
+		// 		p.order.ResetAction();
+		// 		p.Step2.Perform();
+		// 		root.StepFrameJS();
+		// 		Assert.AreEqual( "C=4,A=5,B=6", p.order.Action );
+		// 	}
+		// }
 		
-		[Test]
-		public void Function()
-		{	
-			var p = new UX.JsOrdering.Function();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				p.order.ResetAction();
+		// [Test]
+		// public void Function()
+		// {	
+		// 	var p = new UX.JsOrdering.Function();
+		// 	using (var root = TestRootPanel.CreateWithChild(p))
+		// 	{
+		// 		root.StepFrameJS();
+		// 		p.order.ResetAction();
 				
-				p.Step1.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual( "B=1,G=2,A=3", p.order.Action );
+		// 		p.Step1.Perform();
+		// 		root.StepFrameJS();
+		// 		Assert.AreEqual( "B=1,G=2,A=3", p.order.Action );
 
-				p.order.ResetAction();
-				p.Step2.Perform();
-				root.StepFrameJS();
-				Assert.AreEqual( "G=5,A=6,G=7,B=8", p.order.Action );
-			}
-		}
+		// 		p.order.ResetAction();
+		// 		p.Step2.Perform();
+		// 		root.StepFrameJS();
+		// 		Assert.AreEqual( "G=5,A=6,G=7,B=8", p.order.Action );
+		// 	}
+		// }
 	}
 
 }
