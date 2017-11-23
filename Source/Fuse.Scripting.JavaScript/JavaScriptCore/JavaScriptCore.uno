@@ -13,14 +13,26 @@ namespace Fuse.Scripting.JavaScriptCore
 		public static bool operator==(JSValueRef v1, JSValueRef v2) @{ return v1 == v2; @}
 		public static bool operator!=(JSValueRef v1, JSValueRef v2) @{ return v1 != v2; @}
 
-		// ~Retain
 		public void Protect(JSContextRef ctx)
+		{
+			debug_log "~~~~~~~~~~~~~~ hi from Protect on "+Uno.Threading.Thread.CurrentThread.Name+" ~~~~~~~~~~~~~~~";
+			ProtectInner(ctx);
+		}
+
+		// ~Retain
+		public void ProtectInner(JSContextRef ctx)
 		@{
 			::JSValueProtect($0, *$$);
 		@}
 
-		// ~Release
 		public void Unprotect(JSContextRef ctx)
+		{
+			debug_log "~~~~~~~~~~~~~~ hi from Unprotect on "+Uno.Threading.Thread.CurrentThread.Name+" ~~~~~~~~~~~~~~~";
+			UnprotectInner(ctx);
+		}
+		
+		// ~Release
+		public void UnprotectInner(JSContextRef ctx)
 		@{
 			::JSValueUnprotect($0, *$$);
 		@}
@@ -400,6 +412,11 @@ namespace Fuse.Scripting.JavaScriptCore
 			}
 			return default(JSValueRef); // Satisfy Uno
 		}
+
+		public void GarbageCollect()
+		@{
+			return ::JSGarbageCollect(*$$);
+		@}
 	}
 
 	[Set("Include", "JavaScriptCore/JSObjectRef.h")]

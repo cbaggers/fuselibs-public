@@ -25,7 +25,10 @@ namespace Fuse.Scripting.JavaScript
 		{
 			Fuse.Platform.Lifecycle.Terminating += OnTerminating;
 
+			Uno.Threading.Thread.CurrentThread.Name = "Uno Fuckface";
+
 			_thread = new Thread(Run);
+			_thread.Name = "jsBiatch";
 			if defined(DotNet)
 			{
 				// TODO: Create a method for canceling the thread safely

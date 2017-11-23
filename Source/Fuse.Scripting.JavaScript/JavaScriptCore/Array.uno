@@ -6,6 +6,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Require("Header.Include", "JavaScriptCore/JavaScript.h")]
 	extern(USE_JAVASCRIPTCORE) class Array: Fuse.Scripting.Array
 	{
+		[WeakReference]
 		readonly Context _context;
 		internal readonly JSObjectRef _value;
 

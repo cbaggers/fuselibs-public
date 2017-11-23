@@ -1,3 +1,4 @@
+using Uno;
 using Uno.Compiler.ExportTargetInterop;
 
 namespace Fuse.Scripting.JavaScriptCore
@@ -5,6 +6,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Require("Header.Include", "JavaScriptCore/JavaScript.h")]
 	extern(USE_JAVASCRIPTCORE) class Function: Scripting.Function
 	{
+		[WeakReference]
 		readonly Context _context;
 		internal readonly JSObjectRef _value;
 

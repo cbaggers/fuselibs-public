@@ -2,14 +2,15 @@
 	<JavaScript>
 		var Observable = require("FuseJS/Observable");
 
-		var ivalue = Observable();
-		exports.ivalue = ivalue.inner();
-		exports.ovalue = ivalue.innerTwoWay().mapTwoWay(
-			function( dt ) { return dt; },
-			function( bit, whole ) { return bit; });
+		var makeFat = function(length) {
+			var data = [];
+			for(var i = 0; i < length; i++) {
+				data.push("jamHam");
+			}
+			return data;
+		}
+		makeFat(1000);
 
-		exports.step1 = function() {};
 	</JavaScript>
 
-	<FuseTest.Invoke Handler="{step1}" ux:Name="Step1"/>
 </Panel>

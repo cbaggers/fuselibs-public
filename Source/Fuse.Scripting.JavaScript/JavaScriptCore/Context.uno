@@ -13,8 +13,8 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Require("Header.Include", "JavaScriptCore/JavaScript.h")]
 	public extern(USE_JAVASCRIPTCORE) class Context : Fuse.Scripting.JavaScript.JSContext
 	{
-		internal bool _disposed;
 		internal readonly JSContextRef _context;
+		internal bool _disposed;
 		internal Action<JSValueRef> _onError;
 		readonly Scripting.Object _global;
 		readonly JSObjectRef _functionType;
@@ -110,6 +110,8 @@ namespace Fuse.Scripting.JavaScriptCore
 				_pendingException = null;
 				throw new Exception("Unexpected Uno.Exception", e);
 			}
+			debug_log "----------- foo on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
+			_context.GarbageCollect();
 		}
 
 		public override object Evaluate(string fileName, string code)
