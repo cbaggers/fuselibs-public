@@ -6,7 +6,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Require("Source.Include", "JavaScriptCore/JSValueRef.h")]
 	[Set("TypeName", "::JSValueRef")]
 	[Set("DefaultValue", "NULL")]
-	extern(USE_JAVASCRIPTCORE) struct JSValueRef
+	public extern(USE_JAVASCRIPTCORE) struct JSValueRef
 	{
 		IntPtr _dummy;
 
@@ -15,7 +15,8 @@ namespace Fuse.Scripting.JavaScriptCore
 
 		public void Protect(JSContextRef ctx)
 		{
-			debug_log "~~~~~~~~~~~~~~ hi from Protect on "+Uno.Threading.Thread.CurrentThread.Name+" ~~~~~~~~~~~~~~~";
+			ulong ptr = extern<ulong>"((@{ulong})((void*)*$$))";
+			debug_log "~~~~~~~~~~~~~~ hi from Protect on " + Uno.Threading.Thread.CurrentThread.Name + " ~~ " + ptr + " ~~~~~~~~~~~~~~~";
 			ProtectInner(ctx);
 		}
 
@@ -27,10 +28,11 @@ namespace Fuse.Scripting.JavaScriptCore
 
 		public void Unprotect(JSContextRef ctx)
 		{
-			debug_log "~~~~~~~~~~~~~~ hi from Unprotect on "+Uno.Threading.Thread.CurrentThread.Name+" ~~~~~~~~~~~~~~~";
+			ulong ptr = extern<ulong>"((@{ulong})((void*)*$$))";
+			debug_log "~~~~~~~~~~~~~~ hi from Unprotect on " + Uno.Threading.Thread.CurrentThread.Name + " ~~ " + ptr + " ~~~~~~~~~~~~~~~";
 			UnprotectInner(ctx);
 		}
-		
+
 		// ~Release
 		public void UnprotectInner(JSContextRef ctx)
 		@{
@@ -134,7 +136,7 @@ namespace Fuse.Scripting.JavaScriptCore
 		@}
 	}
 
-	extern(USE_JAVASCRIPTCORE) enum JSType
+	public extern(USE_JAVASCRIPTCORE) enum JSType
 	{
 		Undefined,
 		Null,
@@ -148,7 +150,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Set("Include", "JavaScriptCore/JSStringRef.h")]
 	[Set("TypeName", "::JSStringRef")]
 	[Set("DefaultValue", "NULL")]
-	extern(USE_JAVASCRIPTCORE) struct JSStringRef : IDisposable
+	public extern(USE_JAVASCRIPTCORE) struct JSStringRef : IDisposable
 	{
 		IntPtr _dummy;
 
@@ -174,7 +176,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Set("Include", "JavaScriptCore/JSObjectRef.h")]
 	[Set("TypeName", "::JSObjectRef")]
 	[Set("DefaultValue", "NULL")]
-	extern(USE_JAVASCRIPTCORE) struct JSObjectRef
+	public extern(USE_JAVASCRIPTCORE) struct JSObjectRef
 	{
 		IntPtr _dummy;
 
@@ -328,7 +330,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Set("Include", "JavaScriptCore/JSObjectRef.h")]
 	[Set("TypeName", "::JSPropertyNameArrayRef")]
 	[Set("DefaultValue", "NULL")]
-	extern(USE_JAVASCRIPTCORE) struct JSPropertyNameArray: IDisposable
+	public extern(USE_JAVASCRIPTCORE) struct JSPropertyNameArray: IDisposable
 	{
 		IntPtr _dummy;
 
@@ -355,11 +357,16 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Set("Include", "JavaScriptCore/JSContextRef.h")]
 	[Set("TypeName", "::JSContextRef")]
 	[Set("DefaultValue", "NULL")]
-	extern(USE_JAVASCRIPTCORE) struct JSContextRef : IDisposable
+	public extern(USE_JAVASCRIPTCORE) struct JSContextRef : IDisposable
 	{
 		IntPtr _dummy;
 
 		public static JSContextRef Create()
+		{
+			debug_log "----JSContextRef Create----";
+			return CreateInner();
+		}
+		static JSContextRef CreateInner()
 		@{
 			return (@{JSContextRef})::JSGlobalContextCreate(NULL);
 		@}
@@ -422,7 +429,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Set("Include", "JavaScriptCore/JSObjectRef.h")]
 	[Set("TypeName", "::JSClassRef")]
 	[Set("DefaultValue", "NULL")]
-	extern(USE_JAVASCRIPTCORE) struct JSClassRef : IDisposable
+	public extern(USE_JAVASCRIPTCORE) struct JSClassRef : IDisposable
 	{
 		IntPtr _dummy;
 
@@ -503,7 +510,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	}
 
 	[Require("Source.Include", "JavaScriptCore/JSTypedArrayInclude.h")]
-	extern(USE_JAVASCRIPTCORE) static class JSTypedArray
+	public extern(USE_JAVASCRIPTCORE) static class JSTypedArray
 	{
 		public static JSObjectRef TryMakeArrayBufferWithBytes(JSContextRef ctx, byte[] bytes, Action<JSValueRef> onException)
 		@{

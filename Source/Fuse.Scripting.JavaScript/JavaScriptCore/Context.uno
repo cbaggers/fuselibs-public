@@ -13,6 +13,7 @@ namespace Fuse.Scripting.JavaScriptCore
 	[Require("Header.Include", "JavaScriptCore/JavaScript.h")]
 	public extern(USE_JAVASCRIPTCORE) class Context : Fuse.Scripting.JavaScript.JSContext
 	{
+		public static JSContextRef WAAAContext;
 		internal readonly JSContextRef _context;
 		internal bool _disposed;
 		internal Action<JSValueRef> _onError;
@@ -30,6 +31,7 @@ namespace Fuse.Scripting.JavaScriptCore
 		public Context(): base()
 		{
 			_context = JSContextRef.Create();
+			WAAAContext = _context;
 
 			// To not have to reconstruct the delegate all the
 			// time.  Note: Creates a cyclic reference to `this`,

@@ -1,16 +1,16 @@
 <Panel ux:Class="UX.Observable.TwoWayMapFlat">
 	<JavaScript>
-		var Observable = require("FuseJS/Observable");
-
-		var makeFat = function(length) {
-			var data = [];
-			for(var i = 0; i < length; i++) {
-				data.push("jamHam");
+		var test = function() {
+			var makeFat = function(length) {
+				var data = [];
+				for(var i = 0; i < length; i++) {
+					data.push("jamHam");
+				}
+				return data;
 			}
-			return data;
+			makeFat(10000);
+			return null;
 		}
-		makeFat(1000);
-
+		test();
 	</JavaScript>
-
 </Panel>

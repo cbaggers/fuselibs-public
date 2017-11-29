@@ -72,12 +72,9 @@ namespace Fuse.Scripting
 			ThreadWorker.Invoke(action);
 		}
 
-		Function _identity;
-
 		public Function CallbackToFunction(Callback c)
 		{
-			if (_identity == null) 
-				_identity = (Function)Evaluate("(Context)", "(function(x) { return x; })");
+			var _identity = (Function)Evaluate("(Context)", "(function(x) { return x; })");
 
 			return (Function)_identity.Call(this, c);
 		}
@@ -104,35 +101,30 @@ namespace Fuse.Scripting
 			return null;
 		}
 
-		Function _parseJson;
 		public object ParseJson(string json)
 		{
-			if (_parseJson == null)
-				_parseJson = (Function)Evaluate("(Context)", "JSON.parse");
+			var _parseJson = (Function)Evaluate("(Context)", "JSON.parse");
 
 			return _parseJson.Call(this, json);
 		}
 
-		Function _newObject;
 		public Object NewObject()
 		{
-			if (_newObject == null) _newObject = (Function)Evaluate("(Context)", "(function() { return new Object; })");
+			var _newObject = (Function)Evaluate("(Context)", "(function() { return new Object; })");
 			return (Object)_newObject.Call(this);
 		}
 
-		Function _newArray;
 		public Array NewArray(params object[] values)
 		{
-			if (_newArray == null) _newArray = (Function)Evaluate("(Context)", "(function(count) { return new Array(count); })");
+			var _newArray = (Function)Evaluate("(Context)", "(function(count) { return new Array(count); })");
 			var a = (Array)_newArray.Call(this, values.Length);
 			for (int i = 0; i < values.Length; i++) a[i] = values[i];
 			return a;
 		}
 
-		Function _newError;
 		public Object NewError(params object[] args)
 		{
-			_newError = GlobalObject["Error"] as Function;
+			var _newError = GlobalObject["Error"] as Function;
 			return _newError.Construct(this, args);
 		}
 
