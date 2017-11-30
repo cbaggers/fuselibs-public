@@ -16,7 +16,7 @@ namespace Fuse.Scripting.JavaScriptCore
 		public void Protect(JSContextRef ctx)
 		{
 			ulong ptr = extern<ulong>"((@{ulong})((void*)*$$))";
-			debug_log "~~~~~~~~~~~~~~ hi from Protect on " + Uno.Threading.Thread.CurrentThread.Name + " ~~ " + ptr + " ~~~~~~~~~~~~~~~";
+			//debug_log "~~~~~~~~~~~~~~ hi from Protect on " + Uno.Threading.Thread.CurrentThread.Name + " ~~ " + ptr + " ~~~~~~~~~~~~~~~";
 			ProtectInner(ctx);
 		}
 
@@ -28,9 +28,9 @@ namespace Fuse.Scripting.JavaScriptCore
 
 		public void Unprotect(JSContextRef ctx)
 		{
-			ulong ptr = extern<ulong>"((@{ulong})((void*)*$$))";
-			debug_log "~~~~~~~~~~~~~~ hi from Unprotect on " + Uno.Threading.Thread.CurrentThread.Name + " ~~ " + ptr + " ~~~~~~~~~~~~~~~";
-			UnprotectInner(ctx);
+			// ulong ptr = extern<ulong>"((@{ulong})((void*)*$$))";
+			// debug_log "~~~~~~~~~~~~~~ hi from Unprotect on " + Uno.Threading.Thread.CurrentThread.Name + " ~~ " + ptr + " ~~~~~~~~~~~~~~~";
+			// UnprotectInner(ctx);
 		}
 
 		// ~Release

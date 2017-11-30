@@ -112,7 +112,7 @@ namespace Fuse.Scripting.JavaScriptCore
 				_pendingException = null;
 				throw new Exception("Unexpected Uno.Exception", e);
 			}
-			debug_log "----------- foo on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
+			//debug_log "----------- foo on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
 			_context.GarbageCollect();
 		}
 

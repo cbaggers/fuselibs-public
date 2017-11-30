@@ -1,16 +1,18 @@
 <Panel ux:Class="UX.Observable.TwoWayMapFlat">
+	<!-- <JavaScript> -->
+	<!-- 	var test = function() { -->
+	<!-- 		var makeFat = function(length) { -->
+	<!-- 			var data = []; -->
+	<!-- 			for(var i = 0; i < length; i++) { -->
+	<!-- 				data.push("jamHam"); -->
+	<!-- 			} -->
+	<!-- 			return data; -->
+	<!-- 		} -->
+	<!-- 		makeFat(100000); -->
+	<!-- 		return null; -->
+	<!-- 	} -->
+	<!-- 	test(); -->
+	<!-- </JavaScript> -->
 	<JavaScript>
-		var test = function() {
-			var makeFat = function(length) {
-				var data = [];
-				for(var i = 0; i < length; i++) {
-					data.push("jamHam");
-				}
-				return data;
-			}
-			makeFat(10000);
-			return null;
-		}
-		test();
 	</JavaScript>
 </Panel>

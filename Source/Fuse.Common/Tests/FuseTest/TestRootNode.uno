@@ -50,14 +50,14 @@ namespace FuseTest
 
 		void IDisposable.Dispose()
 		{
-			Pointer.ClearPointersDown();
+			// Pointer.ClearPointersDown();
 
-			// dispose _rootViewport before cleaning low memory, to
-			// make sure ImageSources etc are unpinned first
-			(_rootViewport as IDisposable).Dispose();
+			// // dispose _rootViewport before cleaning low memory, to
+			// // make sure ImageSources etc are unpinned first
+			// (_rootViewport as IDisposable).Dispose();
 
-			//force things to clean (LowMemory should do most items)
-			CleanLowMemory();
+			// //force things to clean (LowMemory should do most items)
+			// CleanLowMemory();
 		}
 		
 		public void CleanLowMemory()

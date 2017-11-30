@@ -16,6 +16,8 @@ namespace Fuse.Scripting.JavaScript
 
 		Fuse.Reactive.FuseJS.Builtins FuseJS { private set; internal get;}
 
+		public static JSContext FCTX;
+
 		public sealed override Fuse.Scripting.IThreadWorker ThreadWorker
 		{
 			get
@@ -45,6 +47,7 @@ namespace Fuse.Scripting.JavaScript
 			// context is not fully constructed when passed to `new Builtins` a segmentation fault
 			// occurs on (at least some) c++ backends
 			result.FuseJS = new Fuse.Reactive.FuseJS.Builtins(result);
+			FCTX = result;
 			return result;
 		}
 

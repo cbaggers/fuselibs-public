@@ -30,1347 +30,184 @@ namespace Fuse.Reactive.Test
 	*/
 	public class ObservableTest : TestBase
 	{
-		[Test]
-		public void Tarst0()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
+		// [Test]
+		// public void Tarst0()
+		// {
+		// 	var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
+		// 	debug_log "FOOOK YARR 0: " + jscCtx;
+		// 	var p = new UX.Observable.TwoWayMapFlat();
+		// 	using (var root = TestRootPanel.CreateWithChild(p))
+		// 	{
+		// 		root.StepFrameJS();
+		// 		Assert.AreEqual("abc","abc");
+		// 		var q = new UX.Observable.TwoWayMapFlat();
+		// 		using (var root2 = TestRootPanel.CreateWithChild(q))
+		// 		{
+		// 			debug_log "oh!"
+		// 			root2.StepFrameJS();
+		// 			Assert.AreEqual("abc","abc");
+		// 			debug_log "still here!"
+		// 		}
+		// 	}
+		// 	debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
+		// 	jscCtx.GarbageCollect();
+		// }
+
+		// [Test]
+		// public void Tarst1()
+		// {
+		// 	var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
+		// 	debug_log "FOOOK YARR 1: " + jscCtx;
+		// 	var p = new UX.Observable.TwoWayMapFlat();
+		// 	var root = TestRootPanel.CreateWithChild(p);
+		// 	root.StepFrameJS();
+		// 	Assert.AreEqual("abc","abc");
+		// 	debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
+		// 	jscCtx.GarbageCollect();
+		// }
+
+		// [Test]
+		// public void Tarst2()
+		// {
+		// 	var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
+		// 	debug_log "FOOOK YARR 2: " + jscCtx;
+		// 	var p = new UX.Observable.TwoWayMapFlat();
+		// 	var root = TestRootPanel.CreateWithChild(p);
+		// 	root.StepFrameJS();
+		// 	Assert.AreEqual("abc","abc");
+		// 	debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
+		// 	jscCtx.GarbageCollect();
+		// }
+
+		// [Test]
+		// public void Tarst3()
+		// {
+		// 	var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
+		// 	debug_log "FOOOK YARR 3: " + jscCtx;
+		// 	var p = new UX.Observable.TwoWayMapFlat();
+		// 	var root = TestRootPanel.CreateWithChild(p);
+		// 	root.StepFrameJS();
+		// 	Assert.AreEqual("abc","abc");
+		// 	debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
+		// 	jscCtx.GarbageCollect();
+		// }
+
+		// [Test]
+		// public void Tarst4()
+		// {
+		// 	var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
+		// 	debug_log "FOOOK YARR 4: " + jscCtx;
+		// 	var p = new UX.Observable.TwoWayMapFlat();
+		// 	using (var root = TestRootPanel.CreateWithChild(p))
+		// 	{
+		// 		root.StepFrameJS();
+		// 		Assert.AreEqual("abc","abc");
+		// 	}
+		// 	debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
+		// 	jscCtx.GarbageCollect();
+		// }
+
+		// [Test]
+		// public void Tarst1()
+		// {
+		// 	for (var i = 0; i<10; i++)
+		// 	{
+		// 		debug_log "==============- Loop: " + i +" -==============";
+		// 		debug_log "----------- horse 0 ----------";
+		// 		var p = new UX.Observable.TwoWayMapFlat();
+		// 		debug_log "----------- horse 1 ----------";
+		// 		var root = TestRootPanel.CreateWithChild(p);
+		// 		debug_log "----------- horse 2 ----------";
+		// 		root.StepFrameJS();
+		// 		debug_log "----------- horse 2.1 ----------";
+		// 		root.StepFrameJS();
+		// 		debug_log "----------- horse 2.2 ----------";
+		// 		root.StepFrameJS();
+		// 		debug_log "----------- horse 2.3 ----------";
+		// 		root.StepFrameJS();
+		// 		debug_log "----------- horse 2.4 ----------";
+		// 		root.StepFrameJS();
+		// 		debug_log "----------- horse 3 ----------";
+		// 		var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
+		// 		jscCtx.GarbageCollect();
+		// 		debug_log "----------- horse 4 ----------";
+		// 		Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+		// 		debug_log "----------- horse 5 ----------";
+		// 		root.StepFrameJS();
+		// 		debug_log "----------- horse 6 " + Uno.Threading.Thread.CurrentThread.Name + " ----------";
+		// 	}
+		// 	Assert.AreEqual("abc","abc");
+		// }
 
 		[Test]
 		public void Tarst1()
 		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
+			for (var i = 0; i<10; i++)
 			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst2()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst3()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst4()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst5()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst6()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst7()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst8()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst9()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst10()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst11()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst12()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst13()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst14()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst15()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst16()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst17()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst18()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst19()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst20()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst21()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst22()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst23()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst24()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst25()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst26()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst27()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst28()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst29()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-				[Test]
-		public void Tarst30()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst31()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst32()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst33()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst34()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst35()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst36()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst37()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst38()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst39()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-				[Test]
-		public void Tarst40()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst41()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst42()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst43()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst44()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst45()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst46()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst47()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst48()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst49()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-				[Test]
-		public void Tarst50()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst51()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst52()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst53()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst54()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst55()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst56()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst57()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst58()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst59()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst60()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst61()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst62()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst63()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst64()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst65()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst66()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst67()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst68()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst69()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst70()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst71()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst72()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst73()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst74()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst75()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst76()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst77()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst78()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
+				debug_log "==============- Loop: " + i +" -==============";
 
-		[Test]
-		public void Tarst79()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
 
-		[Test]
-		public void Tarst80()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
+				var p = new UX.Observable.TwoWayMapFlat();
+				var root = TestRootPanel.CreateWithChild(p);
 
-		[Test]
-		public void Tarst81()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
+				debug_log "----------- horse 0 ----------";
 
-		[Test]
-		public void Tarst82()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
+				// var worker = new Fuse.Scripting.JavaScript.ThreadWorker();
 
-		[Test]
-		public void Tarst83()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
+				debug_log "----------- horse 1 ----------";
+				while (Fuse.Scripting.JavaScript.JSContext.FCTX == null) {}
+				debug_log "foo " + Fuse.Scripting.JavaScript.JSContext.FCTX;
+				var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
+				Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+				debug_log "----------- horse 2 ----------";
 				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst84()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
+				debug_log "----------- horse 3 ----------";
+				jscCtx.GarbageCollect();
+				debug_log "----------- horse 4 ----------";
+				Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+				debug_log "----------- horse 5 ----------";
 				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-		[Test]
-		public void Tarst85()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
+				debug_log "----------- horse 6 ----------";
+				jscCtx.GarbageCollect();
+				debug_log "----------- horse 7 ----------";
+				Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+				debug_log "----------- horse 8 ----------";
 				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
-
-		[Test]
-		public void Tarst86()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
+				debug_log "----------- horse 9 ----------";
+				jscCtx.GarbageCollect();
+				debug_log "----------- horse 10 ----------";
+				Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+				debug_log "----------- horse 11 ----------";
 				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
+				debug_log "----------- horse 12 " + Uno.Threading.Thread.CurrentThread.Name + " ----------";
 			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
+			Assert.AreEqual("abc","abc");
 		}
 
-		[Test]
-		public void Tarst87()
+		void Hmm(Context ctx)
 		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
+			ctx.Evaluate("(FOOO)", "var test = function() {\nvar makeFat = function(length) {\nvar data = [];\nfor(var i = 0; i < length; i++) {\ndata.push(\"jamHam\");\n}\nreturn data;\n}\nmakeFat(100000);\nreturn null;\n}\ntest();");
 		}
 
-		[Test]
-		public void Tarst88()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
+		// public static void StepFrameJS()
+		// {
+		// 	var w = Fuse.Reactive.JavaScript.Worker;
+		// 	if (w == null)
+		// 		throw new Exception("Calling stepFrameJS though there is no JavaScript worker" );
 
-		[Test]
-		public void Tarst89()
-		{
-			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-			debug_log "FOOOK YARR: " + jscCtx;
-			var p = new UX.Observable.TwoWayMapFlat();
-			using (var root = TestRootPanel.CreateWithChild(p))
-			{
-				root.StepFrameJS();
-				Assert.AreEqual("abc","abc");
-			}
-			debug_log "----------- horse on "+Uno.Threading.Thread.CurrentThread.Name+" ----------";
-			jscCtx.GarbageCollect();
-		}
+		// 	var fence = Fuse.Reactive.JavaScript.Worker.PostFence();
+		// 	var loop = true;
+		// 	var e = 0f;
+		// 	while(loop)
+		// 	{
+		// 		loop = !fence.IsSignaled;
+		// 		IncrementFrameImpl(_frameIncrement, StepFlags.WaitJS | StepFlags.IncrementFrame);
+		// 		e += _frameIncrement;
+		// 	}
+		// }
 	}
 }
+
 // 880 passed & failed randomly but usually passed
 // 900 passed...the fuck?
 
@@ -1390,3 +227,4 @@ namespace Fuse.Reactive.Test
 // remove all body code from TwoWayMapFlat and it passes..interesting
 // minimizing that code now
 // Oh fuck, it's to do with exports!
+// Nope memory, the array we allocate forces a gc collect in jsc and that triggers the issue
