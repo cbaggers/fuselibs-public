@@ -20,7 +20,7 @@ namespace Fuse
 			_init = true;
 		}
 		
-		internal static void Set(double current)
+		public static void Set(double current)
 		{
 			if (!_init)
 			{

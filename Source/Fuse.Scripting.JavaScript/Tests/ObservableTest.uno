@@ -147,38 +147,41 @@ namespace Fuse.Reactive.Test
 				debug_log "==============- Loop: " + i +" -==============";
 
 
-				var p = new UX.Observable.TwoWayMapFlat();
-				var root = TestRootPanel.CreateWithChild(p);
+				// var p = new UX.Observable.TwoWayMapFlat();
+				// var root = TestRootPanel.CreateWithChild(p);
 
 				debug_log "----------- horse 0 ----------";
 
-				// var worker = new Fuse.Scripting.JavaScript.ThreadWorker();
-
-				debug_log "----------- horse 1 ----------";
+				var worker = new Fuse.Scripting.JavaScript.ThreadWorker();
 				while (Fuse.Scripting.JavaScript.JSContext.FCTX == null) {}
+				debug_log "----------- horse 0.1 ----------";
+				debug_log "----------- horse 0.2 ----------";
 				debug_log "foo " + Fuse.Scripting.JavaScript.JSContext.FCTX;
 				var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
-				Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+				debug_log "worker = " + worker;
+				debug_log "----------- horse 1 ----------";
+				StepFrameJS(worker);
+				worker.Invoke(Hmm);
 				debug_log "----------- horse 2 ----------";
-				root.StepFrameJS();
+				StepFrameJS(worker);
 				debug_log "----------- horse 3 ----------";
 				jscCtx.GarbageCollect();
 				debug_log "----------- horse 4 ----------";
-				Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+				worker.Invoke(Hmm);
 				debug_log "----------- horse 5 ----------";
-				root.StepFrameJS();
+				StepFrameJS(worker);
 				debug_log "----------- horse 6 ----------";
 				jscCtx.GarbageCollect();
 				debug_log "----------- horse 7 ----------";
-				Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+				worker.Invoke(Hmm);
 				debug_log "----------- horse 8 ----------";
-				root.StepFrameJS();
+				StepFrameJS(worker);
 				debug_log "----------- horse 9 ----------";
 				jscCtx.GarbageCollect();
 				debug_log "----------- horse 10 ----------";
-				Fuse.Scripting.JavaScript.JSContext.FCTX.ThreadWorker.Invoke(Hmm);
+				worker.Invoke(Hmm);
 				debug_log "----------- horse 11 ----------";
-				root.StepFrameJS();
+				StepFrameJS(worker);
 				debug_log "----------- horse 12 " + Uno.Threading.Thread.CurrentThread.Name + " ----------";
 			}
 			Assert.AreEqual("abc","abc");
@@ -189,22 +192,53 @@ namespace Fuse.Reactive.Test
 			ctx.Evaluate("(FOOO)", "var test = function() {\nvar makeFat = function(length) {\nvar data = [];\nfor(var i = 0; i < length; i++) {\ndata.push(\"jamHam\");\n}\nreturn data;\n}\nmakeFat(100000);\nreturn null;\n}\ntest();");
 		}
 
-		// public static void StepFrameJS()
-		// {
-		// 	var w = Fuse.Reactive.JavaScript.Worker;
-		// 	if (w == null)
-		// 		throw new Exception("Calling stepFrameJS though there is no JavaScript worker" );
 
-		// 	var fence = Fuse.Reactive.JavaScript.Worker.PostFence();
-		// 	var loop = true;
-		// 	var e = 0f;
-		// 	while(loop)
-		// 	{
-		// 		loop = !fence.IsSignaled;
-		// 		IncrementFrameImpl(_frameIncrement, StepFlags.WaitJS | StepFlags.IncrementFrame);
-		// 		e += _frameIncrement;
-		// 	}
-		// }
+		static float _frameIncrement = 1/60f;
+
+		enum StepFlags
+		{
+			None = 0,
+			WaitJS = 1 << 0,
+			IncrementFrame = 1 << 1,
+		}
+
+		static void StepFrameJS(Fuse.Scripting.JavaScript.ThreadWorker worker)
+		{
+			debug_log "----------- dicks 0 ----------";
+			if (worker == null)
+				throw new Exception("Calling stepFrameJS though there is no JavaScript worker" );
+
+			var fence = worker.PostFence();
+			var loop = true;
+			var e = 0f;
+			debug_log "----------- dicks 1 ----------";
+			while (loop)
+			{
+				loop = !fence.IsSignaled;
+				IncrementFrameImpl(worker, _frameIncrement, StepFlags.WaitJS | StepFlags.IncrementFrame);
+				e += _frameIncrement;
+			}
+			debug_log "----------- dicks 2 ----------";
+		}
+
+		static void IncrementFrameImpl(Fuse.Scripting.JavaScript.ThreadWorker worker, float elapsedTime = -1, StepFlags flags = StepFlags.IncrementFrame)
+		{
+			debug_log "----------- wat 0 ----------";
+			if (elapsedTime < 0)
+				elapsedTime = _frameIncrement;
+			debug_log "----------- wat 1 ----------";
+			if (flags.HasFlag(StepFlags.WaitJS))
+			{
+				if (worker != null)
+					worker.WaitIdle();
+			}
+			debug_log "----------- wat 2 ----------";
+			Time.Set(Time.FrameTime + elapsedTime);
+			UpdateManager.Update();
+			if (flags.HasFlag(StepFlags.IncrementFrame))
+				UpdateManager.IncreaseFrameIndex();
+			debug_log "----------- wat 3 ----------";
+		}
 	}
 }
 
