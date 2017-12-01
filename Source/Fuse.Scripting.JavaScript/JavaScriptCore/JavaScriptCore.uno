@@ -3,6 +3,20 @@ using Uno.Compiler.ExportTargetInterop;
 
 namespace Fuse.Scripting.JavaScriptCore
 {
+	public static class HORSE
+	{
+		extern(USE_JAVASCRIPTCORE)
+		public static void GLUE()
+		{
+			global::Fuse.Scripting.JavaScriptCore.Context.WAAAContext.GarbageCollect();
+		}
+
+		extern(!USE_JAVASCRIPTCORE)
+		public static void GLUE()
+		{
+		}
+	}
+
 	[Require("Source.Include", "JavaScriptCore/JSValueRef.h")]
 	[Set("TypeName", "::JSValueRef")]
 	[Set("DefaultValue", "NULL")]

@@ -37,15 +37,14 @@ namespace Fuse.Reactive.Test
 			while (Fuse.Scripting.JavaScript.JSContext.FCTX == null) {}
 			var jscCtx = Fuse.Scripting.JavaScriptCore.Context.WAAAContext;
 
-			for (var i = 0; i<20; i++)
-			{
-				debug_log "==============- Loop: " + i +" -==============";
-				debug_log "worker = " + worker;
-				jscCtx.GarbageCollect();
-				worker.Invoke(Hmm);
-				StepFrameJS(worker);
-				debug_log "----------- step done " + Uno.Threading.Thread.CurrentThread.Name + " ----------";
-			}
+			debug_log "==============- About to die -==============";
+
+			jscCtx.GarbageCollect();
+			worker.Invoke(Hmm);
+			StepFrameJS(worker);
+
+			debug_log "----------- We didnt die! " + Uno.Threading.Thread.CurrentThread.Name + " ----------";
+
 			Assert.AreEqual("abc","abc");
 		}
 
