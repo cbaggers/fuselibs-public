@@ -1,9 +1,11 @@
 {
-    "Packages": [
-        "Fuse",
-        "FuseJS",
-    ],
-    "Includes": [
-        "*"
-    ]
+  "Packages": [
+    "Fuse",
+    "FuseJS",
+    "Fuse.Common",
+    "Fuse.Scripting.JavaScript"
+  ],
+  "Includes": [
+    "*"
+  ]
 }

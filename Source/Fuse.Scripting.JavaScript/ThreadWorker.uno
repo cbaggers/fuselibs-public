@@ -12,7 +12,7 @@ namespace Fuse.Scripting.JavaScript
 		object Reflect(Scripting.Context context, object obj);
 	}
 
-	internal class ThreadWorker: IDisposable, IThreadWorker
+	public class ThreadWorker: IDisposable, IThreadWorker
 	{
 		readonly Thread _thread;
 
