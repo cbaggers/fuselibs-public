@@ -41,13 +41,19 @@ namespace Fuse.Scripting.ReactNative
 		public event Action<string, object> ModuleNameChanged;
 	}
 
-	extern(!Android || !USE_REACTNATIVE) public class ReactNativeComponent {
+	extern(!MOBILE || !USE_REACTNATIVE) public class ReactNativeComponent {
 		[UXConstructor]
 		public ReactNativeComponent([UXParameter("Host")]ReactNativeComponentHostBase host) {}
 	}
 
+	[ForeignInclude(Language.ObjC, "React/RCTRootView.h")]
+	[ForeignInclude(Language.ObjC, "React/RCTBridge.h")]
+	[ForeignInclude(Language.ObjC, "React/RCTBridge+Private.h")]
+	[ForeignInclude(Language.ObjC, "React/RCTBridgeModule.h")]
+	[ForeignInclude(Language.ObjC, "React/RCTEventDispatcher.h")]
+	[ForeignInclude(Language.ObjC, "React/RCTJavaScriptExecutor.h")]
 	[ForeignInclude(Language.Java, "com.facebook.react.*", "com.facebook.react.common.*")]
-	extern (Android && USE_REACTNATIVE) public class ReactNativeComponent : ViewHandle
+	extern (MOBILE && USE_REACTNATIVE) public class ReactNativeComponent : ViewHandle
 	{
 		string _moduleName;
 
@@ -72,23 +78,26 @@ namespace Fuse.Scripting.ReactNative
 			OnModuleNameChanged(_moduleName, manager);
 		}
 
+		//---
+
+		extern(android)
 		void OnModuleNameChanged(string moduleName, object instanceManager)
 		{
 			var manager = (Java.Object)instanceManager;
 			InsertChild(new ViewHandle(CreateView(moduleName, manager)));
 		}
 
-		[Foreign(Language.Java)]
-		static Java.Object CreateView(string moduleName, Java.Object reactInstanceManager)
-		@{
-			ReactRootView reactRootView = new ReactRootView(com.fuse.Activity.getRootActivity());
-			reactRootView.startReactApplication((ReactInstanceManager)reactInstanceManager, moduleName);
-			reactRootView.setLayoutParams(
-				new android.widget.FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT));
-			return reactRootView;
-		@}
+		extern(iOS)
+		void OnModuleNameChanged(string moduleName, object bridge)
+		{
+			var rctBridge = (ObjC.Object)bridge;
+			InsertChild(new ViewHandle(CreateView(moduleName, rctBridge)));
+		}
+
+		//---
 
 		[Foreign(Language.Java)]
+		extern(android)
 		static Java.Object InstantiateViewGroupImpl()
 		@{
 			android.widget.FrameLayout frameLayout = new com.fuse.android.views.ViewGroup(@(Activity.Package).@(Activity.Name).GetRootActivity());
@@ -98,6 +107,39 @@ namespace Fuse.Scripting.ReactNative
 			frameLayout.setClipToPadding(false);
 			frameLayout.setLayoutParams(new android.widget.FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT));
 			return frameLayout;
+		@}
+
+		[Foreign(Language.ObjC)]
+		extern(iOS)
+		static ObjC.Object InstantiateViewGroupImpl()
+		@{
+			UIControl* control = [[UIControl alloc] init];
+			[control setOpaque:false];
+			[control setMultipleTouchEnabled:true];
+			return control;
+		@}
+
+		//---
+
+		[Foreign(Language.Java)]
+		extern(android)
+		static Java.Object CreateView(string moduleName, Java.Object reactInstanceManager)
+		@{
+			ReactRootView reactRootView = new ReactRootView(com.fuse.Activity.getRootActivity());
+			reactRootView.startReactApplication((ReactInstanceManager)reactInstanceManager, moduleName);
+			reactRootView.setLayoutParams(
+				new android.widget.FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+			return reactRootView;
+		@}
+
+		[Foreign(Language.ObjC)]
+		extern(iOS)
+		static ObjC.Object CreateView(string moduleName, ObjC.Object bridge)
+		@{
+			RCTBridge* rctBridge = (RCTBridge*)bridge;
+			return [[RCTRootView alloc] initWithBridge:rctBridge
+											moduleName:moduleName
+									 initialProperties:nil];
 		@}
 	}
 }

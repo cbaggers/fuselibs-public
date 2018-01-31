@@ -1,3 +1,4 @@
 <Fuse.Scripting.ReactNative.ReactNativeComponentHostBase ux:Class="ReactNativeHost">
 	<Fuse.Scripting.ReactNative.ReactNativeComponent ux:Template="AndroidAppearance" Host="this" />
+	<!-- <Fuse.Scripting.ReactNative.ReactNativeComponent ux:Template="iOSAppearance" Host="this" /> -->
 </Fuse.Scripting.ReactNative.ReactNativeComponentHostBase>

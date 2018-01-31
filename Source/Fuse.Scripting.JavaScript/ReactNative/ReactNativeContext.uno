@@ -11,7 +11,8 @@ namespace Fuse.Scripting.ReactNative
 	[Require("AndroidManifest.ActivityElement", "<activity android:name=\"com.facebook.react.devsupport.DevSettingsActivity\" />")]
 	[Require("Gradle.Dependency.Compile", "com.facebook.react:react-native:+")]
 	[Require("Gradle.Repository", "maven { url '@(Project.NodeModules:Path)/react-native/android' }")]
-	public extern(USE_REACTNATIVE) class ReactNativeContext : Fuse.Scripting.JavaScriptCore.Context
+	extern(USE_REACTNATIVE && ANDROID)
+	public class ReactNativeContext : Fuse.Scripting.JavaScriptCore.Context
 	{
 		static readonly Java.Object _reactContext;
 		static readonly Java.Object _instanceManager;

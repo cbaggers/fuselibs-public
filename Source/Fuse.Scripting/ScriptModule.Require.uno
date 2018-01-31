@@ -40,6 +40,8 @@ namespace Fuse.Scripting
 
 			object Require(Context context, string id)
 			{
+				// This is a problem as GotReactNativeModules looks for
+				// window, but that wont even be defined yet as the polyfills havent run
 				if defined(USE_REACTNATIVE)
 				{
 					if (GotReactNativeModules(context))
@@ -108,7 +110,7 @@ namespace Fuse.Scripting
 
 			bool GotReactNativeModules(Context context)
 			{
-				return (bool)_c.Evaluate(_m.FileName, "window != null && window.require != null");
+				return (bool)_c.Evaluate(_m.FileName, "this[\"window\"] != null && this[\"window\"].require != null");
 			}
 
 			object TryGetReactNativeModule(string id)
