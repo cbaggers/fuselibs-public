@@ -105,5 +105,27 @@ namespace Fuse.LocalNotifications
 		@}
 
 		public extern(!iOS && !Android) static void ClearAllNotifications() { }
+
+		//----------------------------------------------------------------------
+
+		[Foreign(Language.ObjC)]
+		public extern(iOS) static void CancelPendingNotifications()
+		@{
+			NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+			for (UILocalNotification* localNotification in arrayOfLocalNotifications) {
+				[[UIApplication sharedApplication] cancelLocalNotification:localNotification];
+			}
+		@}
+
+		[Foreign(Language.Java)]
+		public extern(Android) static void CancelPendingNotifications()
+		@{
+			android.app.Activity activity = com.fuse.Activity.getRootActivity();
+			android.content.Intent intent =
+				new android.content.Intent(activity, com.fusedCompound.LocalNotify.LocalNotificationReceiver.class);
+			com.fuse.LocalNotifications.AlarmUtils.cancelAllAlarms(activity, intent);
+		@}
+
+		public extern(!iOS && !Android) static void CancelPendingNotifications() { }
 	}
 }

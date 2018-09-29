@@ -98,6 +98,8 @@ The `payload` will be a string in JSON format containing the following keys:
 - `'body'`: the body text of the notification as a `string`
 - `'payload'`: the `string` of data that was sent with the notification.
 
+`cancelPendingNotifications` cancels all notifications that were enqueued by this app but hav not yet been delivered.
+
 `clearAllNotifications()` clears all notifications made by the app that have already been delivered. This can be used to remove similar notifications if one is clicked.
 
 Last, but not least, `clearBadgeNumber()` clears the little number next to the app icon on the home screen, showing the amount of notifications the app has.

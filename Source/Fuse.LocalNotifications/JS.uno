@@ -42,6 +42,7 @@ namespace Fuse.LocalNotifications
 			AddMember(new NativeFunction("later", Later));
 			AddMember(new NativeFunction("clearBadgeNumber", ClearBadgeNumber));
 			AddMember(new NativeFunction("clearAllNotifications", ClearAllNotifications));
+			AddMember(new NativeFunction("cancelPendingNotifications", CancelPendingNotifications));
 			AddMember(onReceivedMessage);
 
 			Fuse.LocalNotifications.Notify.Received += OnReceived;
@@ -143,6 +144,18 @@ namespace Fuse.LocalNotifications
 		public object ClearAllNotifications(Context context, object[] args)
 		{
 			Fuse.LocalNotifications.Notify.ClearAllNotifications();
+			return null;
+		}
+
+
+		/**
+			@scriptmethod clearAllNotifications
+
+			Cancel all pending notifications enqueued by our app.
+		*/
+		public object CancelPendingNotifications(Context context, object[] args)
+		{
+			LocalNotify.Notify.CancelPendingNotifications();
 			return null;
 		}
 	}
